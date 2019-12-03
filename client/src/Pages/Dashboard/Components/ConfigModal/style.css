@@ -1,0 +1,15 @@
+.config-modal-container {
+    border: 1px solid #aaaaaa4a;
+    width: 100%;
+    min-height: 400px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.config-modal-inner {
+
+}
+
+.config-modal-menu {
+    padding: 1rem;
+}

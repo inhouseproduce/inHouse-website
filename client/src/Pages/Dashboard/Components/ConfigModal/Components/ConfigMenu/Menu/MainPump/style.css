@@ -1,0 +1,30 @@
+
+.main-pump-menu-container {
+    width: 100%;
+}
+
+.main-pump-menu-inner {
+    display: inline-block;
+    width: 100%;
+}
+
+.main-pump-run-interval {
+    padding: 0.5rem;
+}
+.main-pump-run-interval > span {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.main-pump-run-period {
+    padding: 0.5rem;
+}
+.main-pump-run-period > span {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.input-style {
+    width: 100px !important;
+}
+

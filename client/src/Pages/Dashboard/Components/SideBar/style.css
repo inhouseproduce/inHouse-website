@@ -1,0 +1,18 @@
+.dashboard-sidbar {
+    list-style: none;
+    padding: 0;
+    padding-top: 4rem;
+    text-align: center;
+    width: 100px;
+    height: 92.5vh;
+    border-top-right-radius: 10px;
+    background: radial-gradient(circle at 6% 0,#1ac9b5,#35af9b 47%,#35af82);
+    box-shadow: 0 7px 15px 0 rgba(60,64,67,.3), 0 2px 17px 4px rgba(60,64,67,.15);
+}
+
+.dashboard-sidbar li i {
+    font-size: 24px;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    color: #ffff;
+}

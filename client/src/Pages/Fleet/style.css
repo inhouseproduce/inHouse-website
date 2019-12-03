@@ -1,0 +1,32 @@
+.fleet-view-container {
+    width: 100%;
+}
+
+.fleet-view-inner {
+    width: 100%;
+}
+
+.fleet-body-inner {
+    padding: 1rem;
+    display: flex;
+    margin: 0;
+}
+
+.fleet-body-header-inner {
+    border-bottom: 1px solid #d4d4d44a;
+    line-height: 25px;
+    padding: 0.5rem;
+}
+
+.fleet-contant-container {
+    width: 100%;
+    height: 580px;
+    border: 1px solid #d4d4d44a;
+    border-radius: 5px;
+}
+
+@media only screen and (max-width: 770px) {
+    .fleet-side-menu {
+        display: none;
+    }
+}
