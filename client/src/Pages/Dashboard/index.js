@@ -5,11 +5,17 @@ import Header from '../../Components/Headers/MainHeader';
 import SideBar from './Components/SideBar';
 import BodyHeader from './Components/BodyHeader';
 import BodyContent from './Components/BodyContent';
-
+import axios from 'axios';
 class DashboardPage extends Component {
     state = {
         fleetList:['1','2']
     };
+
+    componentDidMount(){
+        axios.get('/get/json', res => {
+            console.log('response', res)
+        })
+    }
 
     render(){
         return (
