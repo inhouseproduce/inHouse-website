@@ -16,7 +16,7 @@ const ConfigModal = props => {
       <div className='config-modal-container'>
         <div className='config-modal-inner'>
           <div className='config-modal-menu'>
-            <ConfigMenu/>
+            <ConfigMenu />
           </div>
         </div>
       </div>

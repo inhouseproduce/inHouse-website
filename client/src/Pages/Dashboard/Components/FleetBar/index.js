@@ -1,9 +1,21 @@
 import React from 'react';
 import './style.css';
 
-import { Icon, Checkbox } from 'antd';
+import { Menu, Dropdown, Icon, Checkbox } from 'antd';
 
-const FleetBar = () => {
+const FleetBar = props => {
+
+    const settingMenu = () => (
+        <Menu>
+            <Menu.Item key='0' onClick={props.modalSwitch}>
+                <a>Add new device</a>
+            </Menu.Item>
+            <Menu.Item key='1'>
+                <a>Delete selected</a>
+            </Menu.Item>
+        </Menu>
+    );
+
     return (
         <div className='fleet-bar-container'>
             <div className='fleet-bar-inner'>
@@ -24,10 +36,12 @@ const FleetBar = () => {
                         <small>Location</small>
                     </li>
                     <li>
-                        <a>
-                            <Icon type='setting' />
-                            <Icon type='down' style={{ fontSize: '10px', paddingLeft: '.25rem' }} />
-                        </a>
+                        <Dropdown overlay={settingMenu} trigger={['click']}>
+                            <a className='ant-dropdown-link' href='#'>
+                                <Icon type='setting' />
+                                <Icon type='down' className='font-10px pl-1' />
+                            </a>
+                        </Dropdown>
                     </li>
                 </ul>
             </div>

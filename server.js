@@ -14,6 +14,7 @@ if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
 };
 
+
 // ---- Headers
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -33,6 +34,7 @@ app.use((req, res, next) => {
 
     next();
 }); // ---------------------------
+
 
 // ---- Mongo connection
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/inhouse';

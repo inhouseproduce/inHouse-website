@@ -5,28 +5,37 @@ import { Divider } from 'antd';
 
 import FleetBar from '../FleetBar';
 import FleetList from '../FleetList';
-import ConfigModal from '../ConfigModal';
+
+import Modals from '../Modals';
 
 class BodyContent extends Component {
-    state={
+    state = {
         configModal: false,
-        fleetList: [1,2,3]
+        addNewModal: false,
+        fleetList: [1, 2, 3]
     };
 
     render() {
-        const modalSwitch = () => {
+        const configModalSwitch = () => {
             this.setState({
                 configModal: !this.state.configModal
-            })
+            });
+        };
+
+        const addNewModalSwitch = () => {
+            this.setState({
+                addNewModal: !this.state.addNewModal
+            });
         };
 
         return (
             <div className='row dashboard-body-content'>
                 <div className='col-sm-12 col-md-8'>
                     <div className='body-content-container'>
-                        <FleetBar />
-                        <FleetList 
-                            modalSwitch={modalSwitch} 
+                        <FleetBar
+                            modalSwitch={addNewModalSwitch} />
+                        <FleetList
+                            modalSwitch={configModalSwitch}
                             fleetList={this.state.fleetList}
                         />
                     </div>
@@ -35,7 +44,7 @@ class BodyContent extends Component {
                     <div className='body-content-container'>
                         <div className='col-12 monitorning-title'>
                             <h3>Health monitoring</h3>
-                            <Divider/>
+                            <Divider />
                         </div>
                         <div className='col-12'>
                             <div className='col-12'>
@@ -44,9 +53,11 @@ class BodyContent extends Component {
                         </div>
                     </div>
                 </div>
-                <ConfigModal 
-                    modal={this.state.configModal}
-                    switch={modalSwitch}
+                <Modals
+                    newFleetModal={this.state.addNewModal}
+                    newFleetSwtich={addNewModalSwitch}
+                    configModal={this.state.configModal}
+                    configSwitch={configModalSwitch}
                 />
             </div>
         )
