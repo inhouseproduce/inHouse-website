@@ -1,23 +1,53 @@
-import React from 'react';
-import { Modal, Input } from 'antd';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-const AddNewFleetModal = (props) => {
-    return (
-        <Modal
-            title='Add New Fleet'
-            visible={props.modal}
-            onOk={props.switch}
-            onCancel={props.switch}
-        >
-            <div className='config-modal-container'>
-                <div className='config-modal-inner'>
-                    <div className='config-modal-menu'>
-                        <Input placeholder='Client Name'/>
+import { Modal } from 'antd';
+
+import FleetForm from './Components/FleetForm';
+
+// Actions
+import { registerFleet } from '../../../../../Store/actions/CRUD/registerFleet';
+
+class AddNewFleetModal extends Component {
+    render() {
+        const handleRegisterFleet = () => {
+            this.props.submitFleetForm();
+        }
+
+        const handleFleetForm = () => {
+
+        }
+
+        return (
+            <Modal
+                title='Add New Fleet'
+                visible={this.props.modal}
+                onOk={handleRegisterFleet}
+                onCancel={this.props.switch}
+            >
+                <div className='config-modal-container'>
+                    <div className='config-modal-inner'>
+                        <div className='config-modal-menu'>
+                            <FleetForm
+                                submitFleetForm={handleRegisterFleet}
+                                handleFleetForm={handleFleetForm}
+                            />
+                        </div>
                     </div>
                 </div>
-            </div>
-        </Modal>
-    )
+            </Modal>
+        )
+    };
 };
 
-export default AddNewFleetModal;
+const mapStateToProps = state => {
+    return {
+    }
+  };
+  
+  const mapDispatchToProps = dispatch => {
+    return {
+      submitFleetForm: ()=> dispatch( registerFleet())
+    }
+  };
+  export default connect( mapStateToProps, mapDispatchToProps)( AddNewFleetModal );

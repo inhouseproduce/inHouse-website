@@ -3,9 +3,7 @@ import './style.css';
 
 import { Divider } from 'antd';
 
-import FleetBar from '../FleetBar';
-import FleetList from '../FleetList';
-
+import FleetList from './Components/FleetList';
 import Modals from '../Modals';
 
 class BodyContent extends Component {
@@ -22,7 +20,7 @@ class BodyContent extends Component {
             });
         };
 
-        const addNewModalSwitch = () => {
+        const addFleetSwitch = () => {
             this.setState({
                 addNewModal: !this.state.addNewModal
             });
@@ -32,10 +30,9 @@ class BodyContent extends Component {
             <div className='row dashboard-body-content'>
                 <div className='col-sm-12 col-md-8'>
                     <div className='body-content-container'>
-                        <FleetBar
-                            modalSwitch={addNewModalSwitch} />
                         <FleetList
-                            modalSwitch={configModalSwitch}
+                            addFleetSwitch={addFleetSwitch}
+                            configSwitch={configModalSwitch}
                             fleetList={this.state.fleetList}
                         />
                     </div>
@@ -55,7 +52,7 @@ class BodyContent extends Component {
                 </div>
                 <Modals
                     newFleetModal={this.state.addNewModal}
-                    newFleetSwtich={addNewModalSwitch}
+                    newFleetSwtich={addFleetSwitch}
                     configModal={this.state.configModal}
                     configSwitch={configModalSwitch}
                 />

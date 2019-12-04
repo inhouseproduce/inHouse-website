@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import { Menu, Icon } from 'antd';
 
-import MainPump from './Menu/MainPump';
-import Lighting from './Menu/Lignting';
+import MainPump from '../../../../../../../Components/Menu/MainPump';
+import Lighting from '../../../../../../../Components/Menu/Lignting';
 
 const { SubMenu } = Menu;
 
 class ConfigMenu extends Component {
+    state={
+        
+    }
     render() {
         return (
             <Menu

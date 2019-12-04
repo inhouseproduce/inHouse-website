@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './style.css';
 
 import Header from '../../Components/Headers/MainHeader';
@@ -6,10 +7,13 @@ import SideBar from './Components/SideBar';
 import BodyHeader from './Components/BodyHeader';
 import BodyContent from './Components/BodyContent';
 
+// Actions
+import { getAllFleets } from '../../Store/actions/CRUD/getFleet';
+
 class DashboardPage extends Component {
-    state = {
-        fleetList:['1','2']
-    };
+    componentDidMount(){
+        this.props.getFleetList();
+    }
 
     render(){
         return (
@@ -22,7 +26,7 @@ class DashboardPage extends Component {
                             <div className='body-view-inner'>
                                 <BodyHeader/>
                                 <div className='inner-body-container'>
-                                    <BodyContent fleetList={this.state.fleetList}/>
+                                    <BodyContent fleetList={this.props.fleetList}/>
                                 </div>
                             </div>
                         </div>
@@ -33,4 +37,15 @@ class DashboardPage extends Component {
     }
 };
 
-export default DashboardPage;
+const mapStateToProps = state => {
+    return {
+        fleetList: state.app.fleetList
+    }
+  };
+  
+  const mapDispatchToProps = dispatch => {
+    return {
+      getFleetList: ()=> dispatch( getAllFleets())
+    }
+  };
+  export default connect( mapStateToProps, mapDispatchToProps)( DashboardPage );

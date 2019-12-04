@@ -1,5 +1,5 @@
 const initialState = {
-    projects: []
+    fleetList: []
 };
 
 const app = ( state = initialState, action ) => {

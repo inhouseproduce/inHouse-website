@@ -7,13 +7,22 @@ const FleetBar = props => {
 
     const settingMenu = () => (
         <Menu>
-            <Menu.Item key='0' onClick={props.modalSwitch}>
+            <Menu.Item key='0' onClick={props.addFleetSwitch}>
                 <a>Add new device</a>
             </Menu.Item>
             <Menu.Item key='1'>
                 <a>Delete selected</a>
             </Menu.Item>
         </Menu>
+    );
+
+    const DropdonwSetting = () => (
+        <Dropdown overlay={settingMenu} trigger={['click']}>
+            <a className='ant-dropdown-link' href='#'>
+                <Icon type='setting' />
+                <Icon type='down' className='font-10px pl-1' />
+            </a>
+        </Dropdown>
     );
 
     return (
@@ -36,12 +45,7 @@ const FleetBar = props => {
                         <small>Location</small>
                     </li>
                     <li>
-                        <Dropdown overlay={settingMenu} trigger={['click']}>
-                            <a className='ant-dropdown-link' href='#'>
-                                <Icon type='setting' />
-                                <Icon type='down' className='font-10px pl-1' />
-                            </a>
-                        </Dropdown>
+                        <DropdonwSetting />
                     </li>
                 </ul>
             </div>
