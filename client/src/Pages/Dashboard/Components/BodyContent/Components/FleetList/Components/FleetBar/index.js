@@ -7,7 +7,7 @@ const FleetBar = props => {
 
     const settingMenu = () => (
         <Menu>
-            <Menu.Item key='0' onClick={props.addFleetSwitch}>
+            <Menu.Item key='0' onClick={props.modalSwitch}>
                 <a>Add new device</a>
             </Menu.Item>
             <Menu.Item key='1'>

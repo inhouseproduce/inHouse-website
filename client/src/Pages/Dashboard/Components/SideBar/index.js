@@ -13,13 +13,13 @@ const SideBar = () => {
                     <Icon type='home' />
                 </NavLink>
             </li>
-                <Divider className='m-0' />
+                <Divider/>
             <li>
                 <NavLink to="/x">
                     <Icon type='tool' />
                 </NavLink>
             </li>
-                <Divider className='m-0' />
+                <Divider/>
             <li>
                 <NavLink to='/'>
                     <Icon type='experiment' />

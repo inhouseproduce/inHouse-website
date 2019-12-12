@@ -7,34 +7,36 @@ import FleetList from './Components/FleetList';
 import Modals from '../Modals';
 
 class BodyContent extends Component {
-    state = {
-        configModal: false,
-        addNewModal: false,
-        fleetList: [1, 2, 3]
+    constructor(props){
+        super(props);
+
+        this.state = {
+            configModal: false,
+            addNewModal: false,
+        };
+
+        this.updateFleetConfig = this.updateFleetConfig.bind(this);
+        this.createNewFleet = this.createNewFleet.bind(this);
     };
+    
+    updateFleetConfig(){
+        this.setState({
+            configModal: !this.state.configModal
+        });
+    }
+
+    createNewFleet(){
+        this.setState({
+            addNewModal: !this.state.addNewModal
+        });
+    }
 
     render() {
-        const configModalSwitch = () => {
-            this.setState({
-                configModal: !this.state.configModal
-            });
-        };
-
-        const addFleetSwitch = () => {
-            this.setState({
-                addNewModal: !this.state.addNewModal
-            });
-        };
-
         return (
             <div className='row dashboard-body-content'>
                 <div className='col-sm-12 col-md-8'>
                     <div className='body-content-container'>
-                        <FleetList
-                            addFleetSwitch={addFleetSwitch}
-                            configSwitch={configModalSwitch}
-                            fleetList={this.state.fleetList}
-                        />
+                        <FleetList {...this} />
                     </div>
                 </div>
                 <div className='col-sm-12 col-md-4' >
@@ -50,15 +52,10 @@ class BodyContent extends Component {
                         </div>
                     </div>
                 </div>
-                <Modals
-                    newFleetModal={this.state.addNewModal}
-                    newFleetSwtich={addFleetSwitch}
-                    configModal={this.state.configModal}
-                    configSwitch={configModalSwitch}
-                />
+                <Modals {...this} state={this.state} />
             </div>
         )
-    }
+    };
 };
 
 export default BodyContent;

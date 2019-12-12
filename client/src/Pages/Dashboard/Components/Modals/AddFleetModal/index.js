@@ -1,37 +1,41 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import { Modal } from 'antd';
 
+// Components
 import FleetForm from './Components/FleetForm';
 
 // Actions
-import { registerFleet } from '../../../../../Store/actions/CRUD/registerFleet';
+import { registerFleet } from '../../../../../Store/actions/crud/createFleet';
 
 class AddNewFleetModal extends Component {
+    constructor(props) {
+        super(props);
+
+        this.handleInput = this.handleInput.bind(this);
+        this.handleRegisterFleet = this.handleRegisterFleet.bind(this);
+    };
+
+    handleRegisterFleet() {
+        this.props.submitFleetForm(this.state);
+    }
+
+    handleInput(input) {
+        this.setState(input);
+    }
+
     render() {
-        const handleRegisterFleet = () => {
-            this.props.submitFleetForm();
-        }
-
-        const handleFleetForm = () => {
-
-        }
-
         return (
             <Modal
                 title='Add New Fleet'
                 visible={this.props.modal}
-                onOk={handleRegisterFleet}
+                onOk={this.handleRegisterFleet}
                 onCancel={this.props.switch}
             >
                 <div className='config-modal-container'>
                     <div className='config-modal-inner'>
                         <div className='config-modal-menu'>
-                            <FleetForm
-                                submitFleetForm={handleRegisterFleet}
-                                handleFleetForm={handleFleetForm}
-                            />
+                            <FleetForm { ...this } />
                         </div>
                     </div>
                 </div>
@@ -43,11 +47,12 @@ class AddNewFleetModal extends Component {
 const mapStateToProps = state => {
     return {
     }
-  };
-  
-  const mapDispatchToProps = dispatch => {
+};
+
+const mapDispatchToProps = dispatch => {
     return {
-      submitFleetForm: ()=> dispatch( registerFleet())
+        submitFleetForm: (form) => dispatch(registerFleet(form))
     }
-  };
-  export default connect( mapStateToProps, mapDispatchToProps)( AddNewFleetModal );
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddNewFleetModal);

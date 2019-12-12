@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import { Menu, Icon } from 'antd';
 
-import MainPump from '../../../../../../../Components/Menu/MainPump';
-import Lighting from '../../../../../../../Components/Menu/Lignting';
+import Interval from '../../../../../../../Components/Menu/Interval';
+import Clock from '../../../../../../../Components/Menu/Clock';
 
 const { SubMenu } = Menu;
 
 class ConfigMenu extends Component {
-    state={
-        
-    }
     render() {
         return (
             <Menu
@@ -26,7 +23,7 @@ class ConfigMenu extends Component {
                         </span>
                     }
                 >
-                    <MainPump />
+                    <Interval name='mainPump' handleInput={this.props.handleInput} />
                 </SubMenu>
 
                 <SubMenu
@@ -38,7 +35,7 @@ class ConfigMenu extends Component {
                         </span>
                     }
                 >
-                    <Lighting />
+                    <Clock name='lighting' handleInput={this.props.handleInput} />
                 </SubMenu>
             </Menu>
         )

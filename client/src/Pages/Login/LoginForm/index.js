@@ -10,10 +10,12 @@ const LoginForm = props => {
             >
                 <Input
                     onChange={props.handleInput}
-                    name='email' prefix={<Icon type='mail' />}
-                    placeholder='Email'
+                    prefix={<Icon type='mail' />}
+                    name='username' 
+                    placeholder='username'
                 />
             </Form.Item>
+
             <Form.Item
                 hasFeedback
             >

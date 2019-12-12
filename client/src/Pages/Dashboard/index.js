@@ -8,7 +8,7 @@ import BodyHeader from './Components/BodyHeader';
 import BodyContent from './Components/BodyContent';
 
 // Actions
-import { getAllFleets } from '../../Store/actions/CRUD/getFleet';
+import { getAllFleets } from '../../Store/actions/crud/readFleet';
 
 class DashboardPage extends Component {
     componentDidMount(){
@@ -26,7 +26,7 @@ class DashboardPage extends Component {
                             <div className='body-view-inner'>
                                 <BodyHeader/>
                                 <div className='inner-body-container'>
-                                    <BodyContent fleetList={this.props.fleetList}/>
+                                    <BodyContent/>
                                 </div>
                             </div>
                         </div>
@@ -39,7 +39,6 @@ class DashboardPage extends Component {
 
 const mapStateToProps = state => {
     return {
-        fleetList: state.app.fleetList
     }
   };
   

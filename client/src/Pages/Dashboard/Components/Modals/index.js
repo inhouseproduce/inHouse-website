@@ -6,14 +6,15 @@ const Modals = (props) => {
     return (
         <div>
             <AddNewModal
-                modal={props.newFleetModal}
-                switch={props.newFleetSwtich}
+                modal={props.state.addNewModal}
+                switch={props.createNewFleet}
             />
+            
             <ConfigModal
-                modal={props.configModal}
-                switch={props.configSwitch}
+                modal={props.state.configModal}
+                switch={props.updateFleetConfig}
             />
         </div>
-    )
+    ) 
 };
 export default Modals;

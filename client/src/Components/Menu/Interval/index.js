@@ -24,7 +24,7 @@ const MainPump = props => {
                     </span>
                     <span>Run Interval</span>
                     <span>
-                        <Input className='input-style' />
+                        <Input className='input-style' name='run_interval' onChange={(e)=> props.handleInput(e,props.name)} />
                         <small> / Minutes</small>
                     </span>
                 </div>
@@ -36,7 +36,7 @@ const MainPump = props => {
                     </span>
                     <span>On Period</span>
                     <span style={{ paddingLeft: '1.2rem' }}>
-                        <Input className='input-style' />
+                        <Input className='input-style' name='run_period' onChange={(e)=> props.handleInput(e,props.name)}/>
                         <small> / Minutes</small>
                     </span>
                 </div>

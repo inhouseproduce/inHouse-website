@@ -4,6 +4,7 @@
   "private": true,
   "author": "inhouse-produce",
   "license": "ISC",
+  "proxy": "http://localhost:3001/",
   "dependencies": {
     "antd": "^3.25.3",
     "react": "^16.12.0",

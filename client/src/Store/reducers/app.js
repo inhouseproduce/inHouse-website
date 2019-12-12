@@ -1,5 +1,5 @@
 const initialState = {
-    fleetList: []
+    fleetList: [1,2,3]
 };
 
 const app = ( state = initialState, action ) => {
