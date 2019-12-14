@@ -13,9 +13,14 @@ class Info extends Component {
     handleInput(e){
         let { name, value } = e.target;
         this.setState({
-            client: { [name]: value }
+            ...this.state,
+            [this.props.name]: {
+                ...this.state[this.props.name],
+                [name]: value
+            }
+        }, () => {
+            this.props.handleInput(this.state);
         });
-        this.props.handleInput({ client: this.state.client });
     }
 
     render() {

@@ -68,9 +68,9 @@ class clock extends Component {
                                         <Select style={{width:'80px'}} className='mx-1' defaultValue='on' onChange={(e) => this.selectOption(e, i)}>
                                             <Option value='on'>On</Option>
                                             <Option value='off'>Off</Option>
-                                            { this.props.name === 'lighthing' && <Option value='dim'>Dimmgin</Option> }
+                                            { this.props.name === 'lighting' && <Option value='dim'>Dimmgin</Option> }
                                         </Select>
-                                        {this.state.clockArr[i].action === 'dim' && this.props.name === 'lighthing' &&
+                                        {this.state.clockArr[i].action === 'dim' && this.props.name === 'lighting' &&
                                             <span>
                                                 <Input style={{ width: '70px' }} name='level' placeholder='Brightness' onChange={(e) => this.handleInput(e, i)}/>
                                                 <span>%</span>

@@ -13,7 +13,7 @@ class FleetForm extends Component {
                 <div className='col-12 p-0'>
                     <div className='my-3'>
                         <span><b>Client Info</b></span>
-                        <InfoMenu handleInput={this.props.handleInput}/>
+                        <InfoMenu name='client' handleInput={this.props.handleInput}/>
                     </div>
                     <Divider className='my-2' />
                     <div>
@@ -33,7 +33,7 @@ class FleetForm extends Component {
                     <div>
                         <span><b>Lighting</b></span>
                         <span className='p-1'>
-                            <ClockMenu name='lighthing' handleInput={this.props.handleInput} />
+                            <ClockMenu name='lighting' handleInput={this.props.handleInput} />
                         </span>
                     </div>
                 </div>

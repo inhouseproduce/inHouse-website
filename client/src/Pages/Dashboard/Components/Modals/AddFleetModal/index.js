@@ -25,6 +25,7 @@ class AddNewFleetModal extends Component {
     }
 
     render() {
+        console.log('chekcing state', this.state)
         return (
             <Modal
                 title='Add New Fleet'
