@@ -12,15 +12,15 @@ const fetch = require("node-fetch");
 module.exports = ( app ) => {
 
   console.log("In send_sms.js");
-  for (var customer in configContent) 
+  for (var customer in configContent['clients']) 
   {
     // iterates through each customer's data for their phone number and schedules
   
-    // const customerPhone = configContent[customer]['phoneNo'];
+    // const customerPhone = configContent['clients'][customer]['phoneNo'];
     const customerPhone = process.env.TEST_PHONE;
-    cronJobsArray.push([new CronJob(configContent[customer]['schedule_seeding'], 
+    cronJobsArray.push([new CronJob(configContent['clients'][customer]['schedule_seeding'], 
                         messageToCustomer.bind(this, customerPhone, 'seeding'),  null, true),
-                      new CronJob(configContent[customer]['schedule_daily_checkups'], 
+                      new CronJob(configContent['clients'][customer]['schedule_daily_checkups'], 
                       messageToCustomer.bind(this, customerPhone, 'daily_check'),  null, true)]);
   }
 

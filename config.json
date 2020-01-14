@@ -1,8 +1,18 @@
 {
-    "client1":{
+  "clients": [
+      {
+        "site": "preux",
+        "name": "simon",
         "phoneNo": "+3335554444",
-        "schedule_seeding": "* * * * *",
-        "schedule_daily_checkups": "50 * * * *"
-    }
-
+        "schedule_seeding": "0 14 * * *",
+        "schedule_daily_checkups": "15 14 * * *"
+      },
+      {
+        "site": "hugos",
+        "name": "angel",
+        "phoneNo": "+3335554444",
+        "schedule_seeding": "0 14 * * *",
+        "schedule_daily_checkups": "15 14 * * *"
+      }
+   ]
 }
