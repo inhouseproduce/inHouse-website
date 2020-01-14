@@ -1,27 +1,26 @@
 import textReminders from './text-reminders.json';
 import configContent from './config.json';
 
-
-
 var CronJob = require('cron').CronJob;
 var cronJobsArray = [];
 
 
-for (var key in configContent) {
+for (var customer in configContent) 
+{
   // iterates through each customer's data for their phone number and schedules
 
-  const customerPhone = configContent[key]['phoneNo'];
-
-  cronJobsArray.push([new CronJob(configContent[key]['schedule_seeding'], messageToCustomer.bind(this, customerPhone, 'seeding'),  null, true),
-                    new CronJob(configContent[key]['schedule_daily_checkups'], messageToCustomer.bind(this, customerPhone, 'daily_check'),  null, true)]);
-
+  const customerPhone = configContent[customer]['phoneNo'];
+  cronJobsArray.push([new CronJob(configContent[customer]['schedule_seeding'], 
+                      messageToCustomer.bind(this, customerPhone, 'seeding'),  null, true),
+                    new CronJob(configContent[customer]['schedule_daily_checkups'], 
+                    messageToCustomer.bind(this, customerPhone, 'daily_check'),  null, true)]);
 }
-
 
 
 function randomIndex(arrayLength)
 {
   // returns a random number
+
   return Math.floor(Math.random() * arrayLength);
 }
 
@@ -29,9 +28,11 @@ function randomIndex(arrayLength)
 function sendMessage(phoneNo, message)
 {
   // send a SMS message, message, to phoneNo from the Twilio Number
+  
   fetch('/api/messages', {
     method: 'POST',
-    headers: {
+    headers: 
+    {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({"to":phoneNo,"body": message})

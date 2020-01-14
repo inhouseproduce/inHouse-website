@@ -4,7 +4,7 @@ const app = express();
 const db = require('./modules');
 const sendText = require('./send_sms.js');
 const client = require('twilio')(
-  process.env.TWILIO_ACCOUT_SID,
+  process.env.TWILIO_ACCOUNT_SID,
   process.env.TWILIO_AUTH_TOKEN
 );
 
@@ -18,7 +18,9 @@ if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
 };
 
+// SMS messages sender
 sendText();
+
 // Mongo connection
 mongoConnection();
 
