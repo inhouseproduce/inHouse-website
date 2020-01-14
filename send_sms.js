@@ -4,8 +4,8 @@
 var CronJob = require('cron').CronJob;
 var cronJobsArray = [];
 
-const textReminders = require('text-reminders.json');
-const configContent = require('config.json');
+const textReminders = require('./text-reminders.json');
+const configContent = require('./config.json');
 
 
 
