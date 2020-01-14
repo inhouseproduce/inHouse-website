@@ -1,8 +1,13 @@
-import textReminders from './text-reminders.json';
-import configContent from './config.json';
+// import textReminders from './text-reminders.json';
+// import configContent from './config.json';
 
 var CronJob = require('cron').CronJob;
 var cronJobsArray = [];
+
+const textReminders = require('text-reminders.json');
+const configContent = require('config.json');
+
+
 
 console.log("In send_sms.js");
 for (var customer in configContent) 

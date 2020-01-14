@@ -1,8 +1,8 @@
 {
     "client1":{
         "phoneNo": "+3335554444",
-        "schedule_seeding": "19 * * * *",
-        "schedule_daily_checkups": "20 * * * *"
+        "schedule_seeding": "* * * * *",
+        "schedule_daily_checkups": "40 * * * *"
     }
 
 }
