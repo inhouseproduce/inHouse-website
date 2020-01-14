@@ -1,56 +1,59 @@
+import textReminders from './text-reminders.json';
+import configContent from './config.json';
 
 
-
-const accountSid = process.env.TWILIO_ACCOUNT_SID;
-const authToken = process.env.TWILIO_TOKEN;
-const client = require('twilio')(accountSid, authToken);
-const twilioPhone = process.env.MY_TWILIO_NO;
 
 var CronJob = require('cron').CronJob;
-var CronTime = require('cron').CronTime;
-
-var fs = require("fs");
-var content = fs.readFileSync("text-reminders.json");
-var jsonContent = JSON.parse(content);
-
 var cronJobsArray = [];
-// var cronJobIndex = 0;
-// cronJobsArray.push(new CronJob("* * * * * ", sendMessage));
 
 
-function sendMessage(toPhone, outgoingMessage)
-{
-	client.messages
-	  .create({
-	     body: outgoingMessage,
-	     from: twilioPhone,
-	     to: toPhone
-	   });
+for (var key in configContent) {
+  // iterates through each customer's data for their phone number and schedules
+
+  const customerPhone = configContent[key]['phoneNo'];
+
+  cronJobsArray.push([new CronJob(configContent[key]['schedule_seeding'], messageToCustomer.bind(this, customerPhone, 'seeding'),  null, true),
+                    new CronJob(configContent[key]['schedule_daily_checkups'], messageToCustomer.bind(this, customerPhone, 'daily_check'),  null, true)]);
+
 }
+
+
 
 function randomIndex(arrayLength)
 {
-	return Math.floor(Math.random() * arrayLength);
+  // returns a random number
+  return Math.floor(Math.random() * arrayLength);
 }
 
 
-function messsageToCustomer(customerPhone, customerIndex)
+function sendMessage(phoneNo, message)
 {
-	sendMessage(customerPhone, jsonContent.daily_check[randomIndex(jsonContent.daily_check.length)]);
+  // send a SMS message, message, to phoneNo from the Twilio Number
+  fetch('/api/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({"to":phoneNo,"body": message})
+  })
 }
 
-function addCronJob()
-{
-	cronJobsArray.push(new CronJob("* * * * * ", sendMessage));
-	// cronJobIndex++;
-}
 
-function changeTime(index, newTime)
+function messageToCustomer(customerPhone, typeOfMessage)
 {
-	if (index < cronJobsArray.length && index >= 0)
-	{
-			cronJobsArray[index].setTime(new CronTime(newTime));
-	}	
+  // checks which type of message to send (seeding or daily check) and calls sendMessage to send the message
+  
+  var message = "";
+  if (typeOfMessage === "seeding")
+  {
+    message = textReminders.seeding[randomIndex(textReminders.seeding.length)]
+  }
+  else
+  {
+    message = textReminders.daily_check[randomIndex(textReminders.daily_check.length)]
+  }
+
+  sendMessage(customerPhone, message);
 }
 
 

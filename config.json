@@ -1,0 +1,13 @@
+{
+    "client1":{
+        "phoneNo": "+15628817262",
+        "schedule_seeding": "25 * * * *",
+
+        "schedule_daily_checkups": "27 * * * *",
+
+        "cron_seeding_index": 0,
+        "cron_daily_index":1
+
+    }
+
+}
