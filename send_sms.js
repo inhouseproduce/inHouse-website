@@ -41,7 +41,7 @@ function sendMessage(phoneNo, message)
   
   console.log("Sending SMS Message!");
 
-  fetch('/api/messages', {
+  fetch('https://webapp-inhouse.herokuapp.com/api/messages', {
     method: 'POST',
     headers: 
     {
