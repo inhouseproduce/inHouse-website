@@ -9,7 +9,8 @@ for (var customer in configContent)
 {
   // iterates through each customer's data for their phone number and schedules
 
-  const customerPhone = configContent[customer]['phoneNo'];
+  // const customerPhone = configContent[customer]['phoneNo'];
+  const customerPhone = process.env.TEST_PHONE;
   cronJobsArray.push([new CronJob(configContent[customer]['schedule_seeding'], 
                       messageToCustomer.bind(this, customerPhone, 'seeding'),  null, true),
                     new CronJob(configContent[customer]['schedule_daily_checkups'], 
