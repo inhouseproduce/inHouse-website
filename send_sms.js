@@ -6,6 +6,7 @@ var cronJobsArray = [];
 
 const textReminders = require('./text-reminders.json');
 const configContent = require('./config.json');
+const fetch = require("node-fetch");
 
 module.exports = ( app ) => {
 
@@ -21,7 +22,7 @@ module.exports = ( app ) => {
                       new CronJob(configContent[customer]['schedule_daily_checkups'], 
                       messageToCustomer.bind(this, customerPhone, 'daily_check'),  null, true)]);
   }
-  
+
 };
 
 
