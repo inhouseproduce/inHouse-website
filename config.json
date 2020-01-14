@@ -4,14 +4,14 @@
         "site": "preux",
         "name": "simon",
         "phoneNo": "+3335554444",
-        "schedule_seeding": "0 14 * * *",
+        "schedule_seeding": "27 14 * * *",
         "schedule_daily_checkups": "15 14 * * *"
       },
       {
         "site": "hugos",
         "name": "angel",
         "phoneNo": "+3335554444",
-        "schedule_seeding": "0 14 * * *",
+        "schedule_seeding": "28 14 * * *",
         "schedule_daily_checkups": "15 14 * * *"
       }
    ]
