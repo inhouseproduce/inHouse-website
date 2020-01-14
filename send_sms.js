@@ -48,7 +48,7 @@ function sendMessage(phoneNo, message)
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({"to":phoneNo,"body": message})
-  })
+  }).catch(err => console.error("Here's an error: " + err));
 }
 
 
