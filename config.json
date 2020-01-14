@@ -1,6 +1,6 @@
 {
     "client1":{
-        "phoneNo": "+15628817262",
+        "phoneNo": "+3335554444",
         "schedule_seeding": "25 * * * *",
 
         "schedule_daily_checkups": "27 * * * *",
