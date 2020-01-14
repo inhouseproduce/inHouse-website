@@ -23,7 +23,7 @@ module.exports = ( app ) => {
                       new CronJob(configContent['clients'][customer]['schedule_daily_checkups'], 
                       messageToCustomer.bind(this, customerPhone, 'daily_check'),  null, true)]);
   }
-
+  console.log("Finished cron job setup");
 };
 
 
