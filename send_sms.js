@@ -7,20 +7,23 @@ var cronJobsArray = [];
 const textReminders = require('./text-reminders.json');
 const configContent = require('./config.json');
 
+module.exports = ( app ) => {
 
+  console.log("In send_sms.js");
+  for (var customer in configContent) 
+  {
+    // iterates through each customer's data for their phone number and schedules
+  
+    // const customerPhone = configContent[customer]['phoneNo'];
+    const customerPhone = process.env.TEST_PHONE;
+    cronJobsArray.push([new CronJob(configContent[customer]['schedule_seeding'], 
+                        messageToCustomer.bind(this, customerPhone, 'seeding'),  null, true),
+                      new CronJob(configContent[customer]['schedule_daily_checkups'], 
+                      messageToCustomer.bind(this, customerPhone, 'daily_check'),  null, true)]);
+  }
+  
+};
 
-console.log("In send_sms.js");
-for (var customer in configContent) 
-{
-  // iterates through each customer's data for their phone number and schedules
-
-  // const customerPhone = configContent[customer]['phoneNo'];
-  const customerPhone = process.env.TEST_PHONE;
-  cronJobsArray.push([new CronJob(configContent[customer]['schedule_seeding'], 
-                      messageToCustomer.bind(this, customerPhone, 'seeding'),  null, true),
-                    new CronJob(configContent[customer]['schedule_daily_checkups'], 
-                    messageToCustomer.bind(this, customerPhone, 'daily_check'),  null, true)]);
-}
 
 
 function randomIndex(arrayLength)
