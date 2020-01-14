@@ -4,7 +4,7 @@ import configContent from './config.json';
 var CronJob = require('cron').CronJob;
 var cronJobsArray = [];
 
-
+console.log("In send_sms.js");
 for (var customer in configContent) 
 {
   // iterates through each customer's data for their phone number and schedules
@@ -30,6 +30,8 @@ function sendMessage(phoneNo, message)
 {
   // send a SMS message, message, to phoneNo from the Twilio Number
   
+  console.log("Sending SMS Message!");
+
   fetch('/api/messages', {
     method: 'POST',
     headers: 
