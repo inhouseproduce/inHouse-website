@@ -7,6 +7,8 @@ var cronJobsArray = [];
 const textReminders = require('./text-reminders.json');
 const configContent = require('./config.json');
 const fetch = require("node-fetch");
+const twilioNo = process.env.TWILIO_PHONE;
+
 
 module.exports = ( app ) => {
 
@@ -47,7 +49,7 @@ function sendMessage(phoneNo, message)
     {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({"to":phoneNo,"body": message})
+    body: JSON.stringify({"from":twilioNo, "to":phoneNo,"body": message})
   }).catch(err => console.error("Here's an error: " + err));
 }
 
