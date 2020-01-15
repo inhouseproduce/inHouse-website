@@ -19,7 +19,7 @@ module.exports = () => {
       console.log("Connected successfully to server");
     
       const db = client.db('clients');
-      console.log("here is database -> "+ db);
+      console.log("here is database -> "+ db.clientName);
     
     });
 
