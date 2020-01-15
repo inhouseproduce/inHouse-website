@@ -72,7 +72,10 @@ function messageToCustomer(customerPhone, typeOfMessage)
     message = textReminders.daily_check[randomIndex(textReminders.daily_check.length)]
   }
 
-  sendMessage(customerPhone, message);
+  // sendMessage(customerPhone, message);
+
+    console.log("could be sending message: "+ message);
+
 }
 
 
