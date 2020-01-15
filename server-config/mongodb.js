@@ -19,7 +19,7 @@ module.exports = () => {
       console.log("Connected successfully to server");
     
       const db = client.db('clients');
-      console.log(util.inspect(db, {showHidden: false, depth: null}));
+    //   console.log(util.inspect(db, {showHidden: false, depth: null}));
     
     });
 
