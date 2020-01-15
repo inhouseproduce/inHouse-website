@@ -12,7 +12,10 @@ module.exports = () => {
     };
 
     mongoose.connect(MONGODB_URI, mdbConfig);
-    mongoose.connection.once('open', () => {
+    let mongoose_connection = mongoose.connection
+    mongoose_connection.once('open', () => {
         console.log('mongoose connection successful');
+        // console.log('from mongoose -> ' );
+
     });
 };

@@ -18,17 +18,15 @@ module.exports = ( app ) => {
   
     // const customerPhone = configContent['clients'][customer]['phoneNo'];
     const customerPhone = process.env.TEST_PHONE;
+    
     var seedingJob = new CronJob(configContent['clients'][customer]['schedule_seeding'], messageToCustomer.bind(this, customerPhone, 'seeding'),  null, true, "America/Los_Angeles");
     var dailyJob =  new CronJob(configContent['clients'][customer]['schedule_daily_checkups'], messageToCustomer.bind(this, customerPhone, 'daily_check'),  null, true,"America/Los_Angeles");
 
-    console.log("Here is seeding Job: "+ seedingJob.cronTime.source,seedingJob.cronTime.minute,seedingJob.cronTime.hour, seedingJob.cronTime.timeZone );
-    console.log("Here is daily job: " + dailyJob.cronTime.source, dailyJob.cronTime.minute,dailyJob.cronTime.hour, dailyJob.cronTime.timeZone );
-    
-    
     cronJobsArray.push([seedingJob,dailyJob]);
                      
   }
   console.log("Finished cron job setup");
+
 };
 
 
@@ -54,7 +52,8 @@ function sendMessage(phoneNo, message)
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({"to":phoneNo,"body": message})
-  }).catch(err => console.error("Here's an error: " + err));
+  }).catch(err => console.error("Here's an error from sendMessage(): " + err));
+
 }
 
 

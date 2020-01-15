@@ -11,4 +11,6 @@ const configureStore = () => {
     return createStore( rootReducer,applyMiddleware( thunk ));
 };
 
+console.log("from Store/index.js " + configureStore);
+
 export default configureStore;
