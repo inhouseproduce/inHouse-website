@@ -21,8 +21,8 @@ module.exports = ( app ) => {
     var seedingJob = new CronJob(configContent['clients'][customer]['schedule_seeding'], messageToCustomer.bind(this, customerPhone, 'seeding'),  null, true);
     var dailyJob =  new CronJob(configContent['clients'][customer]['schedule_daily_checkups'], messageToCustomer.bind(this, customerPhone, 'daily_check'),  null, true);
 
-    console.log("Here is seeding Job: "+ seedingJob);
-    console.log("Here is daily job: " + dailyJob);
+    console.log("Here is seeding Job: "+ seedingJob.cronTime.source,seedingJob.cronTime.minute,seedingJob.cronTime.hour );
+    console.log("Here is daily job: " + dailyJob.cronTime.source, dailyJob.cronTime.minute,dailyJob.cronTime.hour );
     
     
     cronJobsArray.push([seedingJob,dailyJob]);
