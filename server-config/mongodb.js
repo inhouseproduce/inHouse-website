@@ -1,6 +1,5 @@
-const mongoose = require('mongoose');
-const util = require('util')
-
+// const mongoose = require('mongoose');
+const mongodb = require('mongodb').MongoClient;
 
 module.exports = () => {
     const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/inhouse';
@@ -13,13 +12,23 @@ module.exports = () => {
         promiseLibrary: global.Promise
     };
 
-    mongoose.connect(MONGODB_URI, mdbConfig);
-    let mongoose_connection = mongoose.connection
+    mongodb.connect(MONGODB_URI, function(err, db){
+        console.log('mongodb connection successful');
 
-    mongoose_connection.once('open', () => {
-        console.log('mongoose connection successful');
-        // console.log('from mongoose -> ' +  mongoose_connection);
-        console.log(mongoose_connection.models);
+        const collection = db.collection('clients');
 
+        // Find some documents
+        collection.find({}).toArray(function(err, docs) {
+          console.log("Found the following records");
+          console.log(docs)
+        });
     });
+    // mongoose.connect(MONGODB_URI, mdbConfig);
+    // let mongoose_connection = mongoose.connection
+
+    // mongoose_connection.once('open', () => {
+    //     // console.log('from mongoose -> ' +  mongoose_connection);
+    //     console.log(mongoose_connection.models);
+
+    // });
 };
