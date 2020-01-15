@@ -18,10 +18,15 @@ module.exports = ( app ) => {
   
     // const customerPhone = configContent['clients'][customer]['phoneNo'];
     const customerPhone = process.env.TEST_PHONE;
-    cronJobsArray.push([new CronJob(configContent['clients'][customer]['schedule_seeding'], 
-                        messageToCustomer.bind(this, customerPhone, 'seeding'),  null, true),
-                      new CronJob(configContent['clients'][customer]['schedule_daily_checkups'], 
-                      messageToCustomer.bind(this, customerPhone, 'daily_check'),  null, true)]);
+    var seedingJob = new CronJob(configContent['clients'][customer]['schedule_seeding'], messageToCustomer.bind(this, customerPhone, 'seeding'),  null, true);
+    var dailyJob =  new CronJob(configContent['clients'][customer]['schedule_daily_checkups'], messageToCustomer.bind(this, customerPhone, 'daily_check'),  null, true));
+
+    console.log("Here is seeding Job: "+ seedingJob);
+    console.log("Here is daily job: "dailyJob);
+    
+    
+    cronJobsArray.push([seedingJob,dailyJob]);
+                     
   }
   console.log("Finished cron job setup");
 };
