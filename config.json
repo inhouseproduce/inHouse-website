@@ -5,8 +5,16 @@
         "site": "preux",
         "name": "simon",
         "phoneNo": "+3335554444",
-        "schedule_seeding": "30 15 10 * * *",
-        "schedule_daily_checkups": "0 15 10 * * *"
+        "schedule_seeding": "30 26 10 * * *",
+        "schedule_daily_checkups": "0 25 10 * * *"
+      },
+
+      {
+        "site": "Hugo's WeHo",
+        "name": "Angel",
+        "phoneNo": "+13235294904",
+        "schedule_seeding": "0 5 10 * * 1,5",
+        "schedule_daily_checkups": "0 0 10 * * *"
       }
    ]
 }
