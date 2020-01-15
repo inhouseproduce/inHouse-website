@@ -5,7 +5,7 @@
         "site": "preux",
         "name": "simon",
         "phoneNo": "+3335554444",
-        "schedule_seeding": "8 * * * *",
+        "schedule_seeding": "* * * * *",
         "schedule_daily_checkups": "* * * * *"
       }
    ]
