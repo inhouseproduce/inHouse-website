@@ -18,7 +18,8 @@ module.exports = () => {
     client.connect(function(err) {
       console.log("Connected successfully to server");
     
-      const db = client.db(dbName);
+      const db = client.db('clients');
+      console.log("here is database -> "+ db);
     
     });
 
