@@ -1,6 +1,6 @@
 // const mongoose = require('mongoose');
 const MongoClient = require('mongodb').MongoClient;
-
+const util = require('util');
 module.exports = () => {
     const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/inhouse';
 
@@ -19,7 +19,7 @@ module.exports = () => {
       console.log("Connected successfully to server");
     
       const db = client.db('clients');
-      console.log("here is database -> "+ db.clientName);
+      console.log(util.inspect(db, {showHidden: false, depth: null}));
     
     });
 
