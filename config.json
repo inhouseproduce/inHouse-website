@@ -6,7 +6,7 @@
         "name": "simon",
         "phoneNo": "+3335554444",
         "schedule_seeding": "8 * * * *",
-        "schedule_daily_checkups": "10 16 * * *"
+        "schedule_daily_checkups": "* * * * *"
       }
    ]
 }
