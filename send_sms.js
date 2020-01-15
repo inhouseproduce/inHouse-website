@@ -14,14 +14,13 @@ module.exports = ( app ) => {
   console.log("In send_sms.js");
   for (var customer in configContent['clients']) 
   {
-    // iterates through each customer's data for their phone number and schedules
+    // iterates through each customer's data for their phone number and schedules with correct timezone
   
     // const customerPhone = configContent['clients'][customer]['phoneNo'];
     const customerPhone = process.env.TEST_PHONE;
-    var seedingJob = new CronJob(configContent['clients'][customer]['schedule_seeding'], messageToCustomer.bind(this, customerPhone, 'seeding'),  null, true);
-    var dailyJob =  new CronJob(configContent['clients'][customer]['schedule_daily_checkups'], messageToCustomer.bind(this, customerPhone, 'daily_check'),  null, true);
+    var seedingJob = new CronJob(configContent['clients'][customer]['schedule_seeding'], messageToCustomer.bind(this, customerPhone, 'seeding'),  null, true, "America/Los_Angeles");
+    var dailyJob =  new CronJob(configContent['clients'][customer]['schedule_daily_checkups'], messageToCustomer.bind(this, customerPhone, 'daily_check'),  null, "America/Los_Angeles");
 
-    //consider timezones
     console.log("Here is seeding Job: "+ seedingJob.cronTime.source,seedingJob.cronTime.minute,seedingJob.cronTime.hour );
     console.log("Here is daily job: " + dailyJob.cronTime.source, dailyJob.cronTime.minute,dailyJob.cronTime.hour );
     
@@ -73,10 +72,7 @@ function messageToCustomer(customerPhone, typeOfMessage)
     message = textReminders.daily_check[randomIndex(textReminders.daily_check.length)]
   }
 
-  // sendMessage(customerPhone, message);
-
-    console.log("could be sending message: "+ message);
-
+  sendMessage(customerPhone, message);
 }
 
 
