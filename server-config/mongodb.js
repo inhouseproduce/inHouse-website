@@ -19,7 +19,7 @@ module.exports = () => {
     mongoose_connection.once('open', () => {
         console.log('mongoose connection successful');
         // console.log('from mongoose -> ' +  mongoose_connection);
-        console.log(util.inspect(mongoose_connection, {showHidden: false, depth: null}))
+        console.log(util.inspect(mongoose_connection, {showHidden: false, depth: null}));
 
     });
 };
