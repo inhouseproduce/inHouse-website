@@ -13,9 +13,10 @@ module.exports = () => {
 
     mongoose.connect(MONGODB_URI, mdbConfig);
     let mongoose_connection = mongoose.connection
+
     mongoose_connection.once('open', () => {
         console.log('mongoose connection successful');
-        // console.log('from mongoose -> ' );
+        console.log('from mongoose -> ' +  mongoose_connection);
 
     });
 };
