@@ -5,8 +5,8 @@
         "site": "preux",
         "name": "simon",
         "phoneNo": "+3335554444",
-        "schedule_seeding": "0 25 23 * * *",
-        "schedule_daily_checkups": "0 23 23 * * *"
+        "schedule_seeding": "0 33 7 * * *",
+        "schedule_daily_checkups": "0 34 7 * * *"
       }
    ]
 }
