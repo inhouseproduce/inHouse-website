@@ -19,8 +19,12 @@ module.exports = () => {
       console.log("Connected successfully to server");
     
       const db = client.db('clients');
-    //   console.log(util.inspect(db, {showHidden: false, depth: null}));
-    
+      const collection = db.collection('documents');
+
+      collection.find({}).toArray(function(err, docs) {
+        console.log("Found the following records");
+        console.log(docs)
+      });    
     });
 
     // mongodb.connect(MONGODB_URI, function(err, db){
