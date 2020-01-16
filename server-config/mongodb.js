@@ -14,7 +14,7 @@ module.exports = () => {
 
 
     // Use connect method to connect to the server
-    MongoClient.connect(function(err, client) {
+    MongoClient.connect(MONGODB_URI, function(err, client) {
       console.log("Connected successfully to server");
     
       const db = client.db('webapp-inhouse');
