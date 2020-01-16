@@ -20,7 +20,16 @@ module.exports = () => {
       const db = client.db('webapp-inhouse');
       const collection = db.collection('clients');
 
-      console.log("Here's a collection: "+ collection);
+      db.collection('clients').find()
+      .toArray((err, results) => {
+          if(err) throw err;
+  
+          results.forEach((value)=>{
+              console.log(value.name);
+          });
+      })
+
+      
     });
 
     // mongodb.connect(MONGODB_URI, function(err, db){
