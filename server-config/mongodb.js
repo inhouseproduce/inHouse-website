@@ -18,8 +18,8 @@ module.exports = () => {
     client.connect(function(err) {
       console.log("Connected successfully to server");
     
-      const db = client.db('clients');
-      const collection = db.collection('documents');
+      const db = client.db('collections');
+      const collection = db.collection('client');
 
       collection.find({}).toArray(function(err, docs) {
         console.log("Found the following records");
