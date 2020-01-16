@@ -4,6 +4,19 @@ const util = require('util');
 module.exports = () => {
     const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/inhouse';
 
+    MongoClient.connect(MONGODB_URI, (err, db) => {  
+        if (err) {
+          return console.log(err);
+        }
+        console.log("Succesful YAY");
+        console.log(db.collection('clients'));
+      
+        // Do something with db here, like inserting a record
+
+      });
+
+
+
     // const mdbConfig = {
     //     useCreateIndex: true,
     //     useNewUrlParser: true,
@@ -12,20 +25,20 @@ module.exports = () => {
     //     promiseLibrary: global.Promise
     // };
 
-    const client = new MongoClient(MONGODB_URI, {useNewUrlParser: true});
+    // const client = new MongoClient(MONGODB_URI, {useNewUrlParser: true});
 
-    // Use connect method to connect to the server
-    client.connect(function(err) {
-      console.log("Connected successfully to server");
+    // // Use connect method to connect to the server
+    // client.connect(function(err) {
+    //   console.log("Connected successfully to server");
     
-      const db = client.db('collections');
-      const collection = db.collection('client');
+    //   const db = client.db('collections');
+    //   const collection = db.collection('client');
 
-      collection.find({}).toArray(function(err, docs) {
-        console.log("Found the following records");
-        console.log(docs)
-      });    
-    });
+    //   collection.find({}).toArray(function(err, docs) {
+    //     console.log("Found the following records");
+    //     console.log(docs)
+    //   });    
+    // });
 
     // mongodb.connect(MONGODB_URI, function(err, db){
     //     console.log('mongodb connection successful');
