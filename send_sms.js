@@ -2,65 +2,27 @@ const CronJob = require('cron').CronJob;
 const textReminders = require('./text-reminders.json');
 const Messenger = require('./modules/Messenger.js');
 const fetch = require("node-fetch");
-// const mongoose = require('mongoose');
-
-
-// const Schema = mongoose.Schema;
-
-// const MessagingSchema = new Schema({
-   
-// });
-
-// const Messenger = mongoose.model("messaging", MessagingSchema, "messaging");
-
-
-
 
 module.exports = ( mongoose_connection ) => {
 
-  console.log("In send_sms.js " + Messenger);
+  console.log("In send_sms.js ");
 
   mongoose_connection.once('open', () => 
   {
     console.log("mongodb connection from send_sms.js");
     Messenger.find({}, function (err, client_list) 
     {
- 
       const client_data = JSON.parse(JSON.stringify(client_list[0]));
-
       client_data.clients.forEach(client => 
       {
         const customerPhone = client.phoneNo;
-    
         new CronJob(client.schedule_seeding, messageToCustomer.bind(this, customerPhone, 'seeding'),  null, true, "America/Los_Angeles");
         new CronJob(client.schedule_daily_checkups, messageToCustomer.bind(this, customerPhone, 'daily_check'),  null, true,"America/Los_Angeles");
       });
-        
     });
-
   });
   console.log("Finished cron job setup");
 };
-
-
-  
-//   for (var customer in configContent['clients']) 
-//   {
-//     // iterates through each customer's data for their phone number and schedules with correct timezone
-  
-//     const customerPhone = configContent['clients'][customer]['phoneNo'];
-//     // const customerPhone = process.env.TEST_PHONE;
-
-//     var seedingJob = new CronJob(configContent['clients'][customer]['schedule_seeding'], messageToCustomer.bind(this, customerPhone, 'seeding'),  null, true, "America/Los_Angeles");
-//     var dailyJob =  new CronJob(configContent['clients'][customer]['schedule_daily_checkups'], messageToCustomer.bind(this, customerPhone, 'daily_check'),  null, true,"America/Los_Angeles");
-
-//     cronJobsArray.push([seedingJob,dailyJob]);
-                     
-//   }
-
-// };
-
-
 
 function randomIndex(arrayLength)
 {
@@ -68,7 +30,6 @@ function randomIndex(arrayLength)
 
   return Math.floor(Math.random() * arrayLength);
 }
-
 
 function sendMessage(phoneNo, message)
 {

@@ -8,8 +8,6 @@ const client = require('twilio')(
   process.env.TWILIO_AUTH_TOKEN
 );
 const twilioNo = process.env.TWILIO_PHONE;
-
-
 const PORT = process.env.PORT || 3001;
 
 const mongoConnection = require('./server-config/mongodb');
@@ -19,13 +17,11 @@ if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
 };
 
-
+// SMS messages sender
+sendText(mongoConnection);
 
 // Mongo connection
-const mongoConnect = mongoConnection();
-
-// SMS messages sender
-sendText(mongoConnect);
+const mongoConnect = mongoConnection;
 
 // Use header
 setHeader(app);
