@@ -1,23 +1,24 @@
 const CronJob = require('cron').CronJob;
 const textReminders = require('./text-reminders.json');
-// const Messenger = require('../modules/Messenger');
+const Messenger = require('../modules/Messenger');
 const fetch = require("node-fetch");
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 
 
-const Schema = mongoose.Schema;
+// const Schema = mongoose.Schema;
 
-const MessagingSchema = new Schema({
+// const MessagingSchema = new Schema({
    
-});
+// });
 
-const Messenger = mongoose.model("messaging", MessagingSchema, "messaging");
+// const Messenger = mongoose.model("messaging", MessagingSchema, "messaging");
+
 
 
 
 module.exports = ( mongoose_connection ) => {
 
-  console.log("In send_sms.js");
+  console.log("In send_sms.js " + Messenger);
 
   mongoose_connection.once('open', () => 
   {
