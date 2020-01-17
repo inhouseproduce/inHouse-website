@@ -12,6 +12,7 @@ module.exports = ( mongoose_connection ) => {
     console.log("mongodb connection from send_sms.js");
     Messenger.find({}, function (err, client_list) 
     {
+      console.log("found clients");
       const client_data = JSON.parse(JSON.stringify(client_list[0]));
       client_data.clients.forEach(client => 
       {
