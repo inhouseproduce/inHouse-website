@@ -23,29 +23,29 @@ module.exports = () => {
 
 
 
-    const Schema = mongoose.Schema;
+    // const Schema = mongoose.Schema;
 
-    const MessagingSchema = new Schema({
+    // const MessagingSchema = new Schema({
        
-    });
+    // });
     
-    const Messenger = mongoose.model("messaging", MessagingSchema, "messaging");
+    // const Messenger = mongoose.model("messaging", MessagingSchema, "messaging");
 
 
 
     mongoose_connection.once('open', () => {
         console.log("here in mongoose connection!");
-        Messenger.find({}, function (err, client_list) 
-        {
+        // Messenger.find({}, function (err, client_list) 
+        // {
    
-                const client_data = JSON.parse(JSON.stringify(client_list[0]));
-                client_data.clients.forEach(person => 
-                    {
-                    console.log( person.schedule_daily_checkups);
-                });
+        //         const client_data = JSON.parse(JSON.stringify(client_list[0]));
+        //         client_data.clients.forEach(person => 
+        //             {
+        //             console.log( person.schedule_daily_checkups);
+        //         });
          
 
-          });
+        //   });
 
     });
 

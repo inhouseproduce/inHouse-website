@@ -1,6 +1,6 @@
 const CronJob = require('cron').CronJob;
 const textReminders = require('./text-reminders.json');
-const Messenger = require('../modules/Messenger');
+const Messenger = require('./modules/Messenger.js');
 const fetch = require("node-fetch");
 // const mongoose = require('mongoose');
 
