@@ -19,11 +19,13 @@ if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
 };
 
-// SMS messages sender
-sendText();
+
 
 // Mongo connection
-mongoConnection();
+const mongoConnect = mongoConnection();
+
+// SMS messages sender
+sendText(mongoConnect);
 
 // Use header
 setHeader(app);

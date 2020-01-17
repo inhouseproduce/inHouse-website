@@ -1,33 +1,52 @@
-// import textReminders from './text-reminders.json';
-// import configContent from './config.json';
-
-var CronJob = require('cron').CronJob;
-var cronJobsArray = [];
-
+const CronJob = require('cron').CronJob;
 const textReminders = require('./text-reminders.json');
-const configContent = require('./config.json');
+const Messenger = require('../modules/Messenger');
 const fetch = require("node-fetch");
 
 
-module.exports = ( app ) => {
+module.exports = ( mongoose_connection ) => {
 
   console.log("In send_sms.js");
-  for (var customer in configContent['clients']) 
+
+  mongoose_connection.once('open', () => 
   {
-    // iterates through each customer's data for their phone number and schedules with correct timezone
-  
-    // const customerPhone = configContent['clients'][customer]['phoneNo'];
-    const customerPhone = process.env.TEST_PHONE;
+    console.log("mongodb connection from send_sms.js");
+    Messenger.find({}, function (err, client_list) 
+    {
+ 
+      const client_data = JSON.parse(JSON.stringify(client_list[0]));
+
+      client_data.clients.forEach(client => 
+      {
+        const customerPhone = client.phoneNo;
     
-    var seedingJob = new CronJob(configContent['clients'][customer]['schedule_seeding'], messageToCustomer.bind(this, customerPhone, 'seeding'),  null, true, "America/Los_Angeles");
-    var dailyJob =  new CronJob(configContent['clients'][customer]['schedule_daily_checkups'], messageToCustomer.bind(this, customerPhone, 'daily_check'),  null, true,"America/Los_Angeles");
+        new CronJob(client.schedule_seeding, messageToCustomer.bind(this, customerPhone, 'seeding'),  null, true, "America/Los_Angeles");
+        new CronJob(client.schedule_daily_checkups, messageToCustomer.bind(this, customerPhone, 'daily_check'),  null, true,"America/Los_Angeles");
+      });
+        
+    });
 
-    cronJobsArray.push([seedingJob,dailyJob]);
-                     
-  }
+  });
   console.log("Finished cron job setup");
-
 };
+
+
+  
+//   for (var customer in configContent['clients']) 
+//   {
+//     // iterates through each customer's data for their phone number and schedules with correct timezone
+  
+//     const customerPhone = configContent['clients'][customer]['phoneNo'];
+//     // const customerPhone = process.env.TEST_PHONE;
+
+//     var seedingJob = new CronJob(configContent['clients'][customer]['schedule_seeding'], messageToCustomer.bind(this, customerPhone, 'seeding'),  null, true, "America/Los_Angeles");
+//     var dailyJob =  new CronJob(configContent['clients'][customer]['schedule_daily_checkups'], messageToCustomer.bind(this, customerPhone, 'daily_check'),  null, true,"America/Los_Angeles");
+
+//     cronJobsArray.push([seedingJob,dailyJob]);
+                     
+//   }
+
+// };
 
 
 
