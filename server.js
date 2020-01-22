@@ -22,6 +22,7 @@ sendText(mongoConnection);
 
 // Mongo connection
 const mongoConnect = mongoConnection;
+mongoConnect.on('error', console.error.bind(console, 'connection error:'));
 
 // Use header
 setHeader(app);
