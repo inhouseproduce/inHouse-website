@@ -14,7 +14,7 @@ module.exports = ( mongoose_connection ) => {
   main(mongoose_connection);
 
   //at midnight, recheck the jobs 
-  new CronJob("0 /3 * * * *", main.bind(this, mongoose_connection),  null, true, "America/Los_Angeles");
+  new CronJob("0 */15 * * * *", main.bind(this, mongoose_connection),  null, true, "America/Los_Angeles");
 };
 
 
@@ -28,6 +28,20 @@ function main(mongoose_connection)
     {
       console.log("found clients");
       const client_data = JSON.parse(JSON.stringify(client_list[0]));
+
+      Object.keys(cronJobs).forEach(client =>
+        {
+          if (!(client in client_data.clients))
+          {
+            cronJobs[client]['seeding'].stop();
+            cronJobs[client]['daily_check'].stop();
+
+            // delete crobJobs[client]['seeding'];
+            // delete crobJobs[client];
+          }
+        })
+
+
       client_data.clients.forEach(client => 
       {
         if (client.name in crobJobs)
