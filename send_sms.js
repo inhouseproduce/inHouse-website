@@ -14,10 +14,10 @@ module.exports = ( mongoose_connection ) => {
   // main(mongoose_connection);
 
   //test
+
   sendMessage(process.env.TESTPHONE, 'seeding 1');
 
-  // messageToCustomer(process.env.TESTPHONE, 'seeding');
-  sendMessage(process.env.TESTPHONE, 'seeding 2');
+  messageToCustomer(process.env.TESTPHONE, 'seeding');
 
   //at midnight, recheck the jobs 
   // new CronJob("0 50 * * * *", main.bind(this, mongoose_connection),  null, true, "America/Los_Angeles");
@@ -106,6 +106,8 @@ function messageToCustomer(customerPhone, typeOfMessage)
 {
   // checks which type of message to send (seeding or daily check) and calls sendMessage to send the message
   
+  sendMessage(process.env.TESTPHONE, 'start of messageToCustomer');
+
   loadTextReminders.then(message_array => {
       // var message = "";
       // if (typeOfMessage === "seeding")
@@ -119,4 +121,6 @@ function messageToCustomer(customerPhone, typeOfMessage)
 
       sendMessage(customerPhone, "made it here");
   });
+  sendMessage(process.env.TESTPHONE, 'end of messageToCustomer');
+
 }
