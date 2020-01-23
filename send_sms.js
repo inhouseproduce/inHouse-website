@@ -14,11 +14,13 @@ module.exports = ( mongoose_connection ) => {
   main(mongoose_connection);
 
   //test
+  sendMessage(process.env.TESTPHONE, 'seeding 1');
+
   messageToCustomer(process.env.TESTPHONE, 'seeding');
-  sendMessage(process.env.TESTPHONE, 'seeding');
+  sendMessage(process.env.TESTPHONE, 'seeding 2');
 
   //at midnight, recheck the jobs 
-  new CronJob("0 50 * * * *", main.bind(this, mongoose_connection),  null, true, "America/Los_Angeles");
+  // new CronJob("0 50 * * * *", main.bind(this, mongoose_connection),  null, true, "America/Los_Angeles");
 };
 
 
