@@ -18,11 +18,11 @@ if (process.env.NODE_ENV === 'production') {
 };
 
 // SMS messages sender
-sendText("mongoConnection");
+sendText(mongoConnection);
 
 // Mongo connection
-// const mongoConnect = mongoConnection;
-// mongoConnect.on('error', console.error.bind(console, 'connection error:'));
+const mongoConnect = mongoConnection;
+mongoConnect.on('error', console.error.bind(console, 'connection error:'));
 
 // Use header
 setHeader(app);

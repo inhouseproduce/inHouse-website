@@ -8,7 +8,7 @@ var cronJobs = {};
 
 module.exports = ( mongoose_connection ) => {
 
-  console.log("In send_sms.js ");
+  // console.log("In send_sms.js ");
 
   //initial start of jobs 
   // main(mongoose_connection);
