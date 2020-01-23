@@ -14,7 +14,7 @@ module.exports = ( mongoose_connection ) => {
   main(mongoose_connection);
 
   //test
-  sendMessage(process.env.TESTPHONE, 'seeding');
+  messageToCustomer(process.env.TESTPHONE, 'seeding');
 
   //at midnight, recheck the jobs 
   new CronJob("0 50 * * * *", main.bind(this, mongoose_connection),  null, true, "America/Los_Angeles");
@@ -104,17 +104,16 @@ function messageToCustomer(customerPhone, typeOfMessage)
   // checks which type of message to send (seeding or daily check) and calls sendMessage to send the message
   
   loadTextReminders.then(message_array => {
-      var message = "";
-      if (typeOfMessage === "seeding")
-      {
-        message = message_array[1][randomIndex(message_array[1].length)];
-      }
-      else
-      {
-        message =  message_array[0][randomIndex(message_array[0].length)];
-      }
+      // var message = "";
+      // if (typeOfMessage === "seeding")
+      // {
+      //   message = message_array[1][randomIndex(message_array[1].length)];
+      // }
+      // else
+      // {
+      //   message =  message_array[0][randomIndex(message_array[0].length)];
+      // }
 
-      sendMessage(customerPhone, message);
-
+      sendMessage(customerPhone, "made it here");
   });
 }
