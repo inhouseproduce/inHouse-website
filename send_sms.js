@@ -15,7 +15,7 @@ module.exports = ( mongoose_connection ) => {
 
   //test
 
-  // sendMessage(process.env.TESTPHONE, 'seeding');
+  sendMessage(process.env.TESTPHONE, 'seeding');
 
   // messageToCustomer(process.env.TESTPHONE, 'seeding');
 
@@ -88,7 +88,7 @@ function sendMessage(phoneNo, message)
 {
   // send a SMS message, message, to phoneNo from the Twilio Number
   
-  console.log("Sending SMS Message!");
+  // console.log("Sending SMS Message!");
 
   fetch('https://webapp-inhouse.herokuapp.com/api/messages', {
     method: 'POST',

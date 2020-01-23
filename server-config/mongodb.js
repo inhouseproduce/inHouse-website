@@ -14,9 +14,9 @@ mongoose.connect(MONGODB_URI, mdbConfig);
 
 let mongoose_connection = mongoose.connection;
 
-mongoose_connection.once('open', () => {
-    console.log("connected to mongodb");
-});
+// mongoose_connection.once('open', () => {
+//     console.log("connected to mongodb");
+// });
 
 module.exports = mongoose_connection;
 
