@@ -9,10 +9,12 @@ var cronJobs = {};
 module.exports = ( mongoose_connection ) => {
 
   console.log("In send_sms.js ");
-  // main(mongoose_connection);
+
+  //initial 
+  main(mongoose_connection);
 
   //at midnight, recheck the jobs 
-  new CronJob("0 0 0 * * *", main.bind(this, mongoose_connection),  null, true, "America/Los_Angeles");
+  new CronJob("0 /3 * * * *", main.bind(this, mongoose_connection),  null, true, "America/Los_Angeles");
 };
 
 

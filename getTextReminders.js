@@ -70,11 +70,11 @@ async function getMessages(auth) {
 
   const sheets = google.sheets({ version: "v4", auth });
   const daily_check = await sheets.spreadsheets.values.get({
-    spreadsheetId: '1xVf95wPNQtMyXMISXFj52hE1ULWPvjwH9e9M5vCoutw',
+    spreadsheetId: process.env.SPREADSHEET_ID,
     range: 'System!A:A',
   });
   const seeding = await sheets.spreadsheets.values.get({
-    spreadsheetId: '1xVf95wPNQtMyXMISXFj52hE1ULWPvjwH9e9M5vCoutw',
+    spreadsheetId: process.env.SPREADSHEET_ID,
     range: 'Seeding!A:A',
   });
 
