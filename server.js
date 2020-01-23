@@ -18,7 +18,7 @@ if (process.env.NODE_ENV === 'production') {
 };
 
 // SMS messages sender
-// sendText(mongoConnection);
+sendText(mongoConnection);
 
 // Mongo connection
 const mongoConnect = mongoConnection;

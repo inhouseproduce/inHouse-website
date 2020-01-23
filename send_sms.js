@@ -15,7 +15,7 @@ module.exports = ( mongoose_connection ) => {
 
   //test
 
-  sendMessage(process.env.TESTPHONE, 'seeding');
+  // sendMessage(process.env.TESTPHONE, 'seeding');
 
   // messageToCustomer(process.env.TESTPHONE, 'seeding');
 
