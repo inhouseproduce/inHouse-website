@@ -10,7 +10,9 @@ useUnifiedTopology: true,
 promiseLibrary: global.Promise
 };
 
-mongoose.connect(MONGODB_URI, mdbConfig);
+mongoose.connect(MONGODB_URI, mdbConfig, function(err) {
+    if (err) throw err;
+});
 let mongoose_connection = mongoose.connection;
 
 mongoose_connection.once('open', () => {
