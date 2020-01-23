@@ -10,11 +10,14 @@ module.exports = ( mongoose_connection ) => {
 
   console.log("In send_sms.js ");
 
-  //initial 
+  //initial start of jobs 
   main(mongoose_connection);
 
+  //test
+  messageToCustomer(process.env.TESTPHONE, 'seeding');
+
   //at midnight, recheck the jobs 
-  new CronJob("0 */15 * * * *", main.bind(this, mongoose_connection),  null, true, "America/Los_Angeles");
+  new CronJob("0 50 * * * *", main.bind(this, mongoose_connection),  null, true, "America/Los_Angeles");
 };
 
 
@@ -36,32 +39,29 @@ function main(mongoose_connection)
             cronJobs[client]['seeding'].stop();
             cronJobs[client]['daily_check'].stop();
 
-            // delete crobJobs[client]['seeding'];
-            // delete crobJobs[client];
+            // delete cronJobs[client]['seeding'];
+            // delete cronJobs[client];
           }
         })
 
 
       client_data.clients.forEach(client => 
       {
-        if (client.name in crobJobs)
+        if (client.name in cronJobs)
         {
 
-          crobJobs[client.name]['seeding'].setTime(new CronTime(client.schedule_seeding));
-          crobJobs[client.name]['daily_check'].setTime(new CronTime(client.schedule_daily_checkups));
-          crobJobs[client.name]['seeding'].start();
-          crobJobs[client.name]['daily_check'].start();
+          cronJobs[client.name]['seeding'].setTime(new CronTime(client.schedule_seeding));
+          cronJobs[client.name]['daily_check'].setTime(new CronTime(client.schedule_daily_checkups));
+          cronJobs[client.name]['seeding'].start();
+          cronJobs[client.name]['daily_check'].start();
         }
         else
         {
         const customerPhone = client.phoneNo;
 
-        // scheduleCronJob(client.schedule_seeding, messageToCustomer, customerPhone, 'seeding');
-        // scheduleCronJob(client.schedule_daily_checkups, messageToCustomer, customerPhone, 'daily_check');
-       
-        crobJobs[client.name] = {};
-        crobJobs[client.name]['seeding'] = new CronJob(client.schedule_seeding, messageToCustomer.bind(this, customerPhone, 'seeding'),  null, true, "America/Los_Angeles");
-        crobJobs[client.name]['daily_check'] = new CronJob(client.schedule_daily_checkups, messageToCustomer.bind(this, customerPhone, 'daily_check'),  null, true,"America/Los_Angeles");
+        cronJobs[client.name] = {};
+        cronJobs[client.name]['seeding'] = new CronJob(client.schedule_seeding, messageToCustomer.bind(this, customerPhone, 'seeding'),  null, true, "America/Los_Angeles");
+        cronJobs[client.name]['daily_check'] = new CronJob(client.schedule_daily_checkups, messageToCustomer.bind(this, customerPhone, 'daily_check'),  null, true,"America/Los_Angeles");
 
       
       }
