@@ -11,7 +11,7 @@ module.exports = ( mongoose_connection ) => {
   console.log("In send_sms.js ");
 
   //initial start of jobs 
-  main(mongoose_connection);
+  // main(mongoose_connection);
 
   //test
   sendMessage(process.env.TESTPHONE, 'seeding 1');
