@@ -118,7 +118,8 @@ function messageToCustomer(customerPhone, typeOfMessage)
         message =  message_array[0][randomIndex(message_array[0].length)];
       }
 
-      console.log( 'in here');
+      console.log( "here " + message);
+      sendMessage(customerPhone, message);
     });
   console.log( 'end of messageToCustomer');
 
