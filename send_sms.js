@@ -8,18 +8,16 @@ var cronJobs = {};
 
 module.exports = ( mongoose_connection ) => {
 
-  // console.log("In send_sms.js ");
+  console.log("In send_sms.js ");
 
   //initial start of jobs 
-  // main(mongoose_connection);
+  main(mongoose_connection);
 
   //test
-
-
-  messageToCustomer(process.env.TESTPHONE, 'seeding');
+  // messageToCustomer(process.env.TESTPHONE, 'seeding');
 
   //at midnight, recheck the jobs 
-  // new CronJob("0 50 * * * *", main.bind(this, mongoose_connection),  null, true, "America/Los_Angeles");
+  new CronJob("0 25 * * * *", main.bind(this, mongoose_connection),  null, true, "America/Los_Angeles");
 };
 
 
@@ -87,7 +85,7 @@ function sendMessage(phoneNo, message)
 {
   // send a SMS message, message, to phoneNo from the Twilio Number
   
-  // console.log("Sending SMS Message!");
+  console.log("Sending SMS Message!");
 
   fetch('https://webapp-inhouse.herokuapp.com/api/messages', {
     method: 'POST',
