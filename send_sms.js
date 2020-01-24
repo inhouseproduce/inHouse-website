@@ -17,7 +17,7 @@ module.exports = ( mongoose_connection ) => {
   // messageToCustomer(process.env.TESTPHONE, 'seeding');
 
   //at midnight, recheck the jobs 
-  new CronJob("0 25 * * * *", main.bind(this, mongoose_connection),  null, true, "America/Los_Angeles");
+  new CronJob("0 38 * * * *", main.bind(this, mongoose_connection),  null, true, "America/Los_Angeles");
 };
 
 
@@ -49,7 +49,7 @@ function main(mongoose_connection)
       {
         if (client.name in cronJobs)
         {
-
+          console.log("new schedule for " + client.name + " at " + client.schedule_seeding + " and " + client.schedule_daily_checkups);
           cronJobs[client.name]['seeding'].setTime(new CronTime(client.schedule_seeding));
           cronJobs[client.name]['daily_check'].setTime(new CronTime(client.schedule_daily_checkups));
           cronJobs[client.name]['seeding'].start();
@@ -58,6 +58,7 @@ function main(mongoose_connection)
         else
         {
         const customerPhone = client.phoneNo;
+        console.log("new client named " + client.name + " at " + client.schedule_seeding + " and " + client.schedule_daily_checkups);
 
         cronJobs[client.name] = {};
         cronJobs[client.name]['seeding'] = new CronJob(client.schedule_seeding, messageToCustomer.bind(this, customerPhone, 'seeding'),  null, true, "America/Los_Angeles");
