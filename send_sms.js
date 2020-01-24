@@ -15,9 +15,8 @@ module.exports = ( mongoose_connection ) => {
 
   //test
 
-  sendMessage(process.env.TESTPHONE, 'seeding');
 
-  // messageToCustomer(process.env.TESTPHONE, 'seeding');
+  messageToCustomer(process.env.TESTPHONE, 'seeding');
 
   //at midnight, recheck the jobs 
   // new CronJob("0 50 * * * *", main.bind(this, mongoose_connection),  null, true, "America/Los_Angeles");
