@@ -21,8 +21,7 @@ if (process.env.NODE_ENV === 'production') {
 sendText();
 
 // Mongo connection
-const mongoConnect = mongoConnection;
-mongoConnect.on('error', console.error.bind(console, 'connection error:'));
+mongoConnection();
 
 // Use header
 setHeader(app);

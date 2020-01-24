@@ -17,7 +17,7 @@ module.exports = (  ) => {
   // messageToCustomer(process.env.TESTPHONE, 'seeding');
 
   //at midnight, recheck the jobs 
-  new CronJob("0 */3 * * * *", main,  null, true, "America/Los_Angeles");
+  new CronJob("0 * * * * *", main,  null, true, "America/Los_Angeles");
 };
 
 
@@ -36,6 +36,7 @@ function main()
         {
           if (!(client in client_data.clients))
           {
+            console.log("client " + client + " no longer in database");
             cronJobs[client]['seeding'].stop();
             cronJobs[client]['daily_check'].stop();
 
@@ -54,6 +55,7 @@ function main()
           cronJobs[client.name]['daily_check'].setTime(new CronTime(client.schedule_daily_checkups));
           cronJobs[client.name]['seeding'].start();
           cronJobs[client.name]['daily_check'].start();
+          console.log(cronJobs[client.name]['daily_check'] );
         }
         else
         {
