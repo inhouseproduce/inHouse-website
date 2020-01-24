@@ -11,7 +11,6 @@ function loadTextReminders(){
   {
     // Load client secrets from a local file.
     // var content = fs.readFileSync(CREDENTIALS, 'utf8')
-    console.log(CREDENTIALS);
     return authorize(JSON.parse(CREDENTIALS), main);
   }
   catch(err)
@@ -29,8 +28,7 @@ function authorize(credentials, callback) {
   // Check if we have previously stored a token.
   try{
     // var token = fs.readFileSync(TOKEN, 'utf8');
-    console.log(typeof TOKEN);
-    oAuth2Client.setCredentials(JSON.parse(token));
+    oAuth2Client.setCredentials(JSON.parse(TOKEN));
     return callback(oAuth2Client);
 }
   catch(err)
