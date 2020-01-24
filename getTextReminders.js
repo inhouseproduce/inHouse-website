@@ -11,7 +11,7 @@ function loadTextReminders(){
   {
     // Load client secrets from a local file.
     // var content = fs.readFileSync(CREDENTIALS, 'utf8')
-    console.log("type is " + typeof CREDENTIALS);
+    console.log(CREDENTIALS);
     return authorize(JSON.parse(CREDENTIALS), main);
   }
   catch(err)
