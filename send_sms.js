@@ -51,8 +51,9 @@ function main()
         if (client.name in cronJobs)
         {
           console.log("new schedule for " + client.name + " at " + client.schedule_seeding + " and " + client.schedule_daily_checkups);
-          cronJobs[client.name]['seeding'].setTime(new CronTime(client.schedule_seeding));
-          cronJobs[client.name]['daily_check'].setTime(new CronTime(client.schedule_daily_checkups));
+          cronJobs[client.name]['seeding'].setTime(new CronTime(client.schedule_seeding, "America/Los_Angeles"));
+          cronJobs[client.name]['daily_check'].setTime(new CronTime(client.schedule_daily_checkups, "America/Los_Angeles"));
+        
           cronJobs[client.name]['seeding'].start();
           cronJobs[client.name]['daily_check'].start();
 
