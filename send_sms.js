@@ -6,22 +6,22 @@ const loadTextReminders = require('./getTextReminders.js').getTextReminders;
 
 var cronJobs = {};
 
-module.exports = ( mongoose_connection ) => {
+module.exports = (  ) => {
 
   console.log("In send_sms.js ");
 
   //initial start of jobs 
-  main(mongoose_connection);
+  main();
 
   //test
   // messageToCustomer(process.env.TESTPHONE, 'seeding');
 
   //at midnight, recheck the jobs 
-  new CronJob("0 38 * * * *", main.bind(this, mongoose_connection),  null, true, "America/Los_Angeles");
+  new CronJob("0 */5 * * * *", main.bind(this, mongoose_connection),  null, true, "America/Los_Angeles");
 };
 
 
-function main(mongoose_connection)
+function main()
 {
   console.log('start of main');
   // mongoose_connection.once('open', () => 
@@ -63,8 +63,6 @@ function main(mongoose_connection)
         cronJobs[client.name] = {};
         cronJobs[client.name]['seeding'] = new CronJob(client.schedule_seeding, messageToCustomer.bind(this, customerPhone, 'seeding'),  null, true, "America/Los_Angeles");
         cronJobs[client.name]['daily_check'] = new CronJob(client.schedule_daily_checkups, messageToCustomer.bind(this, customerPhone, 'daily_check'),  null, true,"America/Los_Angeles");
-
-      
       }
       });
     });
