@@ -17,7 +17,7 @@ module.exports = (  ) => {
   // messageToCustomer(process.env.TESTPHONE, 'seeding');
 
   //at midnight, recheck the jobs 
-  new CronJob("0 * * * * *", main,  null, true, "America/Los_Angeles");
+  new CronJob("0 */2 * * * *", main,  null, true, "America/Los_Angeles");
 };
 
 
@@ -55,7 +55,6 @@ function main()
           cronJobs[client.name]['daily_check'].setTime(new CronTime(client.schedule_daily_checkups));
           cronJobs[client.name]['seeding'].start();
           cronJobs[client.name]['daily_check'].start();
-          console.log(cronJobs[client.name]['daily_check'] );
         }
         else
         {
