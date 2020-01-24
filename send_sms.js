@@ -24,8 +24,8 @@ module.exports = ( mongoose_connection ) => {
 function main(mongoose_connection)
 {
   console.log('start of main');
-  mongoose_connection.once('open', () => 
-  {
+  // mongoose_connection.once('open', () => 
+  // {
     console.log("mongodb connection from send_sms.js");
     Messenger.find({}, function (err, client_list) 
     {
@@ -68,7 +68,7 @@ function main(mongoose_connection)
       }
       });
     });
-  });
+  // });
   console.log("Finished cron job setup");
 
 }
