@@ -1,5 +1,5 @@
 const CronJob = require('cron').CronJob;
-const CronTime = require('cron').CronTime
+const CronTime = require('cron').CronTime;
 const Messenger = require('./modules/Messenger.js');
 const fetch = require("node-fetch");
 const loadTextReminders = require('./getTextReminders.js').getTextReminders;
@@ -17,7 +17,7 @@ module.exports = (  ) => {
   // messageToCustomer(process.env.TESTPHONE, 'seeding');
 
   //at midnight, recheck the jobs 
-  new CronJob("0 */2 * * * *", main,  null, true, "America/Los_Angeles");
+  new CronJob("0 * * * * *", main,  null, true, "America/Los_Angeles");
 };
 
 
@@ -55,6 +55,8 @@ function main()
           cronJobs[client.name]['daily_check'].setTime(new CronTime(client.schedule_daily_checkups));
           cronJobs[client.name]['seeding'].start();
           cronJobs[client.name]['daily_check'].start();
+          console.log(cronJobs[client.name]['daily_check'].cronTime.zone);
+
         }
         else
         {
