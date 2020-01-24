@@ -55,7 +55,6 @@ function main()
           cronJobs[client.name]['daily_check'].setTime(new CronTime(client.schedule_daily_checkups));
           cronJobs[client.name]['seeding'].start();
           cronJobs[client.name]['daily_check'].start();
-          console.log(cronJobs[client.name]['daily_check'].cronTime.zone);
 
         }
         else
@@ -67,6 +66,8 @@ function main()
         cronJobs[client.name]['seeding'] = new CronJob(client.schedule_seeding, messageToCustomer.bind(this, customerPhone, 'seeding'),  null, true, "America/Los_Angeles");
         cronJobs[client.name]['daily_check'] = new CronJob(client.schedule_daily_checkups, messageToCustomer.bind(this, customerPhone, 'daily_check'),  null, true,"America/Los_Angeles");
       }
+      console.log(cronJobs[client.name]['daily_check'].cronTime.zone);
+
       });
     });
   // });
