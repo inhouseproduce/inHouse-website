@@ -105,7 +105,7 @@ function messageToCustomer(customerPhone, typeOfMessage)
 {
   // checks which type of message to send (seeding or daily check) and calls sendMessage to send the message
   
-  sendMessage(process.env.TESTPHONE, 'start of messageToCustomer');
+  console.log('start of messageToCustomer');
 
   loadTextReminders.then(message_array => {
       // var message = "";
@@ -118,8 +118,8 @@ function messageToCustomer(customerPhone, typeOfMessage)
       //   message =  message_array[0][randomIndex(message_array[0].length)];
       // }
 
-      sendMessage(customerPhone, "made it here");
-  });
-  sendMessage(process.env.TESTPHONE, 'end of messageToCustomer');
+      console.log( 'in here');
+    });
+  console.log( 'end of messageToCustomer');
 
 }
