@@ -108,15 +108,15 @@ function messageToCustomer(customerPhone, typeOfMessage)
   console.log('start of messageToCustomer');
 
   loadTextReminders.then(message_array => {
-      // var message = "";
-      // if (typeOfMessage === "seeding")
-      // {
-      //   message = message_array[1][randomIndex(message_array[1].length)];
-      // }
-      // else
-      // {
-      //   message =  message_array[0][randomIndex(message_array[0].length)];
-      // }
+      var message = "";
+      if (typeOfMessage === "seeding")
+      {
+        message = message_array[1][randomIndex(message_array[1].length)];
+      }
+      else
+      {
+        message =  message_array[0][randomIndex(message_array[0].length)];
+      }
 
       console.log( 'in here');
     });
