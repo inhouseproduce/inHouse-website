@@ -2,7 +2,7 @@ const CronJob = require('cron').CronJob;
 const CronTime = require('cron').CronTime
 const Messenger = require('./modules/Messenger.js');
 const fetch = require("node-fetch");
-const loadTextReminders = require('./getTextReminders.js');
+const loadTextReminders = require('./getTextReminders.js').getTextReminders;
 
 var cronJobs = {};
 
