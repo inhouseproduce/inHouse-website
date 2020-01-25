@@ -14,7 +14,7 @@ module.exports = (  ) => {
   main();
 
   //at midnight, recheck the jobs 
-  new CronJob("0 */5 * * * *", main,  null, true, "America/Los_Angeles");
+  new CronJob("0 0 0 * * *", main,  null, true, "America/Los_Angeles");
 };
 
 
