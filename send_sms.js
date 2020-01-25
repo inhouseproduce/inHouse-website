@@ -50,7 +50,7 @@ function main()
           cronJobs[client]['seeding'].stop();
           cronJobs[client]['daily_check'].stop();         
         }
-       }
+       });
        
 
 
