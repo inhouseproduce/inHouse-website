@@ -32,23 +32,31 @@ function main()
       console.log("found clients");
       const client_data = JSON.parse(JSON.stringify(client_list[0]));
 
-      Object.keys(cronJobs).forEach(client =>
+      //create newClientList from mongodb database in case of 
+      //newly added or deleted client
+      var newClientList = [];
+      client_data.clients.forEach(client =>
         {
-          if (!(client in client_data.clients))
-          {
-            console.log("client " + client + " no longer in database");
-            cronJobs[client]['seeding'].stop();
-            cronJobs[client]['daily_check'].stop();
+          newClientList.push(client.name);
+        }
+      );
 
-            // delete cronJobs[client]['seeding'];
-            // delete cronJobs[client];
-          }
-        })
+      Object.keys(cronJobs).forEach(client =>
+        { 
+       
+          if (!(newClientList).includes(client))
+         {    
+          console.log("client " + client + " no longer in mongodb database so they're cronjobs are getting stopped");
+          cronJobs[client]['seeding'].stop();
+          cronJobs[client]['daily_check'].stop();         
+        }
+       }
+       
 
 
       client_data.clients.forEach(client => 
       {
-        if (client.name in cronJobs)
+        if (Object.keys(cronJobs).includes(client.name))
         {
           console.log("new schedule for " + client.name + " at " + client.schedule_seeding + " and " + client.schedule_daily_checkups);
           cronJobs[client.name]['seeding'].setTime(new CronTime(client.schedule_seeding, "America/Los_Angeles"));
