@@ -20,11 +20,9 @@ module.exports = (  ) => {
 
 function main()
 {
-  // console.log('start of main');
 
     Messenger.find({}, function (err, client_list) 
     {
-      // console.log("found clients");
       const client_data = JSON.parse(JSON.stringify(client_list[0]));
 
       //create newClientList from mongodb database in case of 
@@ -42,7 +40,10 @@ function main()
         { 
           if (!(newClientList).includes(client))
          {    
-          console.log("client " + client + " no longer in mongodb database so they're cronjobs are getting stopped");
+
+          //for debugging
+          // console.log("client " + client + " no longer in mongodb database so they're cronjobs are getting stopped");
+          
           cronJobs[client]['seeding'].stop();
           cronJobs[client]['daily_check'].stop();         
         }
@@ -54,7 +55,8 @@ function main()
       {
         if (Object.keys(cronJobs).includes(client.name))
         {
-          console.log("new schedule for " + client.name + " at " + client.schedule_seeding + " and " + client.schedule_daily_checkups);
+          //for debugging
+          // console.log("new schedule for " + client.name + " at " + client.schedule_seeding + " and " + client.schedule_daily_checkups);
           
           cronJobs[client.name]['seeding'].setTime(new CronTime(client.schedule_seeding, "America/Los_Angeles"));
           cronJobs[client.name]['daily_check'].setTime(new CronTime(client.schedule_daily_checkups, "America/Los_Angeles"));
@@ -65,12 +67,13 @@ function main()
         }
         else
         {
-        console.log("new client named " + client.name + " at " + client.schedule_seeding + " and " + client.schedule_daily_checkups);
-        
-        const customerPhone = client.phoneNo;
-        cronJobs[client.name] = {};
-        cronJobs[client.name]['seeding'] = new CronJob(client.schedule_seeding, messageToCustomer.bind(this, customerPhone, 'seeding'),  null, true, "America/Los_Angeles");
-        cronJobs[client.name]['daily_check'] = new CronJob(client.schedule_daily_checkups, messageToCustomer.bind(this, customerPhone, 'daily_check'),  null, true,"America/Los_Angeles");
+          //for debugging
+          // console.log("new client named " + client.name + " at " + client.schedule_seeding + " and " + client.schedule_daily_checkups);
+          
+          const customerPhone = client.phoneNo;
+          cronJobs[client.name] = {};
+          cronJobs[client.name]['seeding'] = new CronJob(client.schedule_seeding, messageToCustomer.bind(this, customerPhone, 'seeding'),  null, true, "America/Los_Angeles");
+          cronJobs[client.name]['daily_check'] = new CronJob(client.schedule_daily_checkups, messageToCustomer.bind(this, customerPhone, 'daily_check'),  null, true,"America/Los_Angeles");
       }
 
       });
