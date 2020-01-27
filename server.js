@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const db = require('./modules');
-const sendText = require('./send_sms.js');
+const sendText = require('./text-messaging/send_sms.js');
 const client = require('twilio')(
   process.env.TWILIO_ACCOUNT_SID,
   process.env.TWILIO_AUTH_TOKEN

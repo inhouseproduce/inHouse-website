@@ -1,6 +1,6 @@
 const CronJob = require('cron').CronJob;
 const CronTime = require('cron').CronTime;
-const Messenger = require('./modules/Messenger.js');
+const Messenger = require('../modules/Messenger.js');
 const fetch = require("node-fetch");
 const loadTextReminders = require('./getTextReminders.js').getTextReminders;
 
@@ -22,7 +22,6 @@ function main()
 {
   // console.log('start of main');
 
-    // console.log("mongodb connection from send_sms.js");
     Messenger.find({}, function (err, client_list) 
     {
       // console.log("found clients");
@@ -37,9 +36,10 @@ function main()
         }
       );
 
+      //compare the previous users stored already to the current mongodb
+      //database and remove users that are no longer in the mongodb database
       Object.keys(cronJobs).forEach(client =>
         { 
-       
           if (!(newClientList).includes(client))
          {    
           console.log("client " + client + " no longer in mongodb database so they're cronjobs are getting stopped");
@@ -49,12 +49,13 @@ function main()
        });
        
 
-
+      //add new clients or create new schedule for an existing client
       client_data.clients.forEach(client => 
       {
         if (Object.keys(cronJobs).includes(client.name))
         {
           console.log("new schedule for " + client.name + " at " + client.schedule_seeding + " and " + client.schedule_daily_checkups);
+          
           cronJobs[client.name]['seeding'].setTime(new CronTime(client.schedule_seeding, "America/Los_Angeles"));
           cronJobs[client.name]['daily_check'].setTime(new CronTime(client.schedule_daily_checkups, "America/Los_Angeles"));
         
@@ -64,9 +65,9 @@ function main()
         }
         else
         {
-        const customerPhone = client.phoneNo;
         console.log("new client named " + client.name + " at " + client.schedule_seeding + " and " + client.schedule_daily_checkups);
-
+        
+        const customerPhone = client.phoneNo;
         cronJobs[client.name] = {};
         cronJobs[client.name]['seeding'] = new CronJob(client.schedule_seeding, messageToCustomer.bind(this, customerPhone, 'seeding'),  null, true, "America/Los_Angeles");
         cronJobs[client.name]['daily_check'] = new CronJob(client.schedule_daily_checkups, messageToCustomer.bind(this, customerPhone, 'daily_check'),  null, true,"America/Los_Angeles");
@@ -74,7 +75,6 @@ function main()
 
       });
     });
-  // console.log("Finished cron job setup");
 
 }
 
@@ -83,7 +83,6 @@ function randomIndex(arrayLength)
   // returns a random number
 
   return Math.floor(Math.random() * arrayLength);
-  // return Math.floor(Math.random() * (arrayLength - 1)) + 1;
 
 }
 
@@ -109,8 +108,6 @@ function messageToCustomer(customerPhone, typeOfMessage)
 {
   // checks which type of message to send (seeding or daily check) and calls sendMessage to send the message
   
-  // console.log('start of messageToCustomer');
-
   loadTextReminders.then(message_array => {
       var message = "";
       if (typeOfMessage === "seeding")
@@ -121,10 +118,7 @@ function messageToCustomer(customerPhone, typeOfMessage)
       {
         message =  message_array[0][randomIndex(message_array[0].length)];
       }
-
-      // console.log( "here " + message);
       sendMessage(customerPhone, message);
     });
-  // console.log( 'end of messageToCustomer');
 
 }
