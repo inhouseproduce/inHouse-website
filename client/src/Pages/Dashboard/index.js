@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col, Card } from 'react-bootstrap';
 
 import Aux from '../../hoc/_Aux';
-import AmChartStatistics6 from './WdgtTable';
+import AmChartStatistics6 from '../../Components/Widget/WdgtTable';
 
 class Dashboard extends Component {
     state = {
