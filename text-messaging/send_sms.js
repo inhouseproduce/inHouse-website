@@ -24,7 +24,7 @@ module.exports = (  ) => {
 
 function main()
 {
-
+    console.log("running in main()");
     Messenger.find({}, function (err, client_list) 
     {
       const client_data = JSON.parse(JSON.stringify(client_list[0]));
