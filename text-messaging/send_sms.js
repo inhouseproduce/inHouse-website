@@ -14,12 +14,12 @@ module.exports = (  ) => {
   main();
 
   //let's see if running this every 30 minutes will stop it from idling
-  new CronJob("0 */20 * * * *", function() {
-    console.log("It's been 30 minutes now!");
-  },  null, true, "America/Los_Angeles");
+  // new CronJob("0 */20 * * * *", function() {
+  //   console.log("It's been 30 minutes now!");
+  // },  null, true, "America/Los_Angeles");
 
   //at midnight, recheck the jobs 
-  new CronJob("0 0 0 * * *", main,  null, true, "America/Los_Angeles");
+  new CronJob("0 */30 * * * *", main,  null, true, "America/Los_Angeles");
 };
 
 function main()
