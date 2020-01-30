@@ -1,64 +1,144 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import { Row, Col, Card, Tabs, Tab } from 'react-bootstrap';
+import { Row, Col, Button, Card } from 'react-bootstrap';
+import { Slider } from 'antd';
 import Aux from '../../../../hoc/_Aux';
 
-import AmChartStatistics7 from '../../../../Components/Chart/AmChartStatistics7';
-import AmChartReplay from '../../../../Components/Chart/AmChartReplay';
-import GaugeChart from '../../../../Components/Chart/GaugeChart';
+// Actions
+import { controlPi } from '../../../../store/actions/index';
 
-import Control from './control';
+class Control extends Component {
+    state = {
+        pump: false,
+        irrigation: false,
+        lights: false,
+        reset: false,
+        level: 100
+    };
 
-class ControlPanel extends Component {
     render() {
+        const styles = {
+            base: {
+                height: '180px',
+                boxShadow: '0 3px 10px 0 rgba(0, 0, 0, 0.05)'
+            },
+            bb: {
+                borderBottom: '1px solid rgba(0, 0, 0, 0.05)',
+            },
+            br: {
+                borderRight: '1px solid rgba(0, 0, 0, 0.05)',
+            },
+        };
+
+        const controlList = [
+            {
+                context: 'pump',
+                style: { ...styles.bb, ...styles.br, ...styles.base },
+                bttnStatus: this.state.pump ? 'primary' : 'danger'
+
+            },
+            {
+                context: 'irrigation',
+                style: { ...styles.bb, ...styles.base },
+                bttnStatus: this.state.irrigation ? 'primary' : 'danger'
+            },
+            {
+                context: 'lights',
+                style: { ...styles.br, ...styles.base },
+                bttnStatus: this.state.lights ? 'primary' : 'danger',
+                slider: true
+            },
+            {
+                context: 'reset',
+                style: { ...styles.base },
+                bttnStatus: this.state.reset ? 'primary' : 'danger'
+            }
+        ];
+
+        const onPress = context => {
+            this.setState({
+                [context]: !this.state[context],
+                level: 100
+            }, () => {
+                this.props.piControl({
+                    status: this.state[context],
+                    action: context,
+                    level: 100
+                });
+            });
+        };
+
+        const pwmLevel = (context, event) => {
+            this.setState({
+                level: event,
+                pivot: true
+            }, () => {
+                if (this.state.pivot) {
+                    setTimeout(() => {
+                        if (!this.state.pivot) {
+                            this.props.piControl({
+                                status: this.state[context],
+                                action: context,
+                                level: this.state.level
+                            });
+                            this.setState({ pivot: true });
+                        };
+                    }, 600);
+                    this.setState({ pivot: false });
+                };
+            });
+        };
+
         return (
-            <Aux>
-                <Row>
-                    <Col xl={{ span: 6 }} className='p-3 mt-3' >
-                        <Control />
-                    </Col>
-                    <Col xl={{ span: 6 }} className='m-b-30'>
-                        <Tabs defaultActiveKey='General' id='uncontrolled-tab-example'>
-                            <Tab eventKey='General' title='General'>
-                                <Col>
-                                    <Card>
-                                        <Card.Header>
-                                            <Card.Title as='h5'>Statistics</Card.Title>
-                                        </Card.Header>
-                                        <Card.Body>
-                                            <AmChartStatistics7 />
-                                        </Card.Body>
-                                    </Card>
+            <Col className='p-0 m-0'>
+                <Card className='m-0'>
+                    <Card.Header>
+                        <Card.Title as='h5'>Control Panel</Card.Title>
+                    </Card.Header>
+                    <Card.Body>
+                        <Row>
+                            {(controlList || []).map((item, i) => (
+                                <Col xs={{ span: 6 }} key={i} className='p-0'>
+                                    <div style={item.style}>
+                                        <Col>
+                                            <b><p className='p-3'>{item.context}</p></b>
+                                        </Col>
+                                        <Col className='text-center'>
+                                            <Button
+                                                size='lg' variant={item.bttnStatus}
+                                                onClick={() => onPress(item.context)}
+                                            >
+                                                {this.state[item.context] ? 'ON' : 'OFF'}
+                                            </Button>
+                                        </Col>
+                                        <Col>
+                                            {item.slider && this.state[item.context] &&
+                                                <Aux>
+                                                    <b><small>{`Intencity: ${this.state.level}%`}</small></b>
+                                                    <Slider onChange={(e) => pwmLevel(item.context, e)} range defaultValue={[this.state.level]} />
+                                                </Aux>
+                                            }
+                                        </Col>
+                                    </div>
                                 </Col>
-                            </Tab>
-                            <Tab eventKey='statistics' title='statistics'>
-                                <Col>
-                                    <Card>
-                                        <Card.Header>
-                                            <Card.Title as='h5'>Statistics</Card.Title>
-                                        </Card.Header>
-                                        <AmChartReplay height='320px' />
-                                    </Card>
-                                </Col>
-                            </Tab>
-                            <Tab eventKey='usage' title='usage'>
-                                <Col>
-                                    <Card>
-                                        <Card.Header>
-                                            <Card.Title as="h5">Gauge Chart</Card.Title>
-                                        </Card.Header>
-                                        <Card.Body>
-                                            <GaugeChart />
-                                        </Card.Body>
-                                    </Card>
-                                </Col>
-                            </Tab>
-                        </Tabs>
-                    </Col>
-                </Row>
-            </Aux>
+                            ))}
+                        </Row>
+                    </Card.Body>
+                </Card>
+            </Col>
         )
     }
 }
 
-export default ControlPanel;
+const mapStateToProps = state => {
+    return {
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        piControl: e => dispatch(controlPi(e))
+    }
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Control);

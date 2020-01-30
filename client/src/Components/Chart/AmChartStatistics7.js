@@ -41,7 +41,7 @@ class AmChartStatistics7 extends Component {
     }
 
     render() {
-        return <div id='chart-statistics' className="chart-statistics" style={{width: '100%', height: '250px'}} />;
+        return <div id='chart-statistics' className="chart-statistics" style={{width: '100%', height: this.props.height}} />;
     }
 }
 
