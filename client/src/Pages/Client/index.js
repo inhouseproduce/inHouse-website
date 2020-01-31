@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import { Row, Col, Card, Tabs, Tab } from 'react-bootstrap';
 import Aux from '../../hoc/_Aux';
 
+// Statistic components
 import AmChartStatistics7 from '../../Components/Chart/AmChartStatistics7';
 import AmChartReplay from '../../Components/Chart/AmChartReplay';
 import GaugeChart from '../../Components/Chart/GaugeChart';
 
+// Components
 import Control from './Components/controlPanel';
+import Images from './Components/imagesView';
 import Form from './Components/form';
+
+// Actions
+import { getImages } from '../../store/actions/data';
 
 class Client extends Component {
     state = {
@@ -20,6 +27,10 @@ class Client extends Component {
                 name: 'module-2'
             }
         ]
+    };
+
+    componentDidMount(){
+        this.props.getUnitImages();
     };
 
     render() {
@@ -40,6 +51,9 @@ class Client extends Component {
                                                         </Tab>
                                                         <Tab eventKey={'Config'} title={'Config'}>
                                                             <Form/>
+                                                        </Tab>
+                                                        <Tab eventKey={'Images'} title={'Images'}>
+                                                            <Images/>
                                                         </Tab>
                                                     </Tabs>
                                                 </Col>
@@ -94,4 +108,14 @@ class Client extends Component {
     };
 };
 
-export default Client;
+const mapStateToProps = state => {
+    return {
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        getUnitImages: e => dispatch(getImages(e))
+    }
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Client);
