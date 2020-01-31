@@ -68,24 +68,24 @@ class Control extends Component {
         };
 
         const pwmLevel = (context, event) => {
-            // this.setState({
-            //     level: event,
-            //     pivot: true
-            // }, () => {
-            //     if (this.state.pivot) {
-            //         setTimeout(() => {
-            //             if (!this.state.pivot) {
-            //                 this.props.piControl({
-            //                     status: this.state[context],
-            //                     action: context,
-            //                     level: this.state.level
-            //                 });
-            //                 this.setState({ pivot: true });
-            //             };
-            //         }, 600);
-            //         this.setState({ pivot: false });
-            //     };
-            // });
+            this.setState({
+                level: event,
+                pivot: true
+            }, () => {
+                if (this.state.pivot) {
+                    setTimeout(() => {
+                        if (!this.state.pivot) {
+                            this.props.piControl({
+                                status: this.state[context],
+                                action: context,
+                                level: this.state.level
+                            });
+                            this.setState({ pivot: true });
+                        };
+                    }, 600);
+                    this.setState({ pivot: false });
+                };
+            });
         };
 
         return (
