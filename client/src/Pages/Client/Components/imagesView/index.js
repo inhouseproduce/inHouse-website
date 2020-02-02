@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import { Row, Col, Button, Card } from 'react-bootstrap';
 
 let imgs = [
@@ -17,8 +16,8 @@ class ImagesView extends Component {
             <Row>
                 {imgs.map(img => (
                     <Col xs={6} className='p-2'>
-                        <div className='hover-search-icon'>
-                            <img src={img} className='img-fluid'/>
+                        <div className='hover-search-icon mx-2'>
+                            <img src={img} className='img-fluid' />
                         </div>
                     </Col>
                 ))}

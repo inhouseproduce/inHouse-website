@@ -5,7 +5,8 @@ export const getImages = (action) => {
         try {
             let request = await axios.post('/images/', action);
 
-        } catch (error) {
+        } 
+        catch (error) {
             throw error;
         };
     };

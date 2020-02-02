@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { Row, Col, Card, Tabs, Tab } from 'react-bootstrap';
+import { Row, Col, Card, Tabs, Tab, Button } from 'react-bootstrap';
 import Aux from '../../hoc/_Aux';
 
 // Statistic components
@@ -12,10 +12,10 @@ import GaugeChart from '../../Components/Chart/GaugeChart';
 // Components
 import Control from './Components/controlPanel';
 import Images from './Components/imagesView';
-import Form from './Components/form';
+import Form from '../../Components/Forms';
 
 // Actions
-import { getImages } from '../../store/actions/data';
+import { getImages } from '../../store/actions/get';
 
 class Client extends Component {
     state = {
@@ -29,7 +29,7 @@ class Client extends Component {
         ]
     };
 
-    componentDidMount(){
+    componentDidMount() {
         this.props.getUnitImages();
     };
 
@@ -50,10 +50,15 @@ class Client extends Component {
                                                             <Control />
                                                         </Tab>
                                                         <Tab eventKey={'Config'} title={'Config'}>
-                                                            <Form/>
+                                                            <Col>
+                                                                <Form.ClientConfig />
+                                                            </Col>
+                                                            <Col>
+                                                                <Button>Update</Button>
+                                                            </Col>
                                                         </Tab>
                                                         <Tab eventKey={'Images'} title={'Images'}>
-                                                            <Images/>
+                                                            <Images />
                                                         </Tab>
                                                     </Tabs>
                                                 </Col>
@@ -66,7 +71,7 @@ class Client extends Component {
                                                                         <Card.Title as='h5'>Statistics</Card.Title>
                                                                     </Card.Header>
                                                                     <Card.Body>
-                                                                        <AmChartStatistics7 height={'345px'}/>
+                                                                        <AmChartStatistics7 height={'345px'} />
                                                                     </Card.Body>
                                                                 </Card>
                                                             </Col>
@@ -118,4 +123,5 @@ const mapDispatchToProps = dispatch => {
         getUnitImages: e => dispatch(getImages(e))
     }
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(Client);

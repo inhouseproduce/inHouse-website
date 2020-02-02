@@ -1,9 +1,9 @@
 import React from 'react';
 
-const SignIn1 = React.lazy(() => import('./Pages/Authentication'));
+const Auth = React.lazy(() => import('./Pages/Authentication'));
 
 const route = [
-    { path: '/authentication', exact: true, name: 'Signin 2', component: SignIn1 }
+    { path: '/authentication', exact: true, name: 'auth', component: Auth }
 ];
 
 export default route;

@@ -1,13 +1,6 @@
-const axios = require('axios');
-
 module.exports = (app, db) => {
-    app.post('/test/', async (req, res) => {
-        try {
-            await axios.post('http://192.168.43.171:3000/', req.body);
-            res.status(200).json();
-        } 
-        catch (error) {
-            console.log('error', error)
-        };
-    });
+    require('./pi')(app)
+    require('./read')(app)
+    require('./auth')(app)
+    require('./crate')(app)
 };
