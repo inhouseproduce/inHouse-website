@@ -73,8 +73,8 @@ function main()
           
           const customerPhone = client.phoneNo;
           cronJobs[clientKey] = {};
-          cronJobs[clientKey]['seeding'] = new CronJob(client.schedule_seeding, messageToCustomer.bind(this, customerPhone, 'seeding'),  null, true, "America/Los_Angeles");
-          cronJobs[clientKey]['daily_check'] = new CronJob(client.schedule_daily_checkups, messageToCustomer.bind(this, customerPhone, 'daily_check'),  null, true,"America/Los_Angeles");
+          cronJobs[clientKey]['seeding'] = new CronJob(client.schedule_seeding, messageToCustomer.bind(this, customerPhone, 'seeding', client.name, client.client),  null, true, "America/Los_Angeles");
+          cronJobs[clientKey]['daily_check'] = new CronJob(client.schedule_daily_checkups, messageToCustomer.bind(this, customerPhone, 'daily_check', client.name, client.client),  null, true,"America/Los_Angeles");
       }
 
       });
@@ -108,7 +108,7 @@ function sendMessage(phoneNo, message)
 }
 
 
-function messageToCustomer(customerPhone, typeOfMessage)
+function messageToCustomer(customerPhone, typeOfMessage, name, client)
 {
   // checks which type of message to send (seeding or daily check) and calls sendMessage to send the message
   
