@@ -14,7 +14,7 @@ module.exports = (  ) => {
   main();
 
   //at midnight, recheck the jobs 
-  new CronJob("0 */1 * * * *", main,  null, true, "America/Los_Angeles");
+  new CronJob("0 0 0 * * *", main,  null, true, "America/Los_Angeles");
 };
 
 function main()
@@ -41,7 +41,7 @@ function main()
          {    
 
           //for debugging
-          console.log("client " + client + " no longer in mongodb database so they're cronjobs are getting stopped");
+          // console.log("client " + client + " no longer in mongodb database so they're cronjobs are getting stopped");
           
           cronJobs[client]['seeding'].stop();
           cronJobs[client]['daily_check'].stop();         
@@ -57,8 +57,9 @@ function main()
         if (Object.keys(cronJobs).includes(clientKey))
         {
           //for debugging
-          console.log("new schedule for " + client.name + " at " + client.schedule_seeding + " and " + client.schedule_daily_checkups);
-          
+          // console.log("new schedule for " + client.name + " at " + client.schedule_seeding + " and " + client.schedule_daily_checkups);
+          console.log("new scheduling at " + client.schedule_seeding + " and " + client.schedule_daily_checkups);
+
           cronJobs[clientKey]['seeding'].setTime(new CronTime(client.schedule_seeding, "America/Los_Angeles"));
           cronJobs[clientKey]['daily_check'].setTime(new CronTime(client.schedule_daily_checkups, "America/Los_Angeles"));
         
@@ -69,8 +70,9 @@ function main()
         else
         {
           //for debugging
-          console.log("new client named " + client.name + " at " + client.schedule_seeding + " and " + client.schedule_daily_checkups);
-          
+          // console.log("new client named " + client.name + " at " + client.schedule_seeding + " and " + client.schedule_daily_checkups);
+          console.log("new client with schedules at " + client.schedule_seeding + " and " + client.schedule_daily_checkups);
+
           const customerPhone = client.phoneNo;
           cronJobs[clientKey] = {};
           cronJobs[clientKey]['seeding'] = new CronJob(client.schedule_seeding, messageToCustomer.bind(this, customerPhone, 'seeding', client.name, client.client),  null, true, "America/Los_Angeles");
