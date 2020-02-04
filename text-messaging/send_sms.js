@@ -54,7 +54,7 @@ function main()
       {
         var clientKey = client.name + client.client;
 
-        if (Object.keys(cronJobs).includes(client.name))
+        if (Object.keys(cronJobs).includes(clientKey))
         {
           //for debugging
           console.log("new schedule for " + client.name + " at " + client.schedule_seeding + " and " + client.schedule_daily_checkups);
