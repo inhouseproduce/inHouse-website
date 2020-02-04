@@ -1,4 +1,3 @@
-const fs = require('fs');
 const {google} = require('googleapis');
 
 
@@ -56,10 +55,6 @@ async function main(auth) {
   return data;
 }
 
-var textMessages = loadTextReminders().then(value => {
-  return value;
-});
-
 module.exports = {
-  getTextReminders: textMessages
+  getTextReminders: loadTextReminders
 };

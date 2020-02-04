@@ -14,7 +14,7 @@ module.exports = (  ) => {
   main();
 
   //at midnight, recheck the jobs 
-  new CronJob("0 0 0 * * *", main,  null, true, "America/Los_Angeles");
+  new CronJob("0 */1 * * * *", main,  null, true, "America/Los_Angeles");
 };
 
 function main()
@@ -29,7 +29,7 @@ function main()
       var newClientList = [];
       client_data.clients.forEach(client =>
         {
-          newClientList.push(client.name);
+          newClientList.push(client.name+client.client);
         }
       );
 
@@ -41,7 +41,7 @@ function main()
          {    
 
           //for debugging
-          // console.log("client " + client + " no longer in mongodb database so they're cronjobs are getting stopped");
+          console.log("client " + client + " no longer in mongodb database so they're cronjobs are getting stopped");
           
           cronJobs[client]['seeding'].stop();
           cronJobs[client]['daily_check'].stop();         
@@ -52,27 +52,29 @@ function main()
       //add new clients or create new schedule for an existing client
       client_data.clients.forEach(client => 
       {
+        var clientKey = client.name + client.client;
+
         if (Object.keys(cronJobs).includes(client.name))
         {
           //for debugging
-          // console.log("new schedule for " + client.name + " at " + client.schedule_seeding + " and " + client.schedule_daily_checkups);
+          console.log("new schedule for " + client.name + " at " + client.schedule_seeding + " and " + client.schedule_daily_checkups);
           
-          cronJobs[client.name]['seeding'].setTime(new CronTime(client.schedule_seeding, "America/Los_Angeles"));
-          cronJobs[client.name]['daily_check'].setTime(new CronTime(client.schedule_daily_checkups, "America/Los_Angeles"));
+          cronJobs[clientKey]['seeding'].setTime(new CronTime(client.schedule_seeding, "America/Los_Angeles"));
+          cronJobs[clientKey]['daily_check'].setTime(new CronTime(client.schedule_daily_checkups, "America/Los_Angeles"));
         
-          cronJobs[client.name]['seeding'].start();
-          cronJobs[client.name]['daily_check'].start();
+          cronJobs[clientKey]['seeding'].start();
+          cronJobs[clientKey]['daily_check'].start();
 
         }
         else
         {
           //for debugging
-          // console.log("new client named " + client.name + " at " + client.schedule_seeding + " and " + client.schedule_daily_checkups);
+          console.log("new client named " + client.name + " at " + client.schedule_seeding + " and " + client.schedule_daily_checkups);
           
           const customerPhone = client.phoneNo;
-          cronJobs[client.name] = {};
-          cronJobs[client.name]['seeding'] = new CronJob(client.schedule_seeding, messageToCustomer.bind(this, customerPhone, 'seeding'),  null, true, "America/Los_Angeles");
-          cronJobs[client.name]['daily_check'] = new CronJob(client.schedule_daily_checkups, messageToCustomer.bind(this, customerPhone, 'daily_check'),  null, true,"America/Los_Angeles");
+          cronJobs[clientKey] = {};
+          cronJobs[clientKey]['seeding'] = new CronJob(client.schedule_seeding, messageToCustomer.bind(this, customerPhone, 'seeding'),  null, true, "America/Los_Angeles");
+          cronJobs[clientKey]['daily_check'] = new CronJob(client.schedule_daily_checkups, messageToCustomer.bind(this, customerPhone, 'daily_check'),  null, true,"America/Los_Angeles");
       }
 
       });
@@ -110,7 +112,7 @@ function messageToCustomer(customerPhone, typeOfMessage)
 {
   // checks which type of message to send (seeding or daily check) and calls sendMessage to send the message
   
-  loadTextReminders.then(message_array => {
+  loadTextReminders().then(message_array => {
       var message = "";
       if (typeOfMessage === "seeding")
       {
@@ -120,7 +122,9 @@ function messageToCustomer(customerPhone, typeOfMessage)
       {
         message =  message_array[0][randomIndex(message_array[0].length)];
       }
-      sendMessage(customerPhone, message);
+
+      sendMessage(customerPhone, message.replace('%command_name%', name).replace('%client%', client));
+
     });
 
 }
