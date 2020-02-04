@@ -125,7 +125,7 @@ function messageToCustomer(customerPhone, typeOfMessage, name, client)
         message =  message_array[0][randomIndex(message_array[0].length)];
       }
 
-      sendMessage(customerPhone, message.replace('%command_name%', name).replace('%client%', client));
+      sendMessage(customerPhone, message.replace('%name%', name).replace('%client%', client));
 
     });
 
