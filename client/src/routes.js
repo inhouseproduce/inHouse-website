@@ -5,8 +5,8 @@ window.jQuery = $;
 window.$ = $;
 global.jQuery = $;
 
-const DashboardPage = React.lazy(() => import('./Pages/Dashboard'));
-const ClientPage = React.lazy(() => import('./Pages/Client'));
+const DashboardPage = React.lazy(() => import('./View/Dashboard'));
+const ClientPage = React.lazy(() => import('./View/Client'));
 
 const routes = [
     { path: '/dashboard', exact: true, name: 'Dashboard Page', component: DashboardPage },

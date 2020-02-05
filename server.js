@@ -50,7 +50,6 @@ mongoose.connection.once('open', () => {
     console.log('mongoose connection successful');
 });
 
-
 require('./routes')(app, db); //Route files
 
 app.get('*', (req, res) => {

@@ -1,6 +1,7 @@
 module.exports = (app, db) => {
     require('./pi')(app)
+    require('./api')(app)
     require('./read')(app)
     require('./auth')(app)
-    require('./crate')(app)
+    require('./create')(app)
 };

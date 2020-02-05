@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { Row, Col, Card, Tabs, Tab, Button } from 'react-bootstrap';
+import { Row, Col, Card, Tabs, Tab } from 'react-bootstrap';
 import Aux from '../../hoc/_Aux';
 
 // Statistic components
@@ -10,12 +10,13 @@ import AmChartReplay from '../../Components/Chart/AmChartReplay';
 import GaugeChart from '../../Components/Chart/GaugeChart';
 
 // Components
-import Control from './Components/controlPanel';
-import Images from './Components/imagesView';
-import Form from '../../Components/Forms';
+import Control from './Components/ControlPanel';
+import Images from './Components/ImagesView';
+import Settings from './Components/Settings';
 
 // Actions
 import { getImages } from '../../store/actions/get';
+import { updateSettings } from '../../store/actions/update';
 
 class Client extends Component {
     state = {
@@ -45,20 +46,15 @@ class Client extends Component {
                                         <Aux>
                                             <Row>
                                                 <Col xl={{ span: 6 }}>
-                                                    <Tabs defaultActiveKey='Control' id='uncontrolled-tab-example'>
+                                                    <Tabs defaultActiveKey='Images' id='uncontrolled-tab-example'>
+                                                        <Tab eventKey={'Images'} title={'Images'}>
+                                                            <Images />
+                                                        </Tab>
                                                         <Tab eventKey={'Control'} title={'Control'}>
                                                             <Control />
                                                         </Tab>
-                                                        <Tab eventKey={'Config'} title={'Config'}>
-                                                            <Col>
-                                                                <Form.ClientConfig />
-                                                            </Col>
-                                                            <Col>
-                                                                <Button>Update</Button>
-                                                            </Col>
-                                                        </Tab>
-                                                        <Tab eventKey={'Images'} title={'Images'}>
-                                                            <Images />
+                                                        <Tab eventKey={'Settings'} title={'Settings'}>
+                                                            <Settings update={this.props.settingsUpdate}/>
                                                         </Tab>
                                                     </Tabs>
                                                 </Col>
@@ -120,7 +116,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getUnitImages: e => dispatch(getImages(e))
+        getUnitImages: e => dispatch(getImages(e)),
+        settingsUpdate: e => dispatch(updateSettings(e))
     }
 };
 

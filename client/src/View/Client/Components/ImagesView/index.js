@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col, Button, Card } from 'react-bootstrap';
+import { Divider, Icon } from 'antd';
 
 let imgs = [
     'https://s3.amazonaws.com/cdn.gardensalive.com/images/800/62314.jpg',
