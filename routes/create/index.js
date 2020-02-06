@@ -1,3 +1,3 @@
-module.exports = app => {
-    require('./client')(app)
+module.exports = (app, db) => {
+    require('./client')(app, db)
 };

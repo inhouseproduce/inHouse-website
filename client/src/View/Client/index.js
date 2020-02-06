@@ -15,7 +15,7 @@ import Images from './Components/ImagesView';
 import Settings from './Components/Settings';
 
 // Actions
-import { getImages } from '../../store/actions/get';
+import { getUnitImages } from '../../store/actions/get';
 import { updateSettings } from '../../store/actions/update';
 
 class Client extends Component {
@@ -31,7 +31,7 @@ class Client extends Component {
     };
 
     componentDidMount() {
-        this.props.getUnitImages();
+        this.props.GetUnitImages();
     };
 
     render() {
@@ -54,7 +54,7 @@ class Client extends Component {
                                                             <Control />
                                                         </Tab>
                                                         <Tab eventKey={'Settings'} title={'Settings'}>
-                                                            <Settings update={this.props.settingsUpdate}/>
+                                                            <Settings update={this.props.UpdateSettings}/>
                                                         </Tab>
                                                     </Tabs>
                                                 </Col>
@@ -116,8 +116,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getUnitImages: e => dispatch(getImages(e)),
-        settingsUpdate: e => dispatch(updateSettings(e))
+        GetUnitImages: e => dispatch(getUnitImages(e)),
+        UpdateSettings: e => dispatch(updateSettings(e)),
     }
 };
 

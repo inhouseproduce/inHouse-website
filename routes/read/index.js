@@ -1,3 +1,4 @@
-module.exports = app => {
-    require('./images')(app)
+module.exports = (app, db) => {
+    require('./images')(app, db)
+    require('./clientlist')(app, db)
 }

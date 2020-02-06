@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Row, Col, Card } from 'react-bootstrap';
 
 import Aux from '../../hoc/_Aux';
 import ClientList from './Components/ClientList';
 
+// Actions
+import { getClientList } from '../../store/actions/get';
+
 class Dashboard extends Component {
-    state = {
-        clientList: [1, 2, 3, 4]
-    };
+
+    componentDidMount() {
+        this.props.GetClientList();
+    }
 
     render() {
         return (
@@ -42,7 +47,7 @@ class Dashboard extends Component {
                     </Col>
                     <Col xl={12}>
                         <Card>
-                            <ClientList list={this.state.clientList} />
+                            <ClientList list={this.props.clientList} />
                         </Card>
                     </Col>
                 </Row>
@@ -51,4 +56,17 @@ class Dashboard extends Component {
     };
 };
 
-export default Dashboard;
+
+const mapStateToProps = state => {
+    return {
+        clientList: state.clientList
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        GetClientList: e => dispatch(getClientList(e)),
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

@@ -93,12 +93,12 @@ class ClientList extends Component {
                                             return (
                                                 <tr key={i}>
                                                     <td>
-                                                        <a href='client'>
-                                                            <h6 className='m-0'><img className='rounded-circle m-r-10' style={{ width: '40px' }} src={avatar1} alt='activity-user' />Hugos</h6>
+                                                        <a href={`client/${client._id}`}>
+                                                            <h6 className='m-0'><img className='rounded-circle m-r-10' style={{ width: '40px' }} src={client.image} alt='activity-user' />{client.name}</h6>
                                                         </a>
                                                     </td>
                                                     <td>
-                                                        <h6 className='m-0'>Studio City</h6>
+                                                        <h6 className='m-0'>{client.location}</h6>
                                                     </td>
                                                     <td>
                                                         <h6 className='m-0 ml-2 text-c-green'>Ok</h6>

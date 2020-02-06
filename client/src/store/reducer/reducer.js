@@ -67,8 +67,8 @@ const reducer = (state = initialState, action) => {
                     isTrigger: trigger,
                 };
             }
-            return {...state};
-        case actionTypes.FULL_SCREEN :
+            return { ...state };
+        case actionTypes.FULL_SCREEN:
             return {
                 ...state,
                 isFullScreen: !state.isFullScreen
@@ -207,7 +207,17 @@ const reducer = (state = initialState, action) => {
                 navActiveListColor: initialState.navActiveListColor,
                 navListTitleColor: initialState.navListTitleColor,
                 navListTitleHide: initialState.navListTitleHide,
-                layout6Background : initialState.layout6Background
+                layout6Background: initialState.layout6Background
+            };
+
+
+
+
+        // Separate -->
+        case 'CLIENTS':
+            return {
+                ...state,
+                clientList: action.clientList
             };
         default:
             return state;

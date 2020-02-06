@@ -6,7 +6,7 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-const db = require('./modules');
+const db = require('./models');
 
 const PORT = process.env.PORT || 3001;
 
@@ -50,12 +50,15 @@ mongoose.connection.once('open', () => {
     console.log('mongoose connection successful');
 });
 
-require('./routes')(app, db); //Route files
+//Route files
+require('./routes')(app, db); 
 
+// Send HTML 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, './client/build/index.html'));
 });
 
+// Listen server
 app.listen(PORT, () => {
     console.log(`🌎 ==> Server now on port ${PORT}!`);
 });
