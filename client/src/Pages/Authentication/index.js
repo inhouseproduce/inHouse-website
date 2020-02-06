@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
 
 import '../../assets/scss/style.scss';
 import Aux from '../../hoc/_Aux';
@@ -9,7 +8,7 @@ import Breadcrumb from '../../App/layout/AdminLayout/Breadcrumb';
 import back from '../../assets/images/bg-images/bg3.jpg';
 
 // Actions
-import { auth } from '../../store/actions/auth';
+import { adminAuth } from '../../store/actions/auth';
 
 class Authentication extends React.Component {
     state = {
@@ -28,6 +27,7 @@ class Authentication extends React.Component {
     };
 
     render() {
+        console.log('testing history', this.props.history)
         return (
             <Aux>
                 <Breadcrumb />
@@ -45,24 +45,19 @@ class Authentication extends React.Component {
                                 <div className='input-group mb-4'>
                                     <input onChange={this.handleInputChange} type='password' className='form-control' name='password' placeholder='password' />
                                 </div>
-                                <button onClick={() => this.props.adminAuth(this.state.form)} className='col-12 btn btn-primary shadow-2 mb-4'>Login</button>
+                                <button onClick={() => this.props.AdminAuth(this.state.form, this.props.history)} className='col-12 btn btn-primary shadow-2 mb-4'>Login</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </Aux>
         );
-    }
-}
-
-const mapStateToProps = state => {
-    return {
-    }
+    };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        adminAuth: form => dispatch(auth(form))
-    }
+        AdminAuth: (f, h) => dispatch(adminAuth(f, h))
+    };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(Authentication);
+export default connect(null, mapDispatchToProps)(Authentication);

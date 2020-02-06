@@ -3,17 +3,16 @@ import { Row, Col } from 'react-bootstrap';
 import { Icon, Input, Popover } from 'antd';
 
 class Interval extends Component {
-    state = {
-
-    };
-
     handleInput = event => {
-        let { name, value } = event;
+        let { name, value } = event.target;
         this.setState({
             [name]: value
-        }, () => {
-            this.props.handleInput(this.state);
-        });
+        },
+            () => {
+                this.props.handleInput({
+                    [this.props.each]: this.state
+                });
+            });
     };
 
     render() {
@@ -40,9 +39,9 @@ class Interval extends Component {
                     </Col>
                 </Row>
             </Col>
-        )
-    }
-}
+        );
+    };
+};
 
 export default Interval;
 

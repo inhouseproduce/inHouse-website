@@ -28,14 +28,14 @@ class clock extends Component {
     }
 
     handleInput = (e, i) => {
-        // let { name, value } = e.target;
+        let { name, value } = e.target;
 
-        // // Emulate object in specified index
-        // this.state.clockArr[i][name] = value;
-        // this.setState({ clockArr: this.state.clockArr });
+        // Emulate object in specified index
+        this.state.clockArr[i][name] = value;
+        this.setState({ clockArr: this.state.clockArr });
 
-        // // Send clock array back to parent /props
-        // this.props.handleInput({ [this.props.name]: this.state.clockArr });
+        // Send clock array back to parent /props
+        this.props.handleInput({ [this.props.name]: this.state.clockArr });
     }
 
     selectOption = (value, i) => {

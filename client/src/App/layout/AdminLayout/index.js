@@ -1,16 +1,16 @@
 import React, { Component, Suspense } from 'react';
-import {Route, Switch, Redirect} from 'react-router-dom';
-import {connect} from 'react-redux';
-import Fullscreen from "react-full-screen";
+import { Route, Switch, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import Fullscreen from 'react-full-screen';
 import windowSize from 'react-window-size';
 
 import Navigation from './Navigation';
 import NavBar from './NavBar';
 import Breadcrumb from './Breadcrumb';
-import Loader from "../Loader";
-import routes from "../../../routes";
-import Aux from "../../../hoc/_Aux";
-import * as actionTypes from "../../../store/actions";
+import Loader from '../Loader';
+import routes from '../../../routes';
+import Aux from '../../../hoc/_Aux';
+import * as actionTypes from '../../../store/actions';
 
 import './app.scss';
 
@@ -60,17 +60,17 @@ class AdminLayout extends Component {
                 <Fullscreen enabled={this.props.isFullScreen}>
                     <Navigation />
                     <NavBar />
-                    <div className="pcoded-main-container" onClick={() => this.mobileOutClickHandler}>
-                        <div className="pcoded-wrapper">
-                            <div className="pcoded-content">
-                                <div className="pcoded-inner-content">
+                    <div className='pcoded-main-container' onClick={() => this.mobileOutClickHandler}>
+                        <div className='pcoded-wrapper'>
+                            <div className='pcoded-content'>
+                                <div className='pcoded-inner-content'>
                                     <Breadcrumb />
-                                    <div className="main-body">
-                                        <div className="page-wrapper">
-                                            <Suspense fallback={<Loader/>}>
+                                    <div className='main-body'>
+                                        <div className='page-wrapper'>
+                                            <Suspense fallback={<Loader />}>
                                                 <Switch>
                                                     {menu}
-                                                    <Redirect from="/" to={this.props.defaultPath} />
+                                                    <Redirect from='/' to={this.props.defaultPath} />
                                                 </Switch>
                                             </Suspense>
                                         </div>
@@ -97,9 +97,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onFullScreenExit: () => dispatch({type: actionTypes.FULL_SCREEN_EXIT}),
-        onComponentWillMount: () => dispatch({type: actionTypes.COLLAPSE_MENU})
+        onFullScreenExit: () => dispatch({ type: actionTypes.FULL_SCREEN_EXIT }),
+        onComponentWillMount: () => dispatch({ type: actionTypes.COLLAPSE_MENU })
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps) (windowSize(AdminLayout));
+export default connect(mapStateToProps, mapDispatchToProps)(windowSize(AdminLayout));

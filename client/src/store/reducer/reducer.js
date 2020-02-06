@@ -217,7 +217,7 @@ const reducer = (state = initialState, action) => {
         case 'CLIENTS':
             return {
                 ...state,
-                clientList: action.clientList
+                ...action
             };
         default:
             return state;

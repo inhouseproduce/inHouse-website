@@ -15,7 +15,7 @@ import Images from './Components/ImagesView';
 import Settings from './Components/Settings';
 
 // Actions
-import { getUnitImages } from '../../store/actions/get';
+import { getUnitImages, getClientProfile } from '../../store/actions/get';
 import { updateSettings } from '../../store/actions/update';
 
 class Client extends Component {
@@ -32,6 +32,8 @@ class Client extends Component {
 
     componentDidMount() {
         this.props.GetUnitImages();
+        let client = this.props.match.params.id;
+        this.props.GetClientProfile(client);
     };
 
     render() {
@@ -111,6 +113,7 @@ class Client extends Component {
 
 const mapStateToProps = state => {
     return {
+        profile: state.clientProfile
     }
 };
 
@@ -118,6 +121,7 @@ const mapDispatchToProps = dispatch => {
     return {
         GetUnitImages: e => dispatch(getUnitImages(e)),
         UpdateSettings: e => dispatch(updateSettings(e)),
+        GetClientProfile: e => dispatch(getClientProfile(e))
     }
 };
 
