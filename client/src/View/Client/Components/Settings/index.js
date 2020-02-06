@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Card, Col, Tabs, Tab, Button } from 'react-bootstrap';
 
-import Aux from '../../../../hoc/_Aux';
+// Components
 import SettingMenu from './SettingMenu';
 
 let config = {
@@ -35,42 +35,40 @@ class Settings extends Component {
 
     render() {
         return (
-            <Aux>
-                <Row>
-                    <Col>
-                        <Card>
-                            <Card.Header>
-                                <Card.Title as='h5'>Settings</Card.Title>
-                            </Card.Header>
-                            <Card.Body>
-                                <Tabs defaultActiveKey='Basic' id='uncontrolled-tab-example'>
-                                    {Object.keys(config).map(item => {
-                                        return (
-                                            <Tab key={item} eventKey={item} title={item}>
-                                                <Tabs defaultActiveKey='pump' id='uncontrolled-tab-example'>
-                                                    {Object.keys(config[item]).map(each => {
-                                                        let type = config[item][each].type;
-                                                        return (
-                                                            <Tab key={item + each} eventKey={each} title={each}>
-                                                                <SettingMenu
-                                                                    handleInput={(form) => this.handleInput(form, item)}each={each} type={type}
-                                                                />
-                                                            </Tab>
-                                                        )
-                                                    })}
-                                                </Tabs>
-                                            </Tab>
-                                        )
-                                    })}
-                                </Tabs>
-                                <Col className='text-right mt-3'>
-                                    <Button onClick={() => this.props.update(this.state.form)}>Update</Button>
-                                </Col>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                </Row>
-            </Aux>
+            <Row>
+                <Col>
+                    <Card>
+                        <Card.Header>
+                            <Card.Title as='h5'>Settings</Card.Title>
+                        </Card.Header>
+                        <Card.Body>
+                            <Tabs defaultActiveKey='Basic' id='uncontrolled-tab-example'>
+                                {Object.keys(config).map(item => {
+                                    return (
+                                        <Tab key={item} eventKey={item} title={item}>
+                                            <Tabs defaultActiveKey='pump' id='uncontrolled-tab-example'>
+                                                {Object.keys(config[item]).map(each => {
+                                                    let type = config[item][each].type;
+                                                    return (
+                                                        <Tab key={item + each} eventKey={each} title={each}>
+                                                            <SettingMenu
+                                                                handleInput={(form) => this.handleInput(form, item)} each={each} type={type}
+                                                            />
+                                                        </Tab>
+                                                    )
+                                                })}
+                                            </Tabs>
+                                        </Tab>
+                                    )
+                                })}
+                            </Tabs>
+                            <Col className='text-right mt-3'>
+                                <Button onClick={() => this.props.update(this.state.form)}>Update</Button>
+                            </Col>
+                        </Card.Body>
+                    </Card>
+                </Col>
+            </Row>
         )
     }
 };

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
 import { Row, Col, Card } from 'react-bootstrap';
 
+// Components
 import Aux from '../../hoc/_Aux';
 import ClientList from './Components/ClientList';
 
@@ -9,7 +11,6 @@ import ClientList from './Components/ClientList';
 import { getClientList } from '../../store/actions/get';
 
 class Dashboard extends Component {
-
     componentDidMount() {
         this.props.GetClientList();
     }

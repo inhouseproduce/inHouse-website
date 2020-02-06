@@ -73,6 +73,7 @@ class Control extends Component {
                 pivot: true
             }, () => {
                 if (this.state.pivot) {
+                    // Deleay for 600 Ms
                     setTimeout(() => {
                         if (!this.state.pivot) {
                             this.props.piControl({

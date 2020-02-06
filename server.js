@@ -18,6 +18,7 @@ app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({ limit: '2mb' }));
 
+// Headers
 (function headers() {
     app.use((req, res, next) => {
         // Headers
@@ -36,21 +37,23 @@ app.use(bodyParser.json({ limit: '2mb' }));
     });
 })();
 
-// ---- Mongo connection
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/inhouse';
-mongoose.set('useCreateIndex', true);
+// Mongo connection
+(function mongodb() {
+    const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/inhouse';
+    mongoose.set('useCreateIndex', true);
 
-const mdbConfig = {
-    useNewUrlParser: true,
-    useFindAndModify: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true
-};
+    const mdbConfig = {
+        useNewUrlParser: true,
+        useFindAndModify: true,
+        useCreateIndex: true,
+        useUnifiedTopology: true
+    };
 
-mongoose.connect(MONGODB_URI, mdbConfig);
-mongoose.connection.once('open', () => {
-    console.log('mongoose connection successful');
-});
+    mongoose.connect(MONGODB_URI, mdbConfig);
+    mongoose.connection.once('open', () => {
+        console.log('mongoose connection successful');
+    });
+})();
 
 //Route files
 require('./routes')(app, db);

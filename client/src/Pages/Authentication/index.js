@@ -2,10 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import '../../assets/scss/style.scss';
+
+// Background
+import back from '../../assets/images/bg-images/bg3.jpg';
+
+// Helpers
 import Aux from '../../hoc/_Aux';
 import Breadcrumb from '../../App/layout/AdminLayout/Breadcrumb';
-
-import back from '../../assets/images/bg-images/bg3.jpg';
 
 // Actions
 import { adminAuth } from '../../store/actions/auth';
@@ -27,7 +30,6 @@ class Authentication extends React.Component {
     };
 
     render() {
-        console.log('testing history', this.props.history)
         return (
             <Aux>
                 <Breadcrumb />
