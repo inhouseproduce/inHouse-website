@@ -37,36 +37,29 @@ class Settings extends Component {
         return (
             <Row>
                 <Col>
-                    <Card>
-                        <Card.Header>
-                            <Card.Title as='h5'>Settings</Card.Title>
-                        </Card.Header>
-                        <Card.Body>
-                            <Tabs defaultActiveKey='Basic' id='uncontrolled-tab-example'>
-                                {Object.keys(config).map(item => {
-                                    return (
-                                        <Tab key={item} eventKey={item} title={item}>
-                                            <Tabs defaultActiveKey='pump' id='uncontrolled-tab-example'>
-                                                {Object.keys(config[item]).map(each => {
-                                                    let type = config[item][each].type;
-                                                    return (
-                                                        <Tab key={item + each} eventKey={each} title={each}>
-                                                            <SettingMenu
-                                                                handleInput={(form) => this.handleInput(form, item)} each={each} type={type}
-                                                            />
-                                                        </Tab>
-                                                    )
-                                                })}
-                                            </Tabs>
-                                        </Tab>
-                                    )
-                                })}
-                            </Tabs>
-                            <Col className='text-right mt-3'>
-                                <Button onClick={() => this.props.update(this.state.form)}>Update</Button>
-                            </Col>
-                        </Card.Body>
-                    </Card>
+                    <Tabs defaultActiveKey='Basic' id='uncontrolled-tab-example'>
+                        {Object.keys(config).map(item => {
+                            return (
+                                <Tab key={item} eventKey={item} title={item}>
+                                    <Tabs defaultActiveKey='pump' id='uncontrolled-tab-example'>
+                                        {Object.keys(config[item]).map(each => {
+                                            let type = config[item][each].type;
+                                            return (
+                                                <Tab key={item + each} eventKey={each} title={each}>
+                                                    <SettingMenu
+                                                        handleInput={(form) => this.handleInput(form, item)} each={each} type={type}
+                                                    />
+                                                </Tab>
+                                            )
+                                        })}
+                                    </Tabs>
+                                </Tab>
+                            )
+                        })}
+                    </Tabs>
+                    <Col className='text-right mt-3'>
+                        <Button onClick={() => this.props.update(this.state.form)}>Update</Button>
+                    </Col>
                 </Col>
             </Row>
         )

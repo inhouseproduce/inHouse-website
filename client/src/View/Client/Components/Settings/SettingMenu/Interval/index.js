@@ -8,11 +8,11 @@ class Interval extends Component {
         this.setState({
             [name]: value
         },
-            () => {
-                this.props.handleInput({
-                    [this.props.each]: this.state
-                });
+        () => {
+            this.props.handleInput({
+                [this.props.each]: this.state
             });
+        });
     };
 
     render() {
@@ -24,7 +24,7 @@ class Interval extends Component {
                             <a><Icon type='info-circle' /></a>
                         </Popover>
                     </Col>
-                    <Col xs={10}>
+                    <Col xs={9} sm={10}>
                         <Input onChange={this.handleInput} name='time_interval' placeholder='Time Interval' />
                     </Col>
                 </Row>
@@ -34,7 +34,7 @@ class Interval extends Component {
                             <a><Icon type='info-circle' /></a>
                         </Popover>
                     </Col>
-                    <Col xs={10}>
+                    <Col xs={9} sm={10}>
                         <Input onChange={this.handleInput} name='run_period' placeholder='Run period' />
                     </Col>
                 </Row>

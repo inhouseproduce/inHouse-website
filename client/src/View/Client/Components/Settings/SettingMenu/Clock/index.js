@@ -40,7 +40,7 @@ class clock extends Component {
 
     selectOption = (value, i) => {
         this.state.clockArr[i].action = value;
-        this.setState({ clock: this.state.clockArr });
+        this.setState({ clock: this.state.clockArr, option: value });
         this.props.handleInput({ [this.props.name]: this.state.clockArr });
     }
 
@@ -51,16 +51,22 @@ class clock extends Component {
                     {(this.state.clockArr || []).map((item, i) => {
                         return (
                             <Col key={i} xs={12}>
-                                <Row className='p-1 text-center' key={i}>
-                                    <Col md={2}>
-                                        <Select style={{ width: '90px' }} className='mx-1' defaultValue='on' onChange={(e) => this.selectOption(e, i)}>
+                                <Row className='p-1 text-center'>
+                                    <Col className='p-0' xs={3} sm={2}>
+                                        <Select className='mx-1' defaultValue='on' onChange={(e) => this.selectOption(e, i)}>
                                             <Option value='on'>On</Option>
                                             <Option value='off'>Off</Option>
                                             <Option value='pwm'>Pwm</Option>
                                         </Select>
                                     </Col>
-                                    <Col md={10}>
+                                    <Col className='p-0' xs={7} sm={8}>
                                         <TimePicker onChange={e => this.handleInput(e, i)} defaultValue={moment('12:08', 'HH:mm')} format={'HH:mm'} />
+                                    </Col>
+                                    <Col className='p-0' xs={2} sm={2}>
+                                        {console.log('imp checking', this.state.option)}
+                                        {this.state.option === 'pwm' &&
+                                            <Input placeholder='%' />
+                                        }
                                     </Col>
                                 </Row>
                             </Col>

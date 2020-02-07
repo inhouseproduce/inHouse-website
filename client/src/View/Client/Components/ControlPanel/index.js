@@ -56,7 +56,7 @@ class Control extends Component {
             }
         ];
 
-        const onPress = context => {
+        const handleButtonSwitch = context => {
             this.setState({
                 [context]: !this.state[context],
             }, () => {
@@ -101,12 +101,12 @@ class Control extends Component {
                                 <Col xs={{ span: 6 }} key={i} className='p-0'>
                                     <div style={item.style}>
                                         <Col>
-                                            <b><p className='p-3'>{item.context}</p></b>
+                                            <b><p className='py-3 text-center'>{item.context}</p></b>
                                         </Col>
                                         <Col className='text-center'>
                                             <Button
                                                 size='lg' variant={item.bttnStatus}
-                                                onClick={() => onPress(item.context)}
+                                                onClick={() => handleButtonSwitch(item.context)}
                                             >
                                                 {this.state[item.context] ? 'ON' : 'OFF'}
                                             </Button>
@@ -140,4 +140,5 @@ const mapDispatchToProps = dispatch => {
         piControl: e => dispatch(controlPi(e))
     }
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(Control);

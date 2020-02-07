@@ -47,7 +47,7 @@ class Client extends Component {
                                     <Tab key={i} eventKey={item.name} title={item.name}>
                                         <Aux>
                                             <Row>
-                                                <Col xl={{ span: 6 }}>
+                                                <Col xl={{ span: 6 }} className='mt-lg-3'>
                                                     <Tabs defaultActiveKey='Images' id='uncontrolled-tab-example'>
                                                         <Tab eventKey={'Images'} title={'Images'}>
                                                             <Images />
@@ -55,12 +55,12 @@ class Client extends Component {
                                                         <Tab eventKey={'Control'} title={'Control'}>
                                                             <Control />
                                                         </Tab>
-                                                        <Tab eventKey={'Settings'} title={'Settings'}>
+                                                        <Tab className='p-0'eventKey={'Settings'} title={'Settings'}>
                                                             <Settings update={this.props.UpdateSettings}/>
                                                         </Tab>
                                                     </Tabs>
                                                 </Col>
-                                                <Col xl={{ span: 6 }}>
+                                                <Col xl={{ span: 6 }} className='mt-lg-3'>
                                                     <Tabs defaultActiveKey='General' id='uncontrolled-tab-example'>
                                                         <Tab eventKey='General' title='General'>
                                                             <Col>
