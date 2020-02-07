@@ -16,7 +16,6 @@ import Settings from './Components/Settings';
 
 // Actions
 import { getUnitImages, getClientProfile } from '../../store/actions/get';
-import { updateSettings } from '../../store/actions/update';
 
 class Client extends Component {
     state = {
@@ -56,7 +55,7 @@ class Client extends Component {
                                                             <Control />
                                                         </Tab>
                                                         <Tab className='p-0'eventKey={'Settings'} title={'Settings'}>
-                                                            <Settings update={this.props.UpdateSettings}/>
+                                                            <Settings />
                                                         </Tab>
                                                     </Tabs>
                                                 </Col>
@@ -120,7 +119,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         GetUnitImages: e => dispatch(getUnitImages(e)),
-        UpdateSettings: e => dispatch(updateSettings(e)),
         GetClientProfile: e => dispatch(getClientProfile(e))
     }
 };

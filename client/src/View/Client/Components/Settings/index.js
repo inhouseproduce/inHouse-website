@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
-import { Row, Card, Col, Tabs, Tab, Button } from 'react-bootstrap';
+import { connect } from 'react-redux';
+
+import { Row, Col, Tabs, Tab, Button } from 'react-bootstrap';
 
 // Components
 import SettingMenu from './SettingMenu';
+
+// Actions
+import { updateSettings } from '../../../../store/actions/update';
 
 let config = {
     engine: {
@@ -16,22 +21,7 @@ let config = {
 };
 
 class Settings extends Component {
-    state = {
-        form: {}
-    };
-
-    handleInput = (form, item) => {
-        this.setState({
-            ...this.state,
-            form: {
-                ...this.state.form,
-                [item]: {
-                    ...this.state.form[item],
-                    ...form
-                }
-            }
-        });
-    };
+    state = {};
 
     render() {
         return (
@@ -47,7 +37,7 @@ class Settings extends Component {
                                             return (
                                                 <Tab key={item + each} eventKey={each} title={each}>
                                                     <SettingMenu
-                                                        handleInput={(form) => this.handleInput(form, item)} each={each} type={type}
+                                                        handleInput={(data) => this.setState({ ...data })} each={each} type={type}
                                                     />
                                                 </Tab>
                                             )
@@ -58,7 +48,7 @@ class Settings extends Component {
                         })}
                     </Tabs>
                     <Col className='text-right mt-3'>
-                        <Button onClick={() => this.props.update(this.state.form)}>Update</Button>
+                        <Button onClick={() => this.props.UpdateSettings(this.state.form)}>Update</Button>
                     </Col>
                 </Col>
             </Row>
@@ -66,4 +56,10 @@ class Settings extends Component {
     }
 };
 
-export default Settings;
+const mapDispatchToProps = dispatch => {
+    return {
+        UpdateSettings: e => dispatch(updateSettings(e)),
+    }
+};
+
+export default connect(null, mapDispatchToProps)(Settings);

@@ -9,39 +9,58 @@ const { Option } = Select;
 class clock extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
-            clock: [''],
-            clockArr: [{}],
+            clockArr: [{
+                action: 'on',
+                time: '12:00'
+            }],
         };
     }
 
     addClockArr = () => {
-        // If required index not exists push new (empty) object
-        let defaultOpt = {
-            action: 'on'
-        };
-        this.state.clockArr.push(defaultOpt);
+        this.state.clockArr.push({
+            action: 'on',
+            time: '12:00'
+        });
         this.setState({
             clockArr: this.state.clockArr
         });
     }
 
-    handleInput = (e, i) => {
-        let { name, value } = e.target;
+    handleSelect = data => {
+        let { value, index, name } = data;
 
-        // Emulate object in specified index
-        this.state.clockArr[i][name] = value;
-        this.setState({ clockArr: this.state.clockArr });
+        // Emulate object by index and set to state
+        this.state.clockArr[index][name] = value;
+
+        // Set sorted arr to state 
+        this.setState({
+            clockArr: this.sortAlgorithm(this.state.clockArr)
+        });
 
         // Send clock array back to parent /props
-        this.props.handleInput({ [this.props.name]: this.state.clockArr });
+        this.props.handleInput({
+            [this.props.each]: this.state.clockArr
+        });
     }
 
-    selectOption = (value, i) => {
-        this.state.clockArr[i].action = value;
-        this.setState({ clock: this.state.clockArr, option: value });
-        this.props.handleInput({ [this.props.name]: this.state.clockArr });
+    sortAlgorithm = (arr) => {
+        function bubbleSort(a, par) {
+            var swapped;
+            do {
+                swapped = false;
+                for (var i = 0; i < a.length - 1; i++) {
+                    if (a[i][par] > a[i + 1][par]) {
+                        var temp = a[i];
+                        a[i] = a[i + 1];
+                        a[i + 1] = temp;
+                        swapped = true;
+                    }
+                }
+            } while (swapped);
+        }
+        bubbleSort(arr, 'time');
+        return arr;
     }
 
     render() {
@@ -53,17 +72,25 @@ class clock extends Component {
                             <Col key={i} xs={12}>
                                 <Row className='p-1 text-center'>
                                     <Col className='p-0' xs={3} sm={2}>
-                                        <Select className='mx-1' defaultValue='on' onChange={(e) => this.selectOption(e, i)}>
+                                        <Select className='mx-1' defaultValue='on'
+                                            onChange={(opt) => this.handleSelect({
+                                                value: opt, index: i, name: 'action'
+                                            })}
+                                        >
                                             <Option value='on'>On</Option>
                                             <Option value='off'>Off</Option>
                                             <Option value='pwm'>Pwm</Option>
                                         </Select>
                                     </Col>
                                     <Col className='p-0' xs={7} sm={8}>
-                                        <TimePicker onChange={e => this.handleInput(e, i)} defaultValue={moment('12:08', 'HH:mm')} format={'HH:mm'} />
+                                        <TimePicker
+                                            defaultValue={moment('12:00', 'HH:mm')} format={'HH:mm'}
+                                            onChange={(tm, tms) => this.handleSelect({
+                                                value: tms, index: i, name: 'time'
+                                            })}
+                                        />
                                     </Col>
                                     <Col className='p-0' xs={2} sm={2}>
-                                        {console.log('imp checking', this.state.option)}
                                         {this.state.option === 'pwm' &&
                                             <Input placeholder='%' />
                                         }
