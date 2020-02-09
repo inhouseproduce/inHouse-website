@@ -1,9 +1,10 @@
-import React, { Component, Suspense } from 'react';
+import React, { Component, useContext, Suspense } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Fullscreen from 'react-full-screen';
 import windowSize from 'react-window-size';
 
+import { PrivateRoute } from './Route';
 import Navigation from './Navigation';
 import NavBar from './NavBar';
 import Breadcrumb from './Breadcrumb';
@@ -49,9 +50,9 @@ class AdminLayout extends Component {
                     path={route.path}
                     exact={route.exact}
                     name={route.name}
-                    render={props => (
-                        <route.component {...props} />
-                    )} />
+                    render={props => {
+                        return <PrivateRoute {...route} {...props} />
+                    }} />
             ) : (null);
         });
 

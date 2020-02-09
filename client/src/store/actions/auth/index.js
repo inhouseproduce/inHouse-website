@@ -1,18 +1,19 @@
-import axios from 'axios';
+import firebase from 'firebase/app';
+import app from '../../../Provider/AuthProvider/config';
 
 export const adminAuth = (form, history) => {
     return async (dispatch, getState) => {
         try {
-            let request = await axios.post('/auth/', { form });
-            let data = request.data;
-
-            if(data){
-                localStorage.setItem('inhouse', data.auth.token);  
-                history.push('/dashboard');     
-            }
+            await app.auth().setPersistence(
+                firebase.auth.Auth.Persistence.SESSION
+            );
+            await app.auth().signInWithEmailAndPassword(
+                form.username, form.password
+            );
+            history.push('/dashboard');
         }
         catch (error) {
             throw error;
         };
     };
-}; 
+};

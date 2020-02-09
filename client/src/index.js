@@ -9,10 +9,14 @@ import * as serviceWorker from './serviceWorker';
 import config from './config';
 import store from './store';
 
+import { AuthProvider } from './Provider/AuthProvider';
+
 const app = (
     <Provider store={store()}>
         <BrowserRouter basename={config.basename}>
-            <App />
+            <AuthProvider>
+                <App />
+            </AuthProvider>
         </BrowserRouter>
     </Provider>
 );
