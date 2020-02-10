@@ -9,7 +9,7 @@ import * as serviceWorker from './serviceWorker';
 import config from './config';
 import store from './store';
 
-import { AuthProvider } from './Provider/AuthProvider';
+import { AuthProvider } from './Provider/Auth';
 
 const app = (
     <Provider store={store()}>

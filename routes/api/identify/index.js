@@ -1,22 +1,31 @@
+const db = require('../../../models');
 const jwt = require('jsonwebtoken');
 
 module.exports = app => {
-    app.get('/client/identify/', (req, res) => {
+    app.get('/client/identify/', async (req, res) => {
         let header = req.headers.authorization;
-        let bearerToken = header.split('Bearer ')[1].trim();
+        let bearer = header.split('Bearer ')[1].trim();
 
-        jwt.verify(bearerToken, 'secret', async (err, decoded) => {
-            if (err) {
-                res.status(301).end();
-            };
+        // Decode token get data that contains
+        let decoded = await jwt.verify(bearer, 'secret');
 
-            let sesstion = await jwt.sign({
-                exp: Math.floor(Date.now() / 1000) + (60 * 60),
-                data: { oldToken: bearerToken }
-            }, 'secret');
+        // Save client info, return updated document
+        let client = await db.Client.findOneAndUpdate({
+            name: decoded.client
+        }, {
+            ip: decoded.ip
+        }, { new: true });
 
-            res.status(200).json({ sesstion });
-        });
+        // Create session token with client info
+        let sessionToken = await jwt.sign({
+            client: client.name,
+            location: client.location,
+            config: client.config
+        }, 'secret');
+
+        // Send back data
+        res.status(200).json({ sessionToken });
     });
 };
+
 

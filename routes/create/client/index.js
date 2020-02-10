@@ -1,3 +1,5 @@
+const initConfig = require('./config.json');
+
 module.exports = (app, db) => {
     app.post('/create/client/', async (req, res) => {
         let { form } = req.body;
@@ -5,8 +7,10 @@ module.exports = (app, db) => {
         // Extract data from form
         let clientForm = {
             name: form.name,
+            phone: form.phone,
             location: form.location,
-            image: form.image
+            image: form.image,
+            config: initConfig
         };
 
         // Save client in db

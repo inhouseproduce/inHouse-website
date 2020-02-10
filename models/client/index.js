@@ -10,6 +10,18 @@ var ClientSchema = new Schema({
     location: {
         type: String
     },
+
+    phone: {
+        type: String
+    },
+
+    config: {
+        type: Object
+    },
+
+    ip: {
+        type: String
+    },
     
     image: {
         type: String

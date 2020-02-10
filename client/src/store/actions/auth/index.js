@@ -1,5 +1,5 @@
 import firebase from 'firebase/app';
-import app from '../../../Provider/AuthProvider/config';
+import app from '../../../Provider/Auth/config';
 
 export const adminAuth = (form, history) => {
     return async (dispatch, getState) => {
