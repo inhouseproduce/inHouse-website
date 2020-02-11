@@ -20,7 +20,8 @@ export const getClientList = client => {
             if (data) {
                 dispatch({ type: 'CLIENTS', clientList: data });
             };
-        } catch (error) {
+        } 
+        catch (error) {
             throw error;
         };
     };

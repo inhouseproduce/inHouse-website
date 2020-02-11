@@ -10,9 +10,9 @@ import AmChartReplay from '../../Components/Chart/AmChartReplay';
 import GaugeChart from '../../Components/Chart/GaugeChart';
 
 // Components
-import Control from './Components/ControlPanel';
-import Images from './Components/ImagesView';
-import Settings from './Components/Settings';
+import ControlPanel from './Components/ControlPanel';
+import ImagesPanel from './Components/ImagesView';
+import SettingsPanel from './Components/Settings';
 
 // Actions
 import { getUnitImages, getClientProfile } from '../../store/actions/get';
@@ -50,13 +50,13 @@ class Client extends Component {
                                                 <Col xl={{ span: 6 }} className='mt-lg-3'>
                                                     <Tabs defaultActiveKey='Images' id='uncontrolled-tab-example'>
                                                         <Tab eventKey={'Images'} title={'Images'}>
-                                                            <Images />
+                                                            <ImagesPanel />
                                                         </Tab>
                                                         <Tab eventKey={'Control'} title={'Control'}>
-                                                            <Control />
+                                                            <ControlPanel />
                                                         </Tab>
                                                         <Tab className='p-0'eventKey={'Settings'} title={'Settings'}>
-                                                            <Settings update={this.props.UpdateSettings}/>
+                                                            <SettingsPanel update={this.props.UpdateSettings}/>
                                                         </Tab>
                                                     </Tabs>
                                                 </Col>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 
 import { Row, Col, Button, Card } from 'react-bootstrap';
@@ -63,23 +64,21 @@ class Control extends Component {
                 this.props.piControl({
                     status: this.state[context],
                     action: context,
+                    id: this.props.match.params.id
                 });
             });
         };
 
         const pwmLevel = (context, event) => {
-            this.setState({
-                level: event,
-                pivot: true
-            }, () => {
+            this.setState({ level: event, pivot: true }, () => {
                 if (this.state.pivot) {
-                    // Deleay for 600 Ms
-                    setTimeout(() => {
+                    setTimeout(() => { // Deleay for 600 Ms
                         if (!this.state.pivot) {
                             this.props.piControl({
                                 status: this.state[context],
                                 action: context,
-                                level: this.state.level
+                                level: this.state.level,
+                                id: this.props.match.params.id
                             });
                             this.setState({ pivot: true });
                         };
@@ -141,4 +140,4 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Control);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Control));
