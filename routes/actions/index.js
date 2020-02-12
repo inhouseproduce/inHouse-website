@@ -13,15 +13,15 @@ module.exports = {
         signin: (req, res) => signin(req, res),
     },
 
+    control: {
+        controlPi: (req, res) => controlPi(req, res),
+    },
+    
     create: {
         client: (req, res) => newClient(req, res),
     },
     
     get: {
         clientList: (req, res) => clientList(req, res)
-    },
-
-    control: {
-        controlPi: (req, res) => controlPi(req, res),
     },
 };

@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
     }
     catch (error) {
         console.log('error', error)
-        res.json({ error: 'Error Occured. Client form was not saved' });
+        res.json({ error: error});
     };
 };
 
