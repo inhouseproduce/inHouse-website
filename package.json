@@ -1,7 +1,7 @@
 {
-  "name": "inhouse-produce",
+  "name": "portfolio",
   "version": "8.9.2",
-  "description": "InHouse-produce admin app",
+  "description": "Personal Protfolio",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -14,12 +14,11 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "concurrently": "^5.0.2",
-    "nodemon": "^2.0.2",
-    "react-to-print": "^2.1.1"
+    "concurrently": "^3.5.0",
+    "nodemon": "^1.19.2"
   },
   "engines": {
-    "node": "12.12"
+    "node": "12.12.0"
   },
   "dependencies": {
     "aws-sdk": "^2.613.0",
