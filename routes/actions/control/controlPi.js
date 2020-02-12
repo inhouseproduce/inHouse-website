@@ -7,9 +7,10 @@ module.exports = async (req, res) => {
         let client = await db.Client.findOne({ _id: req.body.id });
 
         // Make request to client
-        let request = await axios.post(`http://${client.ip}:${process.env.PORT || 3000}/control/`, req.body);
+        let url = `http://${client.ip}:${(process.env.PORT || 3000)}/control/`;
+        let request = await axios.post(url, req.body);
 
-        res.status(200).json();
+        res.status(200).json(url);
     }
     catch (error) {
         throw error;
