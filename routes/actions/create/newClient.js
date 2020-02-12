@@ -14,8 +14,8 @@ module.exports = async (req, res) => {
 
     // Save client in db
     try {
-        await db.Client.create(clientForm);
-        res.json({ success: 'Client Form was saved' });
+        let test = await db.Client.create(clientForm);
+        res.json({ success: test });
     }
     catch (error) {
         console.log('error', error)

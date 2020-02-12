@@ -1,3 +1,6 @@
+const jwt = require('jsonwebtoken');
+const db = require('../../../models');
+
 module.exports = async (req, res) => {
     let header = req.headers.authorization;
     let bearer = header.split('Bearer ')[1].trim();
