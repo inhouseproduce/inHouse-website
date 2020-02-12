@@ -96,27 +96,6 @@ if (process.env.NODE_ENV === 'production') {
 //     console.log('mongoose connection successful');
 // });
 
-// Parse body
-app.use(logger('dev'));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json({ limit: '2mb' }));
-
-// Headers
-app.use((req, res, next) => {
-    // Headers
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header(
-        'Access-Control-Allow-Headers',
-        'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-    );
-
-    // Header options
-    if (req.method === 'OPTIONS') {
-        res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
-        return res.status(200).json({});
-    };
-    next();
-});
 
 //require('./models')(app);
 
