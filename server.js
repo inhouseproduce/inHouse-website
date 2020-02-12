@@ -74,28 +74,28 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const logger = require('morgan');
 
-//const db = require('./models');
+const db = require('./models');
 
 const PORT = process.env.PORT || 3001;
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
 };
 
-// // // Mongo connection
-// const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/inhouse';
-// mongoose.set('useCreateIndex', true);
+// Mongo connection
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/inhouse';
+mongoose.set('useCreateIndex', true);
 
-// const mdbConfig = {
-//     useNewUrlParser: true,
-//     useFindAndModify: true,
-//     useCreateIndex: true,
-//     useUnifiedTopology: true
-// };
+const mdbConfig = {
+    useNewUrlParser: true,
+    useFindAndModify: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true
+};
 
-// mongoose.connect(MONGODB_URI, mdbConfig);
-// mongoose.connection.once('open', () => {
-//     console.log('mongoose connection successful');
-// });
+mongoose.connect(MONGODB_URI, mdbConfig);
+mongoose.connection.once('open', () => {
+    console.log('mongoose connection successful');
+});
 
 // Parse body
 app.use(logger('dev'));
