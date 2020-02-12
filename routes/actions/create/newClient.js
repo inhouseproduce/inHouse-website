@@ -1,3 +1,5 @@
+const db = require('../../../models');
+
 module.exports = async (req, res) => {
     let { form } = req.body;
 
@@ -16,6 +18,7 @@ module.exports = async (req, res) => {
         res.json({ success: 'Client Form was saved' });
     }
     catch (error) {
+        console.log('error', error)
         res.json({ error: 'Error Occured. Client form was not saved' });
     };
 };

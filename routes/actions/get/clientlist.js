@@ -1,3 +1,5 @@
+const db = require('../../../models');
+
 module.exports = async (req, res) => {
     try {
         let clients = await db.Client.find({});
