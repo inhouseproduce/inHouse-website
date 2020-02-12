@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:3001/",
-  "homepage": "http://html.codedthemes.com/datta-able/react/default",
   "dependencies": {
     "@amcharts/amcharts3-react": "^3.1.0",
     "@amcharts/amcharts4": "^4.3.4",
