@@ -23,5 +23,5 @@ module.exports = async (req, res) => {
     }, 'secret');
 
     // Send back data
-    res.status(200).json({ sessionToken });
+    res.status(200).json({ sessionToken, client });
 };
