@@ -69,14 +69,34 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const server = require( 'http' ).createServer( app );
+const server = require('http').createServer(app);
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+
+//const db = require('./models');
 
 const PORT = process.env.PORT || 3001;
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
 };
 
+// // // Mongo connection
+// const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/inhouse';
+// mongoose.set('useCreateIndex', true);
+
+// const mdbConfig = {
+//     useNewUrlParser: true,
+//     useFindAndModify: true,
+//     useCreateIndex: true,
+//     useUnifiedTopology: true
+// };
+
+// mongoose.connect(MONGODB_URI, mdbConfig);
+// mongoose.connection.once('open', () => {
+//     console.log('mongoose connection successful');
+// });
+
+// Parse body
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({ limit: '2mb' }));
@@ -98,7 +118,7 @@ app.use((req, res, next) => {
     next();
 });
 
-require('./models')(app);
+//require('./models')(app);
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, './client/build/index.html'));
