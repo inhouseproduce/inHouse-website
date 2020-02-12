@@ -20,4 +20,8 @@ module.exports = app => {
     app.get('/get/clientlist/', async (req, res) => {
         actions.get.clientList(req, res);
     });
+
+    app.get('/test/', (req,res)=> {
+        res.json('successss')
+    })
 };

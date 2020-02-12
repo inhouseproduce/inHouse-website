@@ -9,10 +9,17 @@ import ClientList from './Components/ClientList';
 
 // Actions
 import { getClientList } from '../../store/actions/get';
+import axios from 'axios';
 
 class Dashboard extends Component {
     componentDidMount() {
         this.props.GetClientList();
+        this.testing();
+    }
+
+    testing = async () => {
+        let test = await axios.get('/test/');
+        console.log("testing imp", test)
     }
 
     render() {
