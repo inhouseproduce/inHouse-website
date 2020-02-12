@@ -1,4 +1,4 @@
-module.exports = (req, res) => {
+module.exports = async (req, res) => {
     let header = req.headers.authorization;
     let bearer = header.split('Bearer ')[1].trim();
 
