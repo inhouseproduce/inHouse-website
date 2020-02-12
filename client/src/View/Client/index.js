@@ -31,7 +31,7 @@ class Client extends Component {
     };
 
     componentDidMount() {
-        this.props.GetUnitImages();
+        //this.props.GetUnitImages();
         let client = this.props.match.params.id;
         this.props.GetClientProfile(client);
     };

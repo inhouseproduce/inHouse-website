@@ -8,7 +8,7 @@ module.exports = app => {
             let client = await db.Client.findOne({ _id: req.body.id });
 
             // Make request to client
-            let request = await axios.post(`http://192.168.1.68/control/`, req.body);
+            let request = await axios.post(`http://${client.ip}:3000/control/`, req.body);
 
             res.status(200).json();
         }

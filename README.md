@@ -5,4 +5,4 @@
 ## yarn start
 
 # Start (client)
-## yarn client
+## yarn go
