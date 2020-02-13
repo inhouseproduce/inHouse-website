@@ -1,4 +1,5 @@
 const actions = require('./actions');
+const routes = require('./routes.json');
 
 module.exports = app => {
     app.get('/client/identify/', (req, res) => {
@@ -21,7 +22,7 @@ module.exports = app => {
         actions.get.clientList(req, res);
     });
 
-    app.get('/test/', (req,res)=> {
+    app.get('/test/', (req, res) => {
         res.json('successss')
-    })
+    });
 };
