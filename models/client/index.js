@@ -19,7 +19,7 @@ var ClientSchema = new Schema({
         type: Object
     },
 
-    ip: {
+    uuid: {
         type: String
     },
     

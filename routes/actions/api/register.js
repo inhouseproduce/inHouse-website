@@ -5,23 +5,34 @@ module.exports = async (req, res) => {
     let header = req.headers.authorization;
     let bearer = header.split('Bearer ')[1].trim();
 
-    // Decode token get data that contains
-    let decoded = await jwt.verify(bearer, 'secret');
+    try {
+        // Decode token get data that contains
+        let decoded = await jwt.verify(bearer, 'secret');
 
-    // Save client info, return updated document
-    let client = await db.Client.findOneAndUpdate({
-        name: decoded.client
-    }, {
-        ip: decoded.ip
-    }, { new: true });
+        if (decoded.client) {
+            // Save client info, return updated document
+            let client = await db.Client.findOneAndUpdate({
+                name: decoded.client
+            }, {
+                uuid: decoded.uuid,
+                appId: decoded.appId
+            }, {
+                new: true
+            });
 
-    // Create session token with client info
-    let sessionToken = await jwt.sign({
-        client: client.name,
-        location: client.location,
-        config: client.config
-    }, 'secret');
+            if (client) {
+                // Create session token with client info
+                let sessionToken = await jwt.sign({
+                    client: client.name,
+                    location: client.location,
+                    config: client.config
+                }, 'secret');
 
-    // Send back data
-    res.status(200).json({ sessionToken });
+                // Send back data
+                res.status(200).json({ sessionToken });
+            }
+        }
+    } catch (error) {
+        res.status(401).json({ error: 'Authentication failed' });
+    };
 };
