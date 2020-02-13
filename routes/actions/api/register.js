@@ -8,7 +8,7 @@ module.exports = async (req, res) => {
     try {
         // Decode token get data that contains
         let decoded = await jwt.verify(bearer, 'secret');
-
+        
         if (decoded.client) {
             // Save client info, return updated document
             let client = await db.Client.findOneAndUpdate({
