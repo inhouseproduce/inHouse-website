@@ -12,20 +12,7 @@ if (process.env.NODE_ENV === 'production') {
 };
 
 // Mongo connection
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/inhouse';
-mongoose.set('useCreateIndex', true);
-
-const mdbConfig = {
-    useNewUrlParser: true,
-    useFindAndModify: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true
-};
-
-mongoose.connect(MONGODB_URI, mdbConfig);
-mongoose.connection.once('open', () => {
-    console.log('mongoose connection successful');
-});
+mongoDB();
 
 // Parse body
 app.use(logger('dev'));
@@ -33,21 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({ limit: '2mb' }));
 
 // Headers
-app.use((req, res, next) => {
-    // Headers
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header(
-        'Access-Control-Allow-Headers',
-        'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-    );
-
-    // Header options
-    if (req.method === 'OPTIONS') {
-        res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
-        return res.status(200).json({});
-    };
-    next();
-});
+headers(app)
 
 require('./routes')(app);
 
@@ -58,3 +31,39 @@ app.get('*', (req, res) => {
 server.listen(PORT, () => {
     console.log(`🌎 ==> Server now on port ${PORT}!`);
 });
+
+
+function headers(app) {
+    app.use((req, res, next) => {
+        // Headers
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header(
+            'Access-Control-Allow-Headers',
+            'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+        );
+
+        // Header options
+        if (req.method === 'OPTIONS') {
+            res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
+            return res.status(200).json({});
+        };
+        next();
+    });
+};
+
+function mongoDB() {
+    const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/inhouse';
+    mongoose.set('useCreateIndex', true);
+
+    const mdbConfig = {
+        useNewUrlParser: true,
+        useFindAndModify: true,
+        useCreateIndex: true,
+        useUnifiedTopology: true
+    };
+
+    mongoose.connect(MONGODB_URI, mdbConfig);
+    mongoose.connection.once('open', () => {
+        console.log('mongoose connection successful');
+    });
+};

@@ -1,9 +1,34 @@
 {
     "routes": [
         {
-            "requrest": "post",
+            "method": "post",
             "url": "/client/identify/",
-            "action": "register"
+            "action": "register",
+            "to": "api"
+        },
+        {
+            "method": "post",
+            "url": "/create/client/",
+            "action": "client",
+            "to": "create"
+        },
+        {
+            "method": "post",
+            "url": "/auth/",
+            "action": "signin",
+            "to": "auth"
+        },
+        {
+            "method": "post",
+            "url": "/control/pi/",
+            "action": "controlPi",
+            "to": "control"
+        },
+        {
+            "method": "get",
+            "url": "/get/clientlist/",
+            "action": "clientList",
+            "to": "get"
         }
     ]
 }
