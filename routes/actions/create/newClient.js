@@ -9,6 +9,7 @@ module.exports = async (req, res) => {
         phone: form.phone,
         location: form.location,
         image: form.image,
+        uuid: form.uuid,
         config: initConfig
     };
 
@@ -18,8 +19,7 @@ module.exports = async (req, res) => {
         res.json({ success: test });
     }
     catch (error) {
-        console.log('error', error)
-        res.json({ error: error});
+        res.json({ error: error });
     };
 };
 
