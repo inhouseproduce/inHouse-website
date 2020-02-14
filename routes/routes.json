@@ -1,7 +1,7 @@
 {
     "routes": [
         {
-            "method": "post",
+            "method": "get",
             "url": "/client/identify/",
             "action": "register",
             "to": "api"

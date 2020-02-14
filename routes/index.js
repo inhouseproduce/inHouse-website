@@ -4,8 +4,12 @@ const routes = require('./routes.json');
 module.exports = app => {
     routes.routes.map(route => {
         let { method, url, action, to } = route;
-        app[method](url, (req, res) => {
-            actions[to][action](req, res);
+
+        let request = app[method];
+        let reqAction = actions[to][action];
+
+        request(url, (req, res) => {
+            reqAction(req, res);
         });
     });
 };
