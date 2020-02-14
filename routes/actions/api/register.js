@@ -24,9 +24,9 @@ module.exports = async (req, res) => {
                 if (match) {
                     // Create session token with client info
                     let sessionToken = await jwt.sign({
-                        client: client.name,
-                        location: client.location,
-                        config: client.config
+                        client: found.name,
+                        location: found.location,
+                        config: found.config
                     }, 'secret');
 
                     // Send back data
