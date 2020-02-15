@@ -5,6 +5,7 @@ const db = require('../../../models');
 
 module.exports = async (req, res) => {
     try {
+        console.log('controlign request')
         // Find Client with id
         let client = await db.Client.findOne({ _id: req.body.id });
 
@@ -28,7 +29,7 @@ module.exports = async (req, res) => {
                 'authorization': `Bearer ${token}`
             },
         });
-
+        console.log('request', request)
         res.status(200).json(url);
     }
     catch (error) {
