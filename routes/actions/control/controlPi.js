@@ -8,9 +8,6 @@ module.exports = async (req, res) => {
         // Find Client with id
         let client = await db.Client.findOne({ _id: req.body.id });
 
-        // Extract body
-        let { status, action } = req.body;
-
         // Make request to client
         let url = `https://${client.uuid}.balena-devices.com/control/`;
 
@@ -26,7 +23,7 @@ module.exports = async (req, res) => {
         });
 
         // Make request
-        let request = await axios.post(url, { status, action }, {
+        let request = await axios.post(url, req.body, {
             headers: {
                 'authorization': `Bearer ${token}`
             },
