@@ -17,7 +17,7 @@ export const getClientList = client => {
         try {
             let request = await axios.get('/get/clientlist/', await headerAuth());
             let data = request.data.success;
-
+            console.log('request', request)
             if (data) {
                 dispatch({ type: 'CLIENTS', clientList: data });
             };
