@@ -1,11 +1,12 @@
 import axios from 'axios';
+import headerAuth from '../../../utility/headerAuth';
 
-export const controlPi = (action) => {
+export const controlPi = data => {
     return async (dispatch, getState) => {
-        console.log('imp xxx---', action)
+        console.log('sending requerst')
         try {
-            let request = await axios.post('/control/pi/', action);
-            console.log('checking request', request)
+            let request = await axios.post('/control/pi/', data, await headerAuth());
+            console.log('imp request', request)
         }
         catch (error) {
             throw error;

@@ -1,4 +1,5 @@
 const actions = require('./actions');
+const headerAuth = require('../utility/auth');
 
 module.exports = app => {
     app.get('/client/identify/', (req, res) => {
@@ -13,7 +14,7 @@ module.exports = app => {
         actions.auth.signin(req, res);
     });
 
-    app.post('/control/pi/', async (req, res) => {
+    app.post('/control/pi/', headerAuth, (req, res) => {
         actions.control.controlPi(req, res);
     });
 

@@ -4,7 +4,6 @@ const bcrypt = require('bcrypt');
 const db = require('../../../models');
 
 module.exports = async (req, res) => {
-    console.log('reviced requeset')
     let header = req.headers.authorization;
     let bearer = header.split('Bearer ')[1].trim();
 

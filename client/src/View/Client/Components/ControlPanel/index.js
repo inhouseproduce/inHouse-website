@@ -7,7 +7,7 @@ import { Slider } from 'antd';
 import Aux from '../../../../hoc/_Aux';
 
 // Actions
-import { controlPi } from '../../../../store/actions/index';
+import { controlPi } from '../../../../store/actions/pi';
 
 class Control extends Component {
     state = {
