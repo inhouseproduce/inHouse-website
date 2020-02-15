@@ -1,5 +1,6 @@
 const axios = require('axios');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const db = require('../../../models');
 
@@ -29,6 +30,7 @@ module.exports = async (req, res) => {
         res.status(200).json(url);
     }
     catch (error) {
+        console.log('error', error)
         res.status(300).end();
     };
 };
