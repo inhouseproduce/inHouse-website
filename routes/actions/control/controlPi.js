@@ -25,8 +25,12 @@ module.exports = async (req, res) => {
         });
 
         // Make request
-        let request = await axios.post(url, req.body);
-        console.log('request', request)
+        let request = await axios.post(url, req.body, {
+            headers: {
+                'authorization': `Bearer ${token}`
+            }
+        });
+
         res.status(200).json(url);
     }
     catch (error) {
