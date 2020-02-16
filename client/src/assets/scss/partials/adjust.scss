@@ -1,0 +1,16 @@
+.nav-link {
+    padding: 10px 22px !important;
+}
+
+
+@media (min-width: 0px) and (max-width: 1200px) {
+    .mt-lg-3 {
+        margin-top: 1.5rem;
+    }
+}
+
+@media (min-width: 0px) and (max-width: 499px) {
+    .tab-content {
+        padding: .75rem !important;
+    }
+}
