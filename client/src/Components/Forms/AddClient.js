@@ -17,10 +17,24 @@ const AddClientForm = props => {
                     </Form.Item>
                 </Col>
                 <Col sm={6}>
-                    <Input onChange={props.handleInput} name='phone' placeholder='Image Url' />
+                    <Form.Item>
+                        <Input onChange={props.handleInput} name='phone' placeholder='Phone Number' />
+                    </Form.Item>
                 </Col>
                 <Col sm={6}>
-                    <Input onChange={props.handleInput} name='image' placeholder='Image Url' />
+                    <Form.Item>
+                        <Input onChange={props.handleInput} name='email' placeholder='Email Address' />
+                    </Form.Item>
+                </Col>
+                <Col sm={6}>
+                    <Form.Item>
+                        <Input onChange={props.handleInput} name='image' placeholder='Image Url' />
+                    </Form.Item>
+                </Col>
+                <Col sm={6}>
+                    <Form.Item>
+                        <Input onChange={props.handleInput} name='uuid' placeholder='Client uuid' />
+                    </Form.Item>
                 </Col>
             </Row>
         </Form>

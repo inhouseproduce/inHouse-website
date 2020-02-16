@@ -1,28 +1,30 @@
 const actions = require('./actions');
-const routes = require('./routes.json');
+const headerAuth = require('../utility/auth');
 
 module.exports = app => {
+    // Open routes
     app.get('/client/identify/', (req, res) => {
         actions.api.register(req, res);
-    });
-
-    app.post('/create/client/', async (req, res) => {
-        actions.create.client(req, res);
     });
 
     app.post('/auth/', async (req, res) => {
         actions.auth.signin(req, res);
     });
 
-    app.post('/control/pi/', async (req, res) => {
+    // Protected
+    app.post('/create/client/', headerAuth, (req, res) => {
+        actions.create.client(req, res);
+    });
+
+    app.post('/control/pi/', headerAuth, (req, res) => {
         actions.control.controlPi(req, res);
     });
 
-    app.get('/get/clientlist/', async (req, res) => {
+    app.get('/get/clientlist/', headerAuth, (req, res) => {
         actions.get.clientList(req, res);
     });
 
-    app.get('/test/', (req, res) => {
-        res.json('successss')
+    app.get('/client/profile/:id/', headerAuth, (req, res) => {
+        
     });
 };
