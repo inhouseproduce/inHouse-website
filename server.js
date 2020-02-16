@@ -8,7 +8,7 @@ const logger = require('morgan');
 const admin = require('firebase-admin');
 
 // Development environmental variables
-if (!process.env.DEV_MODE) {
+if (process.env.DEV_MODE) {
     require('dotenv').config()
 };
 
