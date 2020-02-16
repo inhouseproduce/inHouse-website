@@ -19,8 +19,9 @@ module.exports = async (req, res) => {
         };
 
         // Generate token
-        let token = await jwt.sign(tokenData, 'secret', {
-            algorithm: 'HS256'
+        let token = await jwt.sign(tokenData, 
+            process.env.JWT_SECRET, {
+            algorithm: process.env.ALGORITHM
         });
 
         // Make request

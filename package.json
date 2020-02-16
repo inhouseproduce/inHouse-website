@@ -15,7 +15,8 @@
   "license": "MIT",
   "devDependencies": {
     "concurrently": "^3.5.0",
-    "nodemon": "^1.19.2"
+    "nodemon": "^1.19.2",
+    "dotenv": "^8.2.0"
   },
   "engines": {
     "node": "12.12.0"
