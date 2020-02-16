@@ -14,9 +14,7 @@ module.exports = async (req, res) => {
 
         if (client && uuid) {
             // Find client by name
-            let found = await db.Client.findOne({
-                name: client
-            });
+            let found = await db.Client.findOne({ name: client });
 
             // Compare db and recived uuid
             bcrypt.compare(found.uuid, uuid, async (err, match) => {
@@ -34,6 +32,6 @@ module.exports = async (req, res) => {
             });
         }
     } catch (error) {
-        res.status(401).json({ error: 'Authentication failed' });
+        res.status(401).end();
     };
 };
