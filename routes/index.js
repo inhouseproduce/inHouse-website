@@ -1,7 +1,7 @@
 const actions = require('./actions');
 const headerAuth = require('../utility/auth');
 
-module.exports = app => {
+module.exports.initializeRoutes = app => {
     // Open routes
     app.get('/client/identify/', (req, res) => {
         actions.api.register(req, res);

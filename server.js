@@ -3,6 +3,7 @@ if (!process.env.DEV_MODE) {
     require('dotenv').config()
 };
 
+// Libas
 const express = require('express');
 const path = require('path');
 const app = express();
@@ -10,9 +11,12 @@ const server = require('http').createServer(app);
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 
+// Utils
 const mongodb = require('./utility/mongodb');
 const firebase = require('./utility/firebase');
+const routes = require('./routes');
 
+// Use static
 const PORT = process.env.PORT || 3001;
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
@@ -46,12 +50,15 @@ app.use((req, res, next) => {
     next();
 });
 
-require('./routes')(app);
+// Initialize Routes
+routes.initializeRoutes(app);
 
+// Get Built index html
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, './client/build/index.html'));
 });
 
+// Listen Server
 server.listen(PORT, () => {
     console.log(`🌎 ==> Server now on port ${PORT}!`);
 });
