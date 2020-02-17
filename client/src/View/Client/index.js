@@ -49,13 +49,13 @@ class Client extends Component {
                                                 <Col xl={{ span: 6 }} className='mt-lg-3'>
                                                     <Tabs defaultActiveKey='Images' id='uncontrolled-tab-example'>
                                                         <Tab eventKey={'Images'} title={'Images'}>
-                                                            <ImagesPanel />
+                                                            <ImagesPanel images={this.props.profile.images} />
                                                         </Tab>
                                                         <Tab eventKey={'Control'} title={'Control'}>
                                                             <ControlPanel />
                                                         </Tab>
-                                                        <Tab className='p-0'eventKey={'Settings'} title={'Settings'}>
-                                                            <SettingsPanel update={this.props.UpdateSettings}/>
+                                                        <Tab className='p-0' eventKey={'Settings'} title={'Settings'}>
+                                                            <SettingsPanel update={this.props.UpdateSettings} />
                                                         </Tab>
                                                     </Tabs>
                                                 </Col>
@@ -112,7 +112,7 @@ class Client extends Component {
 
 const mapStateToProps = state => {
     return {
-        profile: state.clientProfile
+        profile: state.clientProfile,
     }
 };
 

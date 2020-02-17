@@ -22,10 +22,20 @@ var ClientSchema = new Schema({
     uuid: {
         type: String
     },
-    
+
     image: {
         type: String
-    }
+    },
+
+    images: [{
+        name: {
+            type: String
+        },
+
+        image: {
+            type: String
+        }
+    }]
 });
 
 var Client = mongoose.model("Client", ClientSchema)

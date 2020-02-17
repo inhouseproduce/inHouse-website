@@ -17,7 +17,6 @@ export const getClientList = client => {
         try {
             let request = await axios.get('/get/clientlist/', await headerAuth());
             let data = request.data.success;
-            console.log('request', request)
             if (data) {
                 dispatch({ type: 'CLIENTS', clientList: data });
             };
@@ -35,10 +34,9 @@ export const getClientProfile = client => {
             let data = request.data.success;
 
             if (data) {
-                dispatch({ type: 'CLIENTS', clientProfile: data.client });
+                dispatch({ type: 'CLIENTS', clientProfile: data });
             };
-        }
-        catch (error) {
+        } catch (error) {
             throw error;
         };
     };

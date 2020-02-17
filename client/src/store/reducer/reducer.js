@@ -6,6 +6,7 @@ const initialState = {
     isTrigger: [], //for active default menu, set blank for horizontal
     ...config,
     isFullScreen: false, // static can't change
+    clientProfile: {}
 };
 
 const reducer = (state = initialState, action) => {

@@ -1,30 +1,21 @@
 import React, { Component } from 'react';
-import { Row, Col, Button, Card } from 'react-bootstrap';
-import { Divider, Icon } from 'antd';
-
-let imgs = [
-    'https://s3.amazonaws.com/cdn.gardensalive.com/images/800/62314.jpg',
-    'https://s3.amazonaws.com/cdn.gardensalive.com/images/800/62314.jpg',
-    'https://s3.amazonaws.com/cdn.gardensalive.com/images/800/62314.jpg',
-    'https://s3.amazonaws.com/cdn.gardensalive.com/images/800/62314.jpg',
-    'https://s3.amazonaws.com/cdn.gardensalive.com/images/800/62314.jpg',
-    'https://s3.amazonaws.com/cdn.gardensalive.com/images/800/62314.jpg',
-];
+import { Row, Col } from 'react-bootstrap';
 
 class ImagesView extends Component {
     render() {
         return (
             <Row>
-                {imgs.map(img => (
-                    <Col xs={6} className='p-2'>
+                {(this.props.images || []).map((img, i) => (
+                    <Col key={i} xs={6} className='p-2'>
+                        <small>{img.name}</small>
                         <div className='hover-search-icon mx-2'>
-                            <img src={img} className='img-fluid' />
+                            <img src={img.image} className='img-fluid' />
                         </div>
                     </Col>
                 ))}
             </Row>
         )
-    }
-}
+    };
+};
 
 export default ImagesView;

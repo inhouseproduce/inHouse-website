@@ -3,6 +3,7 @@ const newClient = require('./create/newClient');
 const signin = require('./auth/signin');
 const controlPi = require('./control/controlPi');
 const clientList = require('./get/clientlist');
+const clientProfile = require('./get/clientProfile');
 
 module.exports = {
     api: {
@@ -16,12 +17,13 @@ module.exports = {
     control: {
         controlPi: (req, res) => controlPi(req, res),
     },
-    
+
     create: {
         client: (req, res) => newClient(req, res),
     },
-    
+
     get: {
-        clientList: (req, res) => clientList(req, res)
+        clientList: (req, res) => clientList(req, res),
+        clientProfile: (req, res) => clientProfile(req, res)
     },
 };
