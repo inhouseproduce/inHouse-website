@@ -1,8 +1,11 @@
-# Setup
-## yarn setup
+# Development
 
-# Start (dev -> client concurently server)
-## yarn start
+## Setup
+### add .env file with (12)envs
+### yarn setup
 
-# Start (client)
-## yarn go
+## Start (dev -> client concurently server)
+### yarn start
+
+## Start (client)
+### yarn go
