@@ -1,6 +1,5 @@
 module.exports = {
     "type": "service_account",
-    "private_key": (process.env.FB_PRIVATE_KEY).replace(/\\n/g, '\n'),
     "project_id": process.env.FB_PROJECT_ID,
     "private_key_id": process.env.FB_PRIVATE_KEY_ID,
     "client_email": process.env.FB_CLIENT_EMAIL,
