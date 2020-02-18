@@ -3,7 +3,7 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 
 import { Row, Col, Button, Card } from 'react-bootstrap';
-import { Slider } from 'antd';
+import { Slider, Switch, Icon } from 'antd';
 import Aux from '../../../../hoc/_Aux';
 
 // Actions
@@ -57,6 +57,10 @@ class Control extends Component {
             }
         ];
 
+        const handleLockSwitch = (e) => {
+            console.log('checking', e)
+        };
+
         const handleButtonSwitch = context => {
             this.setState({
                 [context]: !this.state[context],
@@ -109,6 +113,14 @@ class Control extends Component {
                                             >
                                                 {this.state[item.context] ? 'ON' : 'OFF'}
                                             </Button>
+                                        </Col>
+                                        <Col className='text-center'>
+                                            <Switch
+                                                size='small'
+                                                onChange={handleLockSwitch}
+                                                checkedChildren={<Icon className='d-block' type='lock' />}
+                                                unCheckedChildren={<Icon className='d-block' type='unlock' />}
+                                            />
                                         </Col>
                                         <Col>
                                             {item.slider && this.state[item.context] &&

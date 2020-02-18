@@ -1,5 +1,6 @@
 import React, { useContext, Suspense } from 'react';
 import { Redirect, Route } from 'react-router-dom';
+import Loading from '../../../../Components/Loading';
 
 import { AuthContext } from '../../../../Provider/Auth';
 
@@ -10,7 +11,7 @@ export const PrivateRoute = ({ component: RouteComponent, ...props }) => {
             {...props}
             render={routeProps => {
                 return !!currentUser || !props.private ? (
-                    <Suspense fallback={'Loading...'}>
+                    <Suspense fallback={<Loading />}>
                         <RouteComponent {...routeProps} />
                     </Suspense>
                 ) : (
