@@ -1,4 +1,3 @@
-
 module.exports = {
     "type": "service_account",
     "project_id": process.env.FB_PROJECT_ID,
