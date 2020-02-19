@@ -57,8 +57,16 @@ class Control extends Component {
             }
         ];
 
-        const handleLockSwitch = (e) => {
-            console.log('checking', e)
+        const handleLockSwitch = context => {
+            this.setState({
+                [`${context}Lock`]: !this.state[`${context}Lock`]
+            }, () => {
+                this.props.piControl({
+                    lock: this.state[`${context}Lock`],
+                    action: context,
+                    id: this.props.match.params.id
+                });
+            });
         };
 
         const handleButtonSwitch = context => {
@@ -117,7 +125,7 @@ class Control extends Component {
                                         <Col className='text-center'>
                                             <Switch
                                                 size='small'
-                                                onChange={handleLockSwitch}
+                                                onChange={() => handleLockSwitch(item.context)}
                                                 checkedChildren={<Icon className='d-block' type='lock' />}
                                                 unCheckedChildren={<Icon className='d-block' type='unlock' />}
                                             />
@@ -141,15 +149,10 @@ class Control extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-    }
-};
-
 const mapDispatchToProps = dispatch => {
     return {
         piControl: e => dispatch(controlPi(e))
-    }
+    };
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Control));
+export default withRouter(connect(null, mapDispatchToProps)(Control));
