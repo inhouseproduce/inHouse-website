@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
         let client = await db.Client.findOne({ _id: req.body.id });
 
         // Make request to client
-        let url = `http://localhost:80/control/`;
+        let url = `https://${client.uuid}.balena-devices.com/control/`;
 
         // Token data
         let tokenData = {
@@ -36,7 +36,7 @@ module.exports = async (req, res) => {
         }
         else {
             res.status(200).json({ error: 'request failed' });
-        }
+        };
     }
     catch (error) {
         res.status(300).end();
