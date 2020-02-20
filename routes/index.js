@@ -7,8 +7,8 @@ module.exports.initializeRoutes = app => {
         actions.api.register(req, res);
     });
 
-    app.get('/auth/', async (req, res) => {
-        actions.auth.signin(req, res);
+    app.get('/login/', async (req, res) => {
+        actions.auth.login(req, res);
     });
 
     // Protected

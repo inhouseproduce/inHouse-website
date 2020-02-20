@@ -17,7 +17,7 @@ export const adminAuth = (form, history) => {
             );
 
             // Verify in server
-            let response = await axios.get('/auth/', {
+            let response = await axios.get('/login/', {
                 headers: {
                     'authorization': `Bearer ${auth.user._lat}`,
                 }

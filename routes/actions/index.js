@@ -1,6 +1,6 @@
 const register = require('./api/register');
 const newClient = require('./create/newClient');
-const signin = require('./auth/signin');
+const login = require('./auth/login');
 const controlPi = require('./control/controlPi');
 const clientList = require('./get/clientlist');
 const clientProfile = require('./get/clientProfile');
@@ -11,7 +11,7 @@ module.exports = {
     },
 
     auth: {
-        signin: (req, res) => signin(req, res),
+        login: (req, res) => login(req, res),
     },
 
     control: {
