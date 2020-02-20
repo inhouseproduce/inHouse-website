@@ -7,7 +7,7 @@ module.exports.initializeRoutes = app => {
         actions.api.register(req, res);
     });
 
-    app.post('/auth/', async (req, res) => {
+    app.get('/auth/', async (req, res) => {
         actions.auth.signin(req, res);
     });
 

@@ -1,17 +1,19 @@
+const admin = require('firebase-admin');
 const jwToken = require('jsonwebtoken');
-const encrypt = require('password-hash');
 
 module.exports = async (req, res) => {
-    let { username, password } = req.body.form;
+    const headerAuth = await req.headers['authorization'];
 
-    const hashed = 'sha1$33202872$1$3a1f7ae607743d9235ede4fd1815841173497d3e';
-    const match = encrypt.verify(password, hashed);
+    if (headerAuth) {
+        const token = headerAuth.split('Bearer')[1].trim();
+        const auth = await admin.auth().verifyIdToken(token);
 
-    if (match) {
-        let token = await jwToken.sign({ username },
-            process.env.JWT_SECRET, {
-            algorithm: 'HS256'
-        });
-        res.status(200).json({ auth: { token } });
+        if (auth) {
+            let token = await jwToken.sign({ username:'test' },
+                process.env.JWT_SECRET, {
+                algorithm: process.env.ALGORITHM
+            });
+            res.status(200).json({ auth: { token } });
+        };
     };
 };
