@@ -1,6 +1,8 @@
 import React from 'react';
-import DEMO  from './../../../../../store/constant';
-import Aux from "../../../../../hoc/_Aux";
+import DEMO from './../../../../../store/constant';
+import Aux from '../../../../../hoc/_Aux';
+
+const logoUrl = 'https://inhouseproduce.com/img/inhouse-icon.png';
 
 const navLogo = (props) => {
     let toggleClass = ['mobile-menu'];
@@ -10,14 +12,14 @@ const navLogo = (props) => {
 
     return (
         <Aux>
-            <div className="navbar-brand header-logo">
-                 <a href={DEMO.BLANK_LINK} className="b-brand">
-                    <div className="b-bg">
-                        <i className="feather icon-trending-up" />
+            <div className='navbar-brand header-logo'>
+                <a href={DEMO.BLANK_LINK} className='b-brand'>
+                    <div className='bg-logo'>
+                        <img className='img-fluid' src={logoUrl} alt='main-logo' />
                     </div>
-                    <span className="b-title">Datta Able</span>
-                 </a>
-                <a href={DEMO.BLANK_LINK} className={toggleClass.join(' ')} id="mobile-collapse" onClick={props.onToggleNavigation}><span /></a>
+                    <span className='b-title'>inHouse</span>
+                </a>
+                <a href={DEMO.BLANK_LINK} className={toggleClass.join(' ')} id='mobile-collapse' onClick={props.onToggleNavigation}><span /></a>
             </div>
         </Aux>
     );

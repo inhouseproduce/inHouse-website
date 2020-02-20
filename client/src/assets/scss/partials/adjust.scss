@@ -2,6 +2,14 @@
     padding: 10px 22px !important;
 }
 
+.bg-logo {
+    border-radius: 10px;
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
 
 @media (min-width: 0px) and (max-width: 1200px) {
     .mt-lg-3 {
