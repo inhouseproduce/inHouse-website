@@ -11,7 +11,7 @@ export default {
                     title: 'Dashboard',
                     type: 'item',
                     icon: 'feather icon-home',
-                    url: '/sample-page',
+                    url: '/dashboard',
                 }
             ]
         }
