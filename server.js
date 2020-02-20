@@ -26,7 +26,7 @@ if (process.env.NODE_ENV === 'production') {
 mongodb.initializeDB();
 
 // Init firebase app
-firebase.initializeApp();
+//firebase.initializeApp();
 
 // Parse body
 app.use(logger('dev'));
