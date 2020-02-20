@@ -1,7 +1,7 @@
 // // Development environmental variables
-if (!process.env.DEV_MODE) {
-    require('dotenv').config()
-};
+// if (!process.env.DEV_MODE) {
+//     require('dotenv').config()
+// };
 
 // Libas
 const express = require('express');
