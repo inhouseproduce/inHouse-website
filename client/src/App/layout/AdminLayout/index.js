@@ -1,4 +1,4 @@
-import React, { Component, useContext, Suspense } from 'react';
+import React, { Component, Suspense } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Fullscreen from 'react-full-screen';
@@ -8,7 +8,7 @@ import { PrivateRoute } from './Route';
 import Navigation from './Navigation';
 import NavBar from './NavBar';
 import Breadcrumb from './Breadcrumb';
-import Loader from '../Loader';
+import Loading from '../../../Components/Loading';
 import routes from '../../../routes';
 import Aux from '../../../hoc/_Aux';
 import * as actionTypes from '../../../store/actions';
@@ -68,7 +68,7 @@ class AdminLayout extends Component {
                                     <Breadcrumb />
                                     <div className='main-body'>
                                         <div className='page-wrapper'>
-                                            <Suspense fallback={<Loader />}>
+                                            <Suspense fallback={<Loading />}>
                                                 <Switch>
                                                     {menu}
                                                     <Redirect from='/' to={this.props.defaultPath} />
