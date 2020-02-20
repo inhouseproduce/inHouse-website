@@ -23,10 +23,10 @@ if (process.env.NODE_ENV === 'production') {
 };
 
 // Mongo connection
-mongodb.initializeDB();
+//mongodb.initializeDB();
 
 // Init firebase app
-firebase.initializeApp();
+//firebase.initializeApp();
 
 // Parse body
 app.use(logger('dev'));
@@ -51,7 +51,7 @@ app.use((req, res, next) => {
 });
 
 // Initialize Routes
-routes.initializeRoutes(app);
+//routes.initializeRoutes(app);
 
 // Get Built index html
 app.get('*', (req, res) => {
