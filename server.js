@@ -12,9 +12,9 @@ const bodyParser = require('body-parser');
 const logger = require('morgan');
 
 // Utils
-const mongodb = require('./utility/mongodb');
-const firebase = require('./utility/firebase');
-const routes = require('./routes');
+// const mongodb = require('./utility/mongodb');
+// const firebase = require('./utility/firebase');
+// const routes = require('./routes');
 
 // Use static
 const PORT = process.env.PORT || 3001;
