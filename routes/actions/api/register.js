@@ -6,21 +6,23 @@ const db = require('../../../models');
 module.exports = async (req, res) => {
     // Token sent in header
     const token = headerToken();
+    
     // Verify and get token data
     let { client, uuid, } = verifyToken(token);
 
-    if (client && uuid) {
-        // Query mdb client
-        let { found, config } = queryClient(client);
+    // Query mdb client
+    let { found, config } = queryClient(client);
 
-        // Compare db and recived uuid
-        bcrypt.compare(found.uuid, uuid, async (err, match) => {
-            if (match) {
-                let session = createSession(found, config);
-                res.status(200).json({ sessionToken: session });
-            };
-        });
-    };
+    // Compare db and recived uuid
+    bcrypt.compare(found.uuid, uuid, async (err, match) => {
+        if (match) {
+            let session = createSession(found, config);
+            res.status(200).json({ sessionToken: session });
+        }
+        else {
+            res.status(401).end();
+        };
+    });
 
     function headerToken() {
         // Extract headers token
