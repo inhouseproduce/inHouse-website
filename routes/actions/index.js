@@ -4,6 +4,7 @@ const login = require('./auth/login');
 const controlPi = require('./control/controlPi');
 const clientList = require('./get/clientlist');
 const clientProfile = require('./get/clientProfile');
+const engineState = require('./control/getEngineState');
 
 module.exports = {
     api: {
@@ -16,6 +17,7 @@ module.exports = {
 
     control: {
         controlPi: (req, res) => controlPi(req, res),
+        engineState: (req, res) => engineState(req, res)
     },
 
     create: {

@@ -11,7 +11,6 @@ module.exports = async (req, res) => {
                 client: client.name,
                 phone: client.phone,
                 location: client.location,
-                config: client.config,
                 images: client.images
             }
         });

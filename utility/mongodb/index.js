@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 module.exports.initializeDB = () => {
-    const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/inhouse';
+    const MONGODB_URI =  'mongodb://localhost/inhouse';
     mongoose.set('useCreateIndex', true);
 
     const mdbConfig = {

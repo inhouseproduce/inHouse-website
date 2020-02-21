@@ -20,6 +20,10 @@ module.exports.initializeRoutes = app => {
         actions.control.controlPi(req, res);
     });
 
+    app.get('/engine/state/:id', headerAuth, (req, res) => {
+        actions.control.engineState(req, res);
+    });
+
     app.get('/get/clientlist/', headerAuth, (req, res) => {
         actions.get.clientList(req, res);
     });

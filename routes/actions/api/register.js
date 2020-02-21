@@ -4,38 +4,60 @@ const bcrypt = require('bcrypt');
 const db = require('../../../models');
 
 module.exports = async (req, res) => {
-    // Gether process envs
-    const JWT_SECRET = process.env.JWT_SECRET;
+    // Token sent in header
+    const token = headerToken();
+    // Verify and get token data
+    let { client, uuid, } = verifyToken(token);
 
-    // Extract headers
-    let header = req.headers.authorization;
-    let bearer = header.split('Bearer ')[1].trim();
+    if (client && uuid) {
+        // Query mdb client
+        let { found, config } = queryClient(client);
 
-    try {
-        // Decode token get data that contains
-        let decoded = await jwt.verify(bearer, JWT_SECRET);
-        let { client, uuid, } = decoded;
+        // Compare db and recived uuid
+        bcrypt.compare(found.uuid, uuid, async (err, match) => {
+            if (match) {
+                let session = createSession(found, config);
+                res.status(200).json({ sessionToken: session });
+            };
+        });
+    };
 
-        if (client && uuid) {
-            // Find client by name
+    function headerToken() {
+        // Extract headers token
+        let header = req.headers.authorization;
+        let bearer = header.split('Bearer ')[1].trim();
+        return bearer;
+    };
+
+    async function queryClient(client) {
+        try {
+            // Find client profile
             let found = await db.Client.findOne({ name: client });
-
-            // Compare db and recived uuid
-            bcrypt.compare(found.uuid, uuid, async (err, match) => {
-                if (match) {
-                    // Create session token with client info
-                    let sessionToken = await jwt.sign({
-                        client: found.name,
-                        location: found.location,
-                        config: found.config
-                    }, JWT_SECRET);
-
-                    // Send back data
-                    res.status(200).json({ sessionToken });
-                }
-            });
+            // Find client config
+            let config = await db.Config.findOne({ id: found._id });
+            return { found, config };
         }
-    } catch (error) {
-        res.status(401).end();
+        catch (error) { res.status(401).end() }
+    };
+
+    async function verifyToken() {
+        try {
+            // Decode token get data that contains
+            let decoded = await jwt.verify(token, process.env.JWT_SECRET);
+            return decoded;
+        }
+        catch (error) { res.status(401).end() }
+    };
+
+    async function createSession(found, config) {
+        // Create session token with client info
+        try {
+            return await jwt.sign({
+                client: found.name,
+                location: found.location,
+                config: config
+            }, process.env.JWT_SECRET);
+        }
+        catch (error) { res.status(401).end() }
     };
 };

@@ -15,10 +15,6 @@ var ClientSchema = new Schema({
         type: String
     },
 
-    config: {
-        type: Object
-    },
-
     uuid: {
         type: String
     },
@@ -26,16 +22,6 @@ var ClientSchema = new Schema({
     image: {
         type: String
     },
-
-    images: [{
-        name: {
-            type: String
-        },
-
-        image: {
-            type: String
-        }
-    }]
 });
 
 var Client = mongoose.model("Client", ClientSchema)
