@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Row, Col, Card, Tabs, Tab } from 'react-bootstrap';
 
 // Statistic components
-import AmChartStatistics7 from '../../Components/Chart/AmChartStatistics7';
+import SystemInfo from '../../Components/Chart/SystemInfo';
 import AmChartReplay from '../../Components/Chart/AmChartReplay';
 import GaugeChart from '../../Components/Chart/GaugeChart';
 
@@ -32,10 +32,10 @@ class Client extends Component {
                     <Col xl={{ span: 6 }} className='mt-lg-3'>
                         <Tabs defaultActiveKey='Images' id='uncontrolled-tab-example'>
                             <Tab eventKey={'Images'} title={'Images'}>
-                                <ImagesPanel images={this.props.record.images} />
+                                <ImagesPanel images={this.props.images} />
                             </Tab>
                             <Tab eventKey={'Control'} title={'Control'}>
-                                <ControlPanel record={this.props.record} />
+                                <ControlPanel info={this.props.engine} />
                             </Tab>
                             <Tab className='p-0' eventKey={'Settings'} title={'Settings'}>
                                 <SettingsPanel update={this.props.UpdateSettings} />
@@ -51,7 +51,7 @@ class Client extends Component {
                                             <Card.Title as='h5'>Statistics</Card.Title>
                                         </Card.Header>
                                         <Card.Body>
-                                            <AmChartStatistics7 height={'345px'} />
+                                            <SystemInfo info={this.props.system} />
                                         </Card.Body>
                                     </Card>
                                 </Col>
@@ -89,7 +89,9 @@ class Client extends Component {
 const mapStateToProps = state => {
     return {
         client: state.clientProfile.client,
-        record: state.clientProfile.record
+        images: state.clientProfile.record.images,
+        engine: state.clientProfile.record.logs.engine,
+        system: state.clientProfile.record.logs.system
     }
 };
 

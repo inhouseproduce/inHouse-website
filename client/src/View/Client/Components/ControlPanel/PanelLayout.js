@@ -18,7 +18,7 @@ class CustomButton extends Component {
     }
 
     controlPanelPresist = (nextProps) => {
-        let logs = nextProps.record.logs.engine;
+        let logs = nextProps.info;
         Object.keys(logs).map(log => {
             this.setState({
                 [log]: logs[log].state

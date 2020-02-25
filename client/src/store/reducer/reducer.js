@@ -8,7 +8,7 @@ const initialState = {
     isFullScreen: false, // static can't change
     clientProfile: {
         client: {},
-        record: { logs: {} }
+        record: { logs: { system: {} } },
     }
 };
 

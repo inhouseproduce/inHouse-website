@@ -17,7 +17,7 @@ const Control = props => {
                 </Card.Header>
                 <Card.Body>
                     <PanelLayout
-                        record={props.record}
+                        info={props.info}
                         control={props.ControlPi} />
                 </Card.Body>
             </Card>
