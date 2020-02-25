@@ -13,6 +13,66 @@ class CustomButton extends Component {
         level: 100
     };
 
+    componentWillReceiveProps(nextProps) {
+        this.controlPanelPresist(nextProps);
+    }
+
+    controlPanelPresist = (nextProps) => {
+        let logs = nextProps.record.logs.engine;
+        Object.keys(logs).map(log => {
+            this.setState({
+                [log]: logs[log].state
+            })
+        });
+    }
+
+    controlPi = data => {
+        this.props.control({
+            id: this.props.match.params.id,
+            ...data
+        });
+    }
+
+    handleLockSwitch = context => {
+        this.setState({
+            [`${context}Lock`]: !this.state[`${context}Lock`]
+        }, () => {
+            this.controlPi({
+                lock: this.state[`${context}Lock`],
+                action: context,
+            });
+        });
+    }
+
+    handleButtonSwitch = context => {
+        this.setState({
+            [context]: !this.state[context],
+        }, () => {
+            this.controlPi({
+                status: this.state[context],
+                action: context,
+            });
+        });
+    }
+
+    pwmLevel = (context, event) => {
+        this.setState({ level: event, pivot: true }, () => {
+            if (this.state.pivot) {
+                setTimeout(() => { // Deleay for 600 Ms
+                    if (!this.state.pivot) {
+                        this.controlPi({
+                            status: this.state[context],
+                            action: context,
+                            level: this.state.level,
+                        });
+                        this.setState({ pivot: true });
+                    };
+                }, 600);
+                this.setState({ pivot: false });
+            };
+        });
+    }
+
     render() {
         const styles = {
             base: {
@@ -52,49 +112,6 @@ class CustomButton extends Component {
             }
         ];
 
-        const handleLockSwitch = context => {
-            this.setState({
-                [`${context}Lock`]: !this.state[`${context}Lock`]
-            }, () => {
-                this.props.control({
-                    lock: this.state[`${context}Lock`],
-                    action: context,
-                    id: this.props.match.params.id
-                });
-            });
-        };
-
-        const handleButtonSwitch = context => {
-            this.setState({
-                [context]: !this.state[context],
-            }, () => {
-                this.props.control({
-                    status: this.state[context],
-                    action: context,
-                    id: this.props.match.params.id
-                });
-            });
-        };
-
-        const pwmLevel = (context, event) => {
-            this.setState({ level: event, pivot: true }, () => {
-                if (this.state.pivot) {
-                    setTimeout(() => { // Deleay for 600 Ms
-                        if (!this.state.pivot) {
-                            this.props.control({
-                                status: this.state[context],
-                                action: context,
-                                level: this.state.level,
-                                id: this.props.match.params.id
-                            });
-                            this.setState({ pivot: true });
-                        };
-                    }, 600);
-                    this.setState({ pivot: false });
-                };
-            });
-        };
-
         return (
             <Row>
                 {(controlList || []).map((item, i) => (
@@ -106,7 +123,7 @@ class CustomButton extends Component {
                             <Col className='text-center'>
                                 <Button
                                     size='lg' variant={item.bttnStatus}
-                                    onClick={() => handleButtonSwitch(item.context)}
+                                    onClick={() => this.handleButtonSwitch(item.context)}
                                 >
                                     {this.state[item.context] ? 'ON' : 'OFF'}
                                 </Button>
@@ -114,7 +131,8 @@ class CustomButton extends Component {
                             <Col className='text-center'>
                                 <Switch
                                     size='small'
-                                    onChange={() => handleLockSwitch(item.context)}
+                                    checked={this.state[`${item.context}Lock`]}
+                                    onChange={() => this.handleLockSwitch(item.context)}
                                     checkedChildren={<Icon className='d-block' type='lock' />}
                                     unCheckedChildren={<Icon className='d-block' type='unlock' />}
                                 />
@@ -123,7 +141,7 @@ class CustomButton extends Component {
                                 {item.slider && this.state[item.context] &&
                                     <>
                                         <b><small>{`Intencity: ${this.state.level}%`}</small></b>
-                                        <Slider onChange={(e) => pwmLevel(item.context, e)} range defaultValue={[this.state.level]} />
+                                        <Slider onChange={(e) => this.pwmLevel(item.context, e)} range defaultValue={[this.state.level]} />
                                     </>
                                 }
                             </Col>

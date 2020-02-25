@@ -8,7 +8,7 @@ import { PrivateRoute } from './Route';
 import Navigation from './Navigation';
 import NavBar from './NavBar';
 import Breadcrumb from './Breadcrumb';
-import Loading from '../../../Components/Loading';
+import { Loading } from '../../../Components/Loading';
 import routes from '../../../routes';
 import Aux from '../../../hoc/_Aux';
 import * as actionTypes from '../../../store/actions';

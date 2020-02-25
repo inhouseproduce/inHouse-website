@@ -2,10 +2,14 @@ var mongoose = require("mongoose");
 
 var Schema = mongoose.Schema;
 
-var LogsSchema = new Schema({
-    logs: [{
+var RecordSchema = new Schema({
+    id: {
+        type: String
+    },
+
+    record: {
         type: Object
-    }],
+    },
 
     images: [{
         name: {
@@ -20,5 +24,5 @@ var LogsSchema = new Schema({
     }]
 });
 
-var Logs = mongoose.model("Logs", LogsSchema)
-module.exports = Logs;
+var Record = mongoose.model("Record", RecordSchema)
+module.exports = Record;

@@ -3,18 +3,8 @@ const db = require('../../../models');
 module.exports = async (req, res) => {
     let { form } = req.body;
 
-    // Extract data from form
-    let clientForm = {
-        name: form.name,
-        phone: form.phone,
-        location: form.location,
-        image: form.image,
-        uuid: form.uuid,
-        config: initConfig
-    };
-
     try {
-        // Create client
+        // Create client doc
         let client = await db.Client.create({
             name: form.name,
             phone: form.phone,
@@ -23,10 +13,15 @@ module.exports = async (req, res) => {
             uuid: form.uuid,
         });
 
-        // Create default Config
+        // Create Config doc
         await db.Config.create({
             id: client._id,
             config: initConfig
+        });
+
+        // Create record doc
+        await db.Record.create({
+            id: client._id
         });
 
         res.json({ success: client });

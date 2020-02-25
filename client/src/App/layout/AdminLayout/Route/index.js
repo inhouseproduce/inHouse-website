@@ -1,6 +1,6 @@
 import React, { useContext, Suspense } from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import Loading from '../../../../Components/Loading';
+import { Loading } from '../../../../Components/Loading';
 
 import { AuthContext } from '../../../../Provider/Auth';
 
