@@ -3,15 +3,24 @@ import { Col, Row } from 'react-bootstrap';
 import { Progress, Badge } from 'antd';
 
 const SystemInfo = props => {
-    const usage = () => {
+    const system = () => {
         if (props.info.memory) {
             let memory = props.info.memory;
             let cpu = props.info.cpu;
-            return { memory: memory.used, cpu: cpu.used }
+            return { memory: memory.used, cpu: cpu.used };
         }
-        return {}
+        return { memory: '--', cpu: '--' };
     };
 
+    const modules = () => {
+        let modules = props.module;
+        if (modules && modules.camera) {
+            let camera = modules.camera;
+            return { list: camera.espLength, active: camera.active };
+        }
+        return { list: '--', active: '--' };
+    };
+    modules()
     return (
         <Col style={{ height: '345px' }}>
             <Row className='text-center'>
@@ -20,24 +29,25 @@ const SystemInfo = props => {
                     <Progress strokeColor={{
                         '0%': '#87d068',
                         '100%': '#108ee9',
-                    }} type="circle" percent={usage().memory} />
+                    }} type="circle" percent={system().memory} />
                 </Col>
                 <Col xs={6}>
                     <h5>RAM</h5>
                     <Progress strokeColor={{
                         '0%': '#87d068',
                         '100%': '#108ee9',
-                    }} type="circle" percent={usage().cpu} />
+                    }} type="circle" percent={system().cpu} />
                 </Col>
             </Row>
-            <Row className='text-center'>
-                <Col xs={6} className='p-3'>
-                    <small>Connection<Badge className='p-1' status="success" /></small><br />
-                    <small>Health<Badge className='p-1' status="success" /></small><br />
-                </Col>
-                <Col xs={6} className='p-3'>
-                    <small>Connection<Badge className='p-1' status="success" /></small><br />
-                    <small>Health<Badge className='p-1' status="success" /></small><br />
+            <Row className='p-3 mt-3'>
+                <Col xs={6}>
+                    <h5>Camera
+                        <Badge
+                            className='px-1'
+                            status={modules().list >= modules().active ? 'error' : 'success'}
+                        />
+                    </h5>
+                    <p className='pl-3'>{`${modules().list} / ${modules().active}`}</p>
                 </Col>
             </Row>
         </Col>

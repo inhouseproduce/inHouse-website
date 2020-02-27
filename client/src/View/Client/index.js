@@ -21,9 +21,16 @@ class Client extends Component {
     state = {};
 
     componentDidMount() {
+        this.getClientData();
+    };
+
+    getClientData = () => {
         let client = this.props.match.params.id;
         this.props.GetClientProfile(client);
-    };
+        setInterval(() => {
+            this.props.GetClientProfile(client);
+        }, 15000);
+    }
 
     render() {
         return (
@@ -51,7 +58,7 @@ class Client extends Component {
                                             <Card.Title as='h5'>Statistics</Card.Title>
                                         </Card.Header>
                                         <Card.Body>
-                                            <SystemInfo info={this.props.system} />
+                                            <SystemInfo module={this.props.module} info={this.props.system} />
                                         </Card.Body>
                                     </Card>
                                 </Col>
@@ -87,11 +94,13 @@ class Client extends Component {
 };
 
 const mapStateToProps = state => {
+    console.log('state-->', state)
     return {
         client: state.clientProfile.client,
         images: state.clientProfile.record.images,
         engine: state.clientProfile.record.logs.engine,
-        system: state.clientProfile.record.logs.system
+        system: state.clientProfile.record.logs.system,
+        module: state.clientProfile.record.logs.module
     }
 };
 
