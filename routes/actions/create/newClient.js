@@ -56,16 +56,6 @@ const initConfig = {
                 {
                     "action": "on",
                     "time": "21:00"
-                },
-                {
-                    "action": "dim",
-                    "time": "23:00",
-                    "level": "50"
-                },
-                {
-                    "action": "dim",
-                    "time": "23:30",
-                    "level": "50"
                 }
             ]
         }
@@ -74,15 +64,8 @@ const initConfig = {
         "camera": {
             "type": "interval",
             "time_interval": 1,
+            "pin": 33,
             "esp": [
-                {
-                    "position": 1,
-                    "mac": "4c:11:ae:75:c2:48"
-                },
-                {
-                    "position": 2,
-                    "mac": "23:6f:28:b1:58:23"
-                }
             ]
         }
     }

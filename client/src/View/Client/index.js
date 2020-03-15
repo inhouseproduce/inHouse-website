@@ -15,7 +15,7 @@ import SettingsPanel from './Components/Settings';
 
 // Actions
 import { getClientProfile } from '../../store/actions/get';
-import { updateSettings } from '../../store/actions/update';
+import { updateSettings, updateImages } from '../../store/actions/update';
 
 class Client extends Component {
     state = {};
@@ -32,6 +32,7 @@ class Client extends Component {
         }, 15000);
     }
 
+
     render() {
         return (
             <Card className='p-3'>
@@ -39,13 +40,19 @@ class Client extends Component {
                     <Col xl={{ span: 6 }} className='mt-lg-3'>
                         <Tabs defaultActiveKey='Images' id='uncontrolled-tab-example'>
                             <Tab eventKey={'Images'} title={'Images'}>
-                                <ImagesPanel images={this.props.images} />
+                                <ImagesPanel
+                                    update={this.props.UpdateImages}
+                                    images={this.props.images}
+                                />
                             </Tab>
                             <Tab eventKey={'Control'} title={'Control'}>
                                 <ControlPanel info={this.props.engine} />
                             </Tab>
                             <Tab className='p-0' eventKey={'Settings'} title={'Settings'}>
-                                <SettingsPanel update={this.props.UpdateSettings} />
+                                <SettingsPanel
+                                    config={this.props.config}
+                                    update={this.props.UpdateSettings}
+                                />
                             </Tab>
                         </Tabs>
                     </Col>
@@ -97,6 +104,7 @@ const mapStateToProps = state => {
     console.log('state-->', state)
     return {
         client: state.clientProfile.client,
+        config: state.clientProfile.config,
         images: state.clientProfile.record.images,
         engine: state.clientProfile.record.logs.engine,
         system: state.clientProfile.record.logs.system,
@@ -108,6 +116,7 @@ const mapDispatchToProps = dispatch => {
     return {
         UpdateSettings: e => dispatch(updateSettings(e)),
         GetClientProfile: e => dispatch(getClientProfile(e)),
+        UpdateImages: id => dispatch(updateImages(id))
     }
 };
 

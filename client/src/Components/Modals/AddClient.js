@@ -27,6 +27,8 @@ class Modals extends Component {
 
     handleSubmit = () => {
         this.props.CreateNewClient(this.state.form);
+        this.props.modalSwitch(); // Close modal
+        this.setState({ form: {} }); // Empty form list
     };
 
     render() {

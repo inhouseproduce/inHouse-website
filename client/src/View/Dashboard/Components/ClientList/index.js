@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Card, Table, Tabs, Tab } from 'react-bootstrap';
+import { Row, Col, Card, Table } from 'react-bootstrap';
 
 // Wrapper
 import Aux from '../../../../hoc/_Aux';
@@ -55,19 +55,17 @@ class ClientList extends Component {
                         </Card>
                     </Col>
                     <Col xl={4} className='m-b-30'>
-                        <Tabs defaultActiveKey='today' id='uncontrolled-tab-example'>
-                            <Tab eventKey='today' title='Today'>
-                                <TableContent />
-                            </Tab>
-                            <Tab eventKey='week' title='This Week'>
-                                <TableContent />
-                            </Tab>
-                            <Tab eventKey='all' title='All'>
-                                <TableContent />
-                            </Tab>
-                        </Tabs>
+                        <Card class>
+                            <Card.Header>
+                                <Card.Title as='h5'>User Activity</Card.Title>
+                            </Card.Header>
+                            <Card.Body className='pb-0'>
+                                <Col className='p-3'>
+                                    <TableContent clientList={this.props.list} />
+                                </Col>
+                            </Card.Body>
+                        </Card>
                     </Col>
-
                 </Row>
             </Aux>
         );

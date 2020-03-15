@@ -5,6 +5,7 @@ module.exports = async (req, res) => {
         // Find client by _id
         let client = await db.Client.findOne({ _id: req.params.id });
         let record = await db.Record.findOne({ id: req.params.id });
+        let config = await db.Config.findOne({ id: client._id });
 
         // Send back client profile data
         res.status(200).json({
@@ -18,7 +19,8 @@ module.exports = async (req, res) => {
                 record: {
                     images: record.images,
                     logs: record.record
-                }
+                },
+                config: config.config
             }
         });
     } catch (error) {

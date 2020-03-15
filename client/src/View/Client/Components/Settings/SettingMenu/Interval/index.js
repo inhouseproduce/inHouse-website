@@ -3,16 +3,26 @@ import { Row, Col } from 'react-bootstrap';
 import { Icon, Input, Popover } from 'antd';
 
 class Interval extends Component {
+    state = {};
+
+    componentWillReceiveProps(){
+        if(this.props.form){
+            this.setState({
+                ...this.props.form
+            })
+        }
+    }
+
     handleInput = event => {
         let { name, value } = event.target;
         this.setState({
             [name]: value
         },
-        () => {
-            this.props.handleInput({
-                [this.props.each]: this.state
+            () => {
+                this.props.handleInput({
+                    [this.props.each]: this.state
+                });
             });
-        });
     };
 
     render() {
@@ -25,7 +35,7 @@ class Interval extends Component {
                         </Popover>
                     </Col>
                     <Col xs={9} sm={10}>
-                        <Input onChange={this.handleInput} name='time_interval' placeholder='Time Interval' />
+                        <Input value={this.props.form.time_interval || 1000} onChange={this.handleInput} name='time_interval' placeholder='Time Interval' />
                     </Col>
                 </Row>
                 <Row className='py-1'>
@@ -35,7 +45,7 @@ class Interval extends Component {
                         </Popover>
                     </Col>
                     <Col xs={9} sm={10}>
-                        <Input onChange={this.handleInput} name='run_period' placeholder='Run period' />
+                        <Input value={this.props.form.run_period} onChange={this.handleInput} name='run_period' placeholder='Run period' />
                     </Col>
                 </Row>
             </Col>

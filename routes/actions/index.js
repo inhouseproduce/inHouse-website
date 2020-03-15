@@ -5,6 +5,7 @@ const controlPi = require('./control/controlPi');
 const clientList = require('./get/clientlist');
 const clientProfile = require('./get/clientProfile');
 const engineState = require('./control/getEngineState');
+const updateImages = require('./update/updateImages');
 
 module.exports = {
     api: {
@@ -28,4 +29,8 @@ module.exports = {
         clientList: (req, res) => clientList(req, res),
         clientProfile: (req, res) => clientProfile(req, res)
     },
+
+    update: {
+        clientImages: (req, res) => { updateImages(req, res) }
+    }
 };
