@@ -32,7 +32,11 @@ module.exports.initializeRoutes = app => {
         actions.get.clientProfile(req, res);
     });
 
-    app.get('/update/images/:id', headerAuth, (req, res) => {
-        actions.update.clientImages(req, res, headerAuth);
+    app.get('/update/images/:id/', headerAuth, (req, res) => {
+        actions.update.clientImages(req, res);
+    });
+
+    app.post('/update/config/:id/', headerAuth, (req, res) => {
+        actions.update.clientConfig(req, res);
     });
 };

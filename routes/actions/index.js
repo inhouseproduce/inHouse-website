@@ -6,6 +6,7 @@ const clientList = require('./get/clientlist');
 const clientProfile = require('./get/clientProfile');
 const engineState = require('./control/getEngineState');
 const updateImages = require('./update/updateImages');
+const updateConfig = require('./update/updateConfig');
 
 module.exports = {
     api: {
@@ -31,6 +32,7 @@ module.exports = {
     },
 
     update: {
-        clientImages: (req, res) => { updateImages(req, res) }
+        clientImages: (req, res) => { updateImages(req, res) },
+        clientConfig: (req, res) => { updateConfig(req, res) }
     }
 };

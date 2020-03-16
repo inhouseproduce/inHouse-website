@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+
 import { Row, Col, Tabs, Tab, Button } from 'react-bootstrap';
 
 // Components
@@ -22,22 +24,26 @@ class Settings extends Component {
         }
     };
 
-    componentWillReceiveProps() {
-        if (this.props.config) {
+    componentDidMount() {
+        setTimeout(() => {
             this.setState({
                 form: this.props.config
             });
-        };
+        }, 1000);
     };
 
     handleInput = (form, item, each) => {
+        console.log('from', form)
         this.setState({
             ...this.state,
             form: {
                 ...this.state.form,
                 [item]: {
                     ...this.state.form[item],
-                    ...form
+                    [each]: {
+                        ...this.state.form[item][each],
+                        ...form[each]
+                    }
                 }
             },
             changes: {
@@ -54,7 +60,6 @@ class Settings extends Component {
     };
 
     render() {
-        console.log('imp changes', this.state.changes)
         return (
             <Row>
                 <Col>
@@ -69,7 +74,7 @@ class Settings extends Component {
                                                 <Tab key={item + each} eventKey={each} title={each}>
                                                     <SettingMenu
                                                         handleInput={(form) => this.handleInput(form, item, each)}
-                                                        form={this.state.form[item][each]} each={each} type={type}
+                                                        form={this.state.form[item]} item={item} each={each} type={type}
                                                     />
                                                 </Tab>
                                             )
@@ -80,7 +85,9 @@ class Settings extends Component {
                         })}
                     </Tabs>
                     <Col className='text-right mt-3'>
-                        <Button onClick={() => this.props.update(this.state.form)}>Update</Button>
+                        <Button onClick={() =>
+                            this.props.update(this.state.form, this.props.match.params.id)}
+                        >Update</Button>
                     </Col>
                 </Col>
             </Row>
@@ -88,4 +95,4 @@ class Settings extends Component {
     }
 };
 
-export default Settings;
+export default withRouter(Settings);
