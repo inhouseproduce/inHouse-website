@@ -14,15 +14,18 @@ module.exports = async (req, res) => {
     let { found, config } = await queryClient(client);
 
     // Compare db and recived uuid
-    bcrypt.compare(found.uuid, uuid, async (err, match) => {
-        if (match) {
-            let session = await createSession(found, config);
-            res.status(200).json({ sessionToken: session });
-        }
-        else {
-            res.status(401).end();
-        };
-    });
+    // bcrypt.compare(found.uuid, uuid, async (err, match) => {
+    //     if (match) {
+    //         let session = await createSession(found, config);
+    //         res.status(200).json({ sessionToken: session });
+    //     }
+    //     else {
+    //         res.status(401).end();
+    //     };
+    // });
+
+    let session = await createSession(found, config);
+    res.status(200).json({ sessionToken: session });
 
     function headerToken() {
         // Extract headers token

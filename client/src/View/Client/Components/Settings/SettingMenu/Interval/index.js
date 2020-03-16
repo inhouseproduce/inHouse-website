@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { Icon, Input, Popover } from 'antd';
 
@@ -18,7 +18,7 @@ const IntervalForm = props => {
             <Row className='py-1'>
                 <Col xs={2}>
                     <Popover content={'help'} title='Time Interval'>
-                        <a><Icon type='info-circle' /></a>
+                        <span><Icon type='info-circle' /></span>
                     </Popover>
                 </Col>
                 <Col xs={9} sm={10}>
@@ -28,7 +28,7 @@ const IntervalForm = props => {
             <Row className='py-1'>
                 <Col xs={2}>
                     <Popover content={'help'} title='Run Period'>
-                        <a><Icon type='info-circle' /></a>
+                        <span><Icon type='info-circle' /></span>
                     </Popover>
                 </Col>
                 <Col xs={9} sm={10}>

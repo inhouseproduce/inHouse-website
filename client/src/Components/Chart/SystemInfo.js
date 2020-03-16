@@ -9,7 +9,7 @@ const SystemInfo = props => {
             let cpu = props.info.cpu;
             return { memory: memory.used, cpu: cpu.used };
         }
-        return { memory: '--', cpu: '--' };
+        return { memory: 0, cpu: 0 };
     };
 
     const modules = () => {
@@ -18,7 +18,7 @@ const SystemInfo = props => {
             let camera = modules.camera;
             return { list: camera.espLength, active: camera.active };
         }
-        return { list: '--', active: '--' };
+        return { list: 0, active: 0 };
     };
     modules()
     return (

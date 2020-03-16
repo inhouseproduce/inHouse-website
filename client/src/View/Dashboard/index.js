@@ -9,7 +9,6 @@ import ClientList from './Components/ClientList';
 
 // Actions
 import { getClientList } from '../../store/actions/get';
-import axios from 'axios';
 
 class Dashboard extends Component {
     componentDidMount() {
