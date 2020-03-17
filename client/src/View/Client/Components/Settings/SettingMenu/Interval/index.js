@@ -6,7 +6,7 @@ const IntervalForm = props => {
     const handleInput = e => {
         props.handleInput({
             [props.each]: {
-                [e.target.name]: e.target.value
+                [e.target.name]: Number(e.target.value)
             }
         });
     };

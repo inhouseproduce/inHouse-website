@@ -14,12 +14,12 @@ class Settings extends Component {
         },
         form: {
             engine: {
-                pump: { type: 'interval', time_interval: '' },
-                irragation: { type: 'interval', time_interval: '' },
-                lights: { type: 'clock', time_interval: '' }
+                pump: { type: 'interval' },
+                irragation: { type: 'interval' },
+                lights: { type: 'clock' }
             },
             modules: {
-                camera: { type: 'interval', time_interval: '' }
+                camera: { type: 'interval' }
             }
         }
     };
@@ -33,7 +33,6 @@ class Settings extends Component {
     };
 
     handleInput = (form, item, each) => {
-        console.log('from', form)
         this.setState({
             ...this.state,
             form: {

@@ -2,12 +2,11 @@ const db = require('../../../models');
 const axios = require('axios');
 
 module.exports = async (req, res) => {
-    console.log('----- Config Update ------')
     let client = await db.Client.findOne({ _id: req.params.id });
 
-    // updateConfig(id, config, () => {
-    // updateClient(client);
-    // });
+    updateConfig(id, config, () => {
+        updateClient(client);
+    });
 
     res.status(200).end();
 };

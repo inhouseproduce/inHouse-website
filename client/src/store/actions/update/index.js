@@ -4,8 +4,8 @@ import headerAuth from '../../../utility/headerAuth';
 export const updateSettings = (config, id) => {
     return async () => {
         try {
-            let request = await axios.post(`/update/config/${id}/`, { config }, await headerAuth());
-
+            await axios.post(`/update/config/${id}/`, { config }, await headerAuth());
+            console.log('config----->', config)
         }
         catch (error) {
             throw error;
