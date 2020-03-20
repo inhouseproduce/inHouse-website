@@ -39,6 +39,7 @@ module.exports = async (req, res) => {
         };
     }
     catch (error) {
+        throw error;
         res.status(300).end();
     };
 };

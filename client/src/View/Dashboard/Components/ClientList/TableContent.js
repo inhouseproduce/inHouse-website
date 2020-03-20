@@ -9,7 +9,7 @@ const TableContent = props => {
         <Aux>
             {(props.clientList || []).map((client, i) => {
                 return (
-                    <div className='media friendlist-box align-items-center justify-content-center m-b-20'>
+                    <div key={i} className='media friendlist-box align-items-center justify-content-center m-b-20'>
                         <div className='m-r-10 photo-table'>
                             <a href={DEMO.BLANK_LINK}><img className='rounded-circle' style={{ width: '40px' }} src={avatar1} alt='activity-user' /></a>
                         </div>

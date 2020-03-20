@@ -1,5 +1,4 @@
 import React from 'react';
-import DEMO from './../../../../../store/constant';
 import Aux from '../../../../../hoc/_Aux';
 
 const logoUrl = 'https://inhouseproduce.com/img/inhouse-icon.png';

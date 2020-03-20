@@ -1,8 +1,13 @@
 const db = require('../../../models');
 const axios = require('axios');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 module.exports = async (req, res) => {
-    let client = await db.Client.findOne({ _id: req.params.id });
+    const id = req.params.id;
+    const config = req.body.config;
+
+    let client = await db.Client.findOne({ _id: id });
 
     updateConfig(id, config, () => {
         updateClient(client);
@@ -24,6 +29,17 @@ async function updateClient(client) {
     });
 };
 
+async function updateConfig(id, config, callback) {
+    try {
+        if (callback) callback();
+        return await db.Config.findOneAndUpdate({ id }, { config });
+    }
+    catch (err) {
+        if (callback) callback(err);
+        return false;
+    };
+};
+
 async function signToken(client) {
     let tokenData = {
         client: client.client,
@@ -35,15 +51,4 @@ async function signToken(client) {
         process.env.JWT_SECRET, {
         algorithm: process.env.ALGORITHM
     });
-};
-
-async function updateConfig(id, config, callback) {
-    try {
-        if (callback) callback();
-        return await db.Config.findOneAndUpdate({ id }, { config });
-    }
-    catch (err) {
-        if (callback) callback(err);
-        return false;
-    };
 };

@@ -114,7 +114,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        UpdateSettings: (form, id) => dispatch(updateSettings(form, id)),
+        UpdateSettings: (config, id) => dispatch(updateSettings(config, id)),
         GetClientProfile: e => dispatch(getClientProfile(e)),
         UpdateImages: id => dispatch(updateImages(id))
     }
