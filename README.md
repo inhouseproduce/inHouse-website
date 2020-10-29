@@ -1,7 +1,7 @@
 # Setup
 ## yarn setup
 
-# Start (dev -> client concurently server)
+# Start (dev -> client concurrently server)
 ## yarn start
 
 # Start (client)
